@@ -1,0 +1,99 @@
+
+<div>
+    <h2><span>Scancaf</span> {{vm.scancaf.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Sourcebox</span></dt>
+        <dd>
+            <span>{{vm.scancaf.sourcebox}}</span>
+        </dd>
+        <dt><span>Category 1</span></dt>
+        <dd>
+            <span>{{vm.scancaf.category1}}</span>
+        </dd>
+        <dt><span>Category 2</span></dt>
+        <dd>
+            <span>{{vm.scancaf.category2}}</span>
+        </dd>
+        <dt><span>Category 3</span></dt>
+        <dd>
+            <span>{{vm.scancaf.category3}}</span>
+        </dd>
+        <dt><span>Category 4</span></dt>
+        <dd>
+            <span>{{vm.scancaf.category4}}</span>
+        </dd>
+        <dt><span>Category 5</span></dt>
+        <dd>
+            <span>{{vm.scancaf.category5}}</span>
+        </dd>
+        <dt><span>Count Category 1</span></dt>
+        <dd>
+            <span>{{vm.scancaf.countCategory1}}</span>
+        </dd>
+        <dt><span>Count Category 2</span></dt>
+        <dd>
+            <span>{{vm.scancaf.countCategory2}}</span>
+        </dd>
+        <dt><span>Count Category 3</span></dt>
+        <dd>
+            <span>{{vm.scancaf.countCategory3}}</span>
+        </dd>
+        <dt><span>Count Category 4</span></dt>
+        <dd>
+            <span>{{vm.scancaf.countCategory4}}</span>
+        </dd>
+        <dt><span>Count Category 5</span></dt>
+        <dd>
+            <span>{{vm.scancaf.countCategory5}}</span>
+        </dd>
+        <dt><span>Cafbarcode</span></dt>
+        <dd>
+            <span>{{vm.scancaf.cafbarcode}}</span>
+        </dd>
+        <dt><span>Colorcode</span></dt>
+        <dd>
+            <span>{{vm.scancaf.colorcode}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            <span>{{vm.scancaf.user}}</span>
+        </dd>
+        <dt><span>Userdate</span></dt>
+        <dd>
+            <span>{{vm.scancaf.userdate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Boxstatus</span></dt>
+        <dd>
+            <span>{{vm.scancaf.boxstatus}}</span>
+        </dd>
+        <dt><span>Sourceboxstaus</span></dt>
+        <dd>
+            <span>{{vm.scancaf.sourceboxstaus}}</span>
+        </dd>
+        <dt><span>Mobilenumber</span></dt>
+        <dd>
+            <span>{{vm.scancaf.mobilenumber}}</span>
+        </dd>
+        <dt><span>Centralbarcode</span></dt>
+        <dd>
+            <span>{{vm.scancaf.centralbarcode}}</span>
+        </dd>
+        <dt><span>Caftype</span></dt>
+        <dd>
+            <span>{{vm.scancaf.caftype}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="scancaf-detail.edit({id:vm.scancaf.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

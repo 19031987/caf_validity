@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "user",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "usercount",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171026112104",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "adminstats",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

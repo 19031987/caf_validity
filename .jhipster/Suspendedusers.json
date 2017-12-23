@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "mobilenumber",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "centralbarcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "count",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "user",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userdate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20171026105140",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "suspendedusers",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

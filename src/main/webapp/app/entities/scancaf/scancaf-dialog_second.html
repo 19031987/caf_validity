@@ -1,0 +1,111 @@
+
+<form name="editForm" role="form" novalidate >
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myScancafLabel">CAF SCAN</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <!-- <div  ng-show="vm.scancaf.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.scancaf.id" readonly />
+        </div> -->
+          <label class="control-label" for="field_category1">Box Name</label>
+            <input type="text"  name="category1" id="field_category1"
+                    ng-model="vm.scancaf.sourceboxstaus"
+            maxlength="8" />
+           
+        
+         <div >
+            <label class="control-label" for="field_cafbarcode">Cafbarcode</label>
+            <input type="text"  name="cafbarcode" id="field_cafbarcode"
+                    ng-model="vm.scancaf.boxstatus"
+                   ng-change="cafcheck()" />
+        </div>
+        
+        
+         <div >
+            <label class="control-label" for="field_colorcode">Colorcode</label>
+            <TextArea type="text"  name="colorcode" id="field_colorcode"
+                    ng-model="vm.scancaf.colorcode"
+                    ng-style="{'background-color':vm.scancaf.colorcode}" cols="70" rows="10"
+                    >
+            </TextArea>
+        </div>
+        
+        
+        <input type="button" ng-click="toggleCustom()" value="Caf Status"></input>
+        <span ng-hide="custom">
+        <div >
+            <label class="control-label" for="field_category1">Churn 1</label>
+            <input type="text"  name="category1" id="field_category1"
+                    ng-model="vm.scancaf.category1"
+            maxlength="8"        ng-change="validate1()"/>
+            <input type="number"  name="countCategory1" id="field_countCategory1"
+                    ng-model="vm.scancaf.countCategory1"
+                   />
+        </div>
+        <div >
+            <label class="control-label" for="field_category2">Chrun 2</label>
+            <input type="text"  name="category2" id="field_category2"
+                    ng-model="vm.scancaf.category2"
+            maxlength="8"      ng-change="validate1()" />
+            <input type="number"  name="countCategory2" id="field_countCategory2"
+                    ng-model="vm.scancaf.countCategory2"
+                   />
+        </div>
+        <div >
+            <label class="control-label" for="field_category3">Churn 3</label>
+            <input type="text"  name="category3" id="field_category3"
+                    ng-model="vm.scancaf.category3"
+             maxlength="8"     ng-change="validate1()" />
+            <input type="number"  name="countCategory3" id="field_countCategory3"
+                    ng-model="vm.scancaf.countCategory3"
+                   />
+        </div>
+        
+        <div >
+            <label class="control-label" for="field_category4">Churn 4</label>
+            <input type="text"  name="category4" id="field_category4"
+                    ng-model="vm.scancaf.category4"
+            maxlength="8"      ng-change="validate1()" />
+            <input type="number"  name="countCategory4" id="field_countCategory4"
+                    ng-model="vm.scancaf.countCategory4"
+                   />
+        </div>
+        <div >
+            <label class="control-label" for="field_category5">Churn 5</label>
+            <input type="text"  name="category5" id="field_category5"
+                    ng-model="vm.scancaf.category5"
+           maxlength="8"       ng-change="validate1()" />
+            <input type="number"  name="countCategory5" id="field_countCategory5"
+                    ng-model="vm.scancaf.countCategory5"
+                   />
+        </div>
+        </span>
+        
+        
+        <div >
+           
+           
+       
+            <!-- <label class="control-label" for="field_churntype">Churntype</label>
+            
+            <select ng-model="vm.scancaf.caftype">
+			<option  value="category_1" style="background-color: red">Churn Type 1</option>
+			<option  value="category_2">Churn Type 2</option>
+			<option  value="category_3">Churn Type 3</option>
+			<option  value="category_4">Churn Type 4</option>
+			<option  value="category_5">Churn Type 5</option>
+			</select>  -->
+            
+         <button type="button" class="btn btn-primary" ng-click="BoxComplete()" >
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>OutBox Completed</span>
+        </button>
+        </div>
+        </div>
+        </form>
+        

@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span>Boxassign</span> {{vm.boxassign.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>User</span></dt>
+        <dd>
+            <span>{{vm.boxassign.user}}</span>
+        </dd>
+        <dt><span>Boxassign</span></dt>
+        <dd>
+            <span>{{vm.boxassign.boxassign}}</span>
+        </dd>
+        <dt><span>Churntype</span></dt>
+        <dd>
+            <span>{{vm.boxassign.churntype}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="boxassign-detail.edit({id:vm.boxassign.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

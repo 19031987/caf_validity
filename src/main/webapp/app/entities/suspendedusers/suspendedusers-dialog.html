@@ -1,0 +1,60 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySuspendedusersLabel">Create or edit a Suspendedusers</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.suspendedusers.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.suspendedusers.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_mobilenumber">Mobilenumber</label>
+            <input type="number" class="form-control" name="mobilenumber" id="field_mobilenumber"
+                    ng-model="vm.suspendedusers.mobilenumber"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_centralbarcode">Centralbarcode</label>
+            <input type="text" class="form-control" name="centralbarcode" id="field_centralbarcode"
+                    ng-model="vm.suspendedusers.centralbarcode"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_count">Count</label>
+            <input type="number" class="form-control" name="count" id="field_count"
+                    ng-model="vm.suspendedusers.count"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_user">User</label>
+            <input type="text" class="form-control" name="user" id="field_user"
+                    ng-model="vm.suspendedusers.user"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_userdate">Userdate</label>
+                <div class="input-group">
+                    <input id="field_userdate" type="text" class="form-control" name="userdate" datetime-picker="{{dateformat}}" ng-model="vm.suspendedusers.userdate" is-open="vm.datePickerOpenStatus.userdate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('userdate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

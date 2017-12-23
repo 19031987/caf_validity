@@ -1,0 +1,125 @@
+<div>
+    <h2>Scancafs</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="scancaf.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs-down" >
+                       1st Level Segregation
+                    </span>
+                </button>
+                 <button class="btn btn-primary" ui-sref="scancaf.second" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs-down" >
+                       2nd Level Segregation
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sourcebox"><span>Sourcebox</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category1"><span>Category 1</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category2"><span>Category 2</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category3"><span>Category 3</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category4"><span>Category 4</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category5"><span>Category 5</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategory1"><span>Count Category 1</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategory2"><span>Count Category 2</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategory3"><span>Count Category 3</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategory4"><span>Count Category 4</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategory5"><span>Count Category 5</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cafbarcode"><span>Cafbarcode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="colorcode"><span>Colorcode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userdate"><span>Userdate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="boxstatus"><span>Boxstatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sourceboxstaus"><span>Sourceboxstaus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mobilenumber"><span>Mobilenumber</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="centralbarcode"><span>Centralbarcode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="caftype"><span>Caftype</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="scancaf in vm.scancafs track by scancaf.id">
+                    <td><a ui-sref="scancaf-detail({id:scancaf.id})">{{scancaf.id}}</a></td>
+                    <td>{{scancaf.sourcebox}}</td>
+                    <td>{{scancaf.category1}}</td>
+                    <td>{{scancaf.category2}}</td>
+                    <td>{{scancaf.category3}}</td>
+                    <td>{{scancaf.category4}}</td>
+                    <td>{{scancaf.category5}}</td>
+                    <td>{{scancaf.countCategory1}}</td>
+                    <td>{{scancaf.countCategory2}}</td>
+                    <td>{{scancaf.countCategory3}}</td>
+                    <td>{{scancaf.countCategory4}}</td>
+                    <td>{{scancaf.countCategory5}}</td>
+                    <td>{{scancaf.cafbarcode}}</td>
+                    <td>{{scancaf.colorcode}}</td>
+                    <td>{{scancaf.user}}</td>
+                        <td>{{scancaf.userdate | date:'mediumDate'}}</td>
+                    <td>{{scancaf.boxstatus}}</td>
+                    <td>{{scancaf.sourceboxstaus}}</td>
+                    <td>{{scancaf.mobilenumber}}</td>
+                    <td>{{scancaf.centralbarcode}}</td>
+                    <td>{{scancaf.caftype}}</td>
+                     <td>{{scancaf.caftype}}</td>
+                     <td>{{scancaf.secaudit}}</td>
+                     <td>{{scancaf.secauditdate | date:'mediumDate'}}</td>
+                     
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="scancaf-detail({id:scancaf.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="scancaf.edit({id:scancaf.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="scancaf.delete({id:scancaf.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

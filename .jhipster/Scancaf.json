@@ -1,0 +1,96 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "sourcebox",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "category",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "category1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "category2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "category3",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "category4",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "category5",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "countCategory1",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "countCategory2",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "countCategory3",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "countCategory4",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "countCategory5",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "cafbarcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "colorcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "user",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userdate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "boxstatus",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sourceboxstaus",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mobilenumber",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "centralbarcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "caftype",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171022120651",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "scancaf",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

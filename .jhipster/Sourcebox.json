@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "sourceboxname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createduser",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createddate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20171022102957",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "sourcebox",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

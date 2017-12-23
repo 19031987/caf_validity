@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "user",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "boxassign",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "churntype",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171026104944",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "boxassign",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span>Sourcebox</span> {{vm.sourcebox.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Sourceboxname</span></dt>
+        <dd>
+            <span>{{vm.sourcebox.sourceboxname}}</span>
+        </dd>
+        <dt><span>Createduser</span></dt>
+        <dd>
+            <span>{{vm.sourcebox.createduser}}</span>
+        </dd>
+        <dt><span>Createddate</span></dt>
+        <dd>
+            <span>{{vm.sourcebox.createddate | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="sourcebox-detail.edit({id:vm.sourcebox.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>
