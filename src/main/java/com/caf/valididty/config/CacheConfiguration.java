@@ -45,6 +45,8 @@ public class CacheConfiguration {
             cm.createCache(com.caf.valididty.domain.Boxassign.class.getName(), jcacheConfiguration);
             cm.createCache(com.caf.valididty.domain.Suspendedusers.class.getName(), jcacheConfiguration);
             cm.createCache(com.caf.valididty.domain.Adminstats.class.getName(), jcacheConfiguration);
+            cm.createCache(com.caf.valididty.domain.System.class.getName(), jcacheConfiguration);
+            cm.createCache(com.caf.valididty.domain.MobileValidation.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

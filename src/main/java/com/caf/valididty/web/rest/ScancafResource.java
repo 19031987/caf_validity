@@ -230,7 +230,23 @@ public class ScancafResource {
     public Boxassign getCatLatest(@RequestBody Boxassign id) {
         log.debug("REST request to get Scancaf : {}", id);
         Boxassign assign = new Boxassign();
-        Scancaf scancaf = scancafRepository.getCatLatest(id.getChurntype());
+        Scancaf scancaf = new Scancaf();
+        if(id.getChurntype()==null) {
+        	scancaf = scancafRepository.getCatALl();
+        	if(scancaf == null) {
+        		scancaf = new Scancaf();
+        		scancaf.setCategory("E1A00000");
+        		scancaf.setCategory1("EC100000");
+        		scancaf.setCategory2("EC200000");
+        		scancaf.setCategory3("EC300000");
+        		scancaf.setCategory4("EC400000");
+        		scancaf.setCategory5("EDA00000");
+        	}
+        	
+        	id.setChurntype("Any");
+        }else {
+         scancaf = scancafRepository.getCatLatest(id.getChurntype());
+        }
         
         if(id.getChurntype().equalsIgnoreCase("category_1")) {
         	 assign.setBoxassign(scancaf.getCategory1());
@@ -249,6 +265,10 @@ public class ScancafResource {
        
         if(id.getChurntype().equalsIgnoreCase("category_5")) {
         	assign.setBoxassign((scancaf.getCategory5()));
+        }
+        if(id.getChurntype().equalsIgnoreCase("Any")) {
+        	assign.setBoxassign((scancaf.getCategory()+","+scancaf.getCategory1()+","+scancaf.getCategory2()
+        	+","+scancaf.getCategory3()+","+scancaf.getCategory4()+","+scancaf.getCategory5()));
         }
 		return assign;
 		
@@ -281,35 +301,35 @@ public class ScancafResource {
         Scancaf cafloc = new Scancaf();
         List<Scancaf> scancaf = new ArrayList<Scancaf>();
         if(id.getCaftype().equalsIgnoreCase("category_1")) {
-         scancaf = scancafRepository.findByOutBoxCompletionCat1(id.getSourceboxstaus(),"red");
+         scancaf = scancafRepository.findByOutBoxCompletionCat5(id.getSourceboxstaus(),"red");
         }
         if(id.getCaftype().equalsIgnoreCase("category_2")) {
-            scancaf = scancafRepository.findByOutBoxCompletionCat2(id.getSourceboxstaus(),"green");
+            scancaf = scancafRepository.findByOutBoxCompletionCat1(id.getSourceboxstaus(),"green");
            }
         if(id.getCaftype().equalsIgnoreCase("category_3")) {
-            scancaf = scancafRepository.findByOutBoxCompletionCat3(id.getSourceboxstaus(),"white");
+            scancaf = scancafRepository.findByOutBoxCompletionCat2(id.getSourceboxstaus(),"white");
            }
         if(id.getCaftype().equalsIgnoreCase("category_4")) {
-            scancaf = scancafRepository.findByOutBoxCompletionCat4(id.getSourceboxstaus(),"yellow");
+            scancaf = scancafRepository.findByOutBoxCompletionCat3(id.getSourceboxstaus(),"yellow");
            }
         if(id.getCaftype().equalsIgnoreCase("category_5")) {
-            scancaf = scancafRepository.findByOutBoxCompletionCat5(id.getSourceboxstaus(),"blue");
+            scancaf = scancafRepository.findByOutBoxCompletionCat4(id.getSourceboxstaus(),"blue");
            }
         for(Scancaf caf : scancaf) {
         	  if(id.getCaftype().equalsIgnoreCase("category_1")) {
-        	    cafs =cafs+"     "+caf.getCentralbarcode();
+        	    cafs =cafs+" ,    "+caf.getCentralbarcode();
         	  }
         	  if(id.getCaftype().equalsIgnoreCase("category_2")) {
-       		   cafs =cafs+"     "+caf.getCentralbarcode();
+       		   cafs =cafs+"  ,   "+caf.getCentralbarcode();
        	  }
         	  if(id.getCaftype().equalsIgnoreCase("category_3")) {
-       		   cafs =cafs+"     "+caf.getCentralbarcode();
+       		   cafs =cafs+"  ,   "+caf.getCentralbarcode();
        	  }
         	  if(id.getCaftype().equalsIgnoreCase("category_4")) {
-       		   cafs =cafs+"     "+caf.getCentralbarcode();
+       		   cafs =cafs+"  ,   "+caf.getCentralbarcode();
        	  }
         	  if(id.getCaftype().equalsIgnoreCase("category_5")) {
-       		   cafs =cafs+"     "+caf.getCentralbarcode();
+       		   cafs =cafs+"  ,  "+caf.getCentralbarcode();
        	  }
         }
         
@@ -322,6 +342,21 @@ public class ScancafResource {
         }
         
        
+    }
+    
+    @PostMapping("/scancafs/getDetailsByName")
+    @Timed
+    public ResponseEntity<Scancaf> getDetailsByName(@RequestBody Scancaf scancaf) {
+    	
+    	 Scancaf scancafLocal = scancafRepository.findByuserOrderByDsc(scancaf.getUser());
+    	if(scancafLocal!= null) {
+		return ResponseEntity.ok().body(scancafLocal);
+    	}else {
+    		return ResponseEntity.badRequest().body(null);
+    	}
+    		
+    	
+    
     }
     
 

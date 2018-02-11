@@ -47,6 +47,9 @@ public class BoxassignResourceIntTest {
     private static final String DEFAULT_CHURNTYPE = "AAAAAAAAAA";
     private static final String UPDATED_CHURNTYPE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_SYSTEM = "AAAAAAAAAA";
+    private static final String UPDATED_SYSTEM = "BBBBBBBBBB";
+
     @Autowired
     private BoxassignRepository boxassignRepository;
 
@@ -89,7 +92,8 @@ public class BoxassignResourceIntTest {
         Boxassign boxassign = new Boxassign()
             .user(DEFAULT_USER)
             .boxassign(DEFAULT_BOXASSIGN)
-            .churntype(DEFAULT_CHURNTYPE);
+            .churntype(DEFAULT_CHURNTYPE)
+            .system(DEFAULT_SYSTEM);
         return boxassign;
     }
 
@@ -117,6 +121,7 @@ public class BoxassignResourceIntTest {
         assertThat(testBoxassign.getUser()).isEqualTo(DEFAULT_USER);
         assertThat(testBoxassign.getBoxassign()).isEqualTo(DEFAULT_BOXASSIGN);
         assertThat(testBoxassign.getChurntype()).isEqualTo(DEFAULT_CHURNTYPE);
+        assertThat(testBoxassign.getSystem()).isEqualTo(DEFAULT_SYSTEM);
 
         // Validate the Boxassign in Elasticsearch
         Boxassign boxassignEs = boxassignSearchRepository.findOne(testBoxassign.getId());
@@ -155,7 +160,8 @@ public class BoxassignResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(boxassign.getId().intValue())))
             .andExpect(jsonPath("$.[*].user").value(hasItem(DEFAULT_USER.toString())))
             .andExpect(jsonPath("$.[*].boxassign").value(hasItem(DEFAULT_BOXASSIGN.toString())))
-            .andExpect(jsonPath("$.[*].churntype").value(hasItem(DEFAULT_CHURNTYPE.toString())));
+            .andExpect(jsonPath("$.[*].churntype").value(hasItem(DEFAULT_CHURNTYPE.toString())))
+            .andExpect(jsonPath("$.[*].system").value(hasItem(DEFAULT_SYSTEM.toString())));
     }
 
     @Test
@@ -171,7 +177,8 @@ public class BoxassignResourceIntTest {
             .andExpect(jsonPath("$.id").value(boxassign.getId().intValue()))
             .andExpect(jsonPath("$.user").value(DEFAULT_USER.toString()))
             .andExpect(jsonPath("$.boxassign").value(DEFAULT_BOXASSIGN.toString()))
-            .andExpect(jsonPath("$.churntype").value(DEFAULT_CHURNTYPE.toString()));
+            .andExpect(jsonPath("$.churntype").value(DEFAULT_CHURNTYPE.toString()))
+            .andExpect(jsonPath("$.system").value(DEFAULT_SYSTEM.toString()));
     }
 
     @Test
@@ -195,7 +202,8 @@ public class BoxassignResourceIntTest {
         updatedBoxassign
             .user(UPDATED_USER)
             .boxassign(UPDATED_BOXASSIGN)
-            .churntype(UPDATED_CHURNTYPE);
+            .churntype(UPDATED_CHURNTYPE)
+            .system(UPDATED_SYSTEM);
 
         restBoxassignMockMvc.perform(put("/api/boxassigns")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -209,6 +217,7 @@ public class BoxassignResourceIntTest {
         assertThat(testBoxassign.getUser()).isEqualTo(UPDATED_USER);
         assertThat(testBoxassign.getBoxassign()).isEqualTo(UPDATED_BOXASSIGN);
         assertThat(testBoxassign.getChurntype()).isEqualTo(UPDATED_CHURNTYPE);
+        assertThat(testBoxassign.getSystem()).isEqualTo(UPDATED_SYSTEM);
 
         // Validate the Boxassign in Elasticsearch
         Boxassign boxassignEs = boxassignSearchRepository.findOne(testBoxassign.getId());
@@ -269,7 +278,8 @@ public class BoxassignResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(boxassign.getId().intValue())))
             .andExpect(jsonPath("$.[*].user").value(hasItem(DEFAULT_USER.toString())))
             .andExpect(jsonPath("$.[*].boxassign").value(hasItem(DEFAULT_BOXASSIGN.toString())))
-            .andExpect(jsonPath("$.[*].churntype").value(hasItem(DEFAULT_CHURNTYPE.toString())));
+            .andExpect(jsonPath("$.[*].churntype").value(hasItem(DEFAULT_CHURNTYPE.toString())))
+            .andExpect(jsonPath("$.[*].system").value(hasItem(DEFAULT_SYSTEM.toString())));
     }
 
     @Test

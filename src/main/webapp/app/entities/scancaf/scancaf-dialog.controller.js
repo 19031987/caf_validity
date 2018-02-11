@@ -21,7 +21,8 @@
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
-
+        
+        
         function clear () {
             $uibModalInstance.dismiss('cancel');
         }
@@ -50,11 +51,63 @@
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }
+        
+        function init(){
+        	
+        	Scancaf.getSystemByName(vm.scancaf,onSuccess,onError);
+        	 function onSuccess(data){
+        		if(data.user != null){
+        			vm.scancaf.user=data.user
+        			 var array =  data.boxassign.split(",");
+                 	 
+     	           	if(array[0].indexOf('E1A') > -1){
+     	           		vm.scancaf.category1 = array[0];
+     	           	}
+     	           	if(array[1].indexOf('EC1') > -1){
+     	           		vm.scancaf.category2 = array[1];
+     	           	}
+     	           	if(array[2].indexOf('EC2')  > -1){
+     	           	 vm.scancaf.category3= array[2]; 
+     	           	}
+     	           	if(array[3].indexOf('EC3')  > -1){
+     	           	  vm.scancaf.category4  =  array[3];
+     	           	}
+     	           	if(array[4].indexOf('EDA')  > -1){
+     	           	 vm.scancaf.category5 = array[4];
+     	           	}
+    				}
+        			Scancaf.getDetailsByName(vm.scancaf,onSuccessName);
+        			function onSuccessName(result){
+        				if(result != null){
+        					vm.scancaf.sourcebox = result.sourcebox;
+        				 vm.scancaf.countCategory1 = result.countCategory1;
+        	        	   vm.scancaf.countCategory2 = result.countCategory2;
+        	        	   vm.scancaf.countCategory3 = result.countCategory3;
+        	        	   vm.scancaf.countCategory4 = result.countCategory4;
+        	        	   vm.scancaf.countCategory5 = result.countCategory5;
+        		           vm.scancaf.category1 = result.category1;
+        		           vm.scancaf.category2 = result.category2;
+        		           vm.scancaf.category3 = result.category3;
+        		           vm.scancaf.category4 = result.category4;
+        		           vm.scancaf.category5 = result.category5;
+        				}
+        			}
+        				
+        		}
+        				
+          		
+            function onError(){
+           		alert("You are not allowed to work on the system, Please check with your Team leader");
+           	}
+        }
+        
+       
+       	init();
        
         //watchCollection
         $scope.$watch('vm.scancaf.sourcebox', function(){
         	if(vm.scancaf.sourcebox.length ===8){
-        		Scancaf.getSource(vm.scancaf.sourcebox,onSaveSuccess);
+        		Scancaf.getSource(vm.scancaf.sourcebox,onSaveSuccess,onError);
         	}
         	 function onSaveSuccess (result) {
         		
@@ -364,8 +417,14 @@
         	 Scancaf.getOutBox(vm.scancaf,getoutbox,geterrorbox);
         	 
         	 function getoutbox (result) {
+        		 $scope.item = result;
+    			// alert(result.boxstatus);
         		 
-    			 alert(result.boxstatus);
+    			 var blob = new Blob([result.boxstatus], {
+    		            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+    		        });
+    			 
+    		        saveAs(blob, "Report.xls");
     			
     		 }
     		 function geterrorbox (result) {

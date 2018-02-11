@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span>System</span> {{vm.system.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Systemname</span></dt>
+        <dd>
+            <span>{{vm.system.systemname}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            <span>{{vm.system.user}}</span>
+        </dd>
+        <dt><span>Userdate</span></dt>
+        <dd>
+            <span>{{vm.system.userdate | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="system-detail.edit({id:vm.system.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

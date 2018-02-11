@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "mobilenumber",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "activationDate",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "customerName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "colorCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "user",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180211175727",
+    "dto": "mapstruct",
+    "service": "no",
+    "entityTableName": "mobile_validation",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

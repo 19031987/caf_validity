@@ -76,6 +76,22 @@
                    // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
                     return angular.toJson(copy);
                 }
+            },'getSystemByName': {
+                method: 'GET',
+                url: 'api/boxassigns/getSystemName',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'getDetailsByName': {
+                method: 'POST',
+                url: 'api/scancafs/getDetailsByName',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
             }
         });
     }

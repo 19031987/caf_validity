@@ -2,7 +2,8 @@ package com.caf.valididty.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.caf.valididty.domain.Boxassign;
-
+import com.caf.valididty.domain.Scancaf;
+import com.caf.valididty.domain.System;
 import com.caf.valididty.repository.BoxassignRepository;
 import com.caf.valididty.repository.search.BoxassignSearchRepository;
 import com.caf.valididty.web.rest.util.HeaderUtil;
@@ -16,11 +17,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -151,5 +156,54 @@ public class BoxassignResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/boxassigns");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+
+    @PostMapping("/boxassigns/getCatLatest")
+    @Timed
+    public Boxassign getCatLatest() {
+        Boxassign assign = new Boxassign();
+        	assign = boxassignRepository.getCatAll();
+        	if(assign == null) {
+        		assign = new Boxassign();
+        		assign.setBoxassign("E1A00000"+","+"EC100000"+","+"EC200000"+","+"EC300000"+","+"EDA00000");
+        	}
+ 		return assign;
+    }
+    
+    @GetMapping("/boxassigns/getSystemName")
+    @Timed
+    public Boxassign getSystemByName() {
+    	Boxassign system =boxassignRepository.findByuser(getCurrentUserLogin());
+    	String systemName = null;
+    	if(system!= null) {
+    		try {
+    		 systemName =InetAddress.getLocalHost().getHostName(); 
+    		} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
+    	}
+    	if(system!= null&& system.getSystem().equalsIgnoreCase(systemName)) {
+			return system;
+		}else {
+			return null;
+			}
+    }
+    
+    public String getCurrentUserLogin() {
+        org.springframework.security.core.context.SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String login = null;
+        if (authentication != null)
+            if (authentication.getPrincipal() instanceof UserDetails)
+            	login = ((UserDetails) authentication.getPrincipal()).getUsername();
+            else if (authentication.getPrincipal() instanceof String)
+            	login = (String) authentication.getPrincipal();
+        
+        return login; 
+        
+
+}
+  
+
 
 }

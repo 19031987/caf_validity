@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "systemname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "user",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userdate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20171223192131",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "system",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

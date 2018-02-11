@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Boxassign implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+ 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,6 +31,9 @@ public class Boxassign implements Serializable {
 
     @Column(name = "churntype")
     private String churntype;
+
+    @Column(name = "jhi_system")
+    private String system;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -79,6 +82,19 @@ public class Boxassign implements Serializable {
     public void setChurntype(String churntype) {
         this.churntype = churntype;
     }
+
+    public String getSystem() {
+        return system;
+    }
+
+    public Boxassign system(String system) {
+        this.system = system;
+        return this;
+    }
+
+    public void setSystem(String system) {
+        this.system = system;
+    }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override
@@ -108,6 +124,7 @@ public class Boxassign implements Serializable {
             ", user='" + getUser() + "'" +
             ", boxassign='" + getBoxassign() + "'" +
             ", churntype='" + getChurntype() + "'" +
+            ", system='" + getSystem() + "'" +
             "}";
     }
 }

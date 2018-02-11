@@ -41,6 +41,9 @@ public interface ScancafRepository extends JpaRepository<Scancaf, Long> {
 	@Query(value ="select * from scancaf order by ?1 desc limit 1",nativeQuery=true)
 	Scancaf getCatLatest(String id);
 	
+	@Query(value ="select * from boxassign order by category_1,category_2,category_3,category_4,category_5 desc limit 1",nativeQuery=true)
+	Scancaf getCatALl();
+	
 	@Query(value ="select * from scancaf where centralBarcode=?1 ",nativeQuery=true)
 	Scancaf findByBarcode( String cafbarcode);
 
@@ -54,5 +57,7 @@ public interface ScancafRepository extends JpaRepository<Scancaf, Long> {
 	List<Scancaf> findByOutBoxCompletionCat4(String category1, String colorcode);
 	@Query(value ="select * from scancaf where category_5=?1 and boxstatus='FIRST_LEVEL' and colorcode=?2",nativeQuery=true)
 	List<Scancaf> findByOutBoxCompletionCat5(String category1, String colorcode);
+	@Query(value ="select * from scancaf where jhi_user=?1 order by scancaf.jhi_user desc LIMIT 1",nativeQuery=true)
+	Scancaf findByuserOrderByDsc(String user);
 
 }

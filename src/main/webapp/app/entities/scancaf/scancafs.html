@@ -4,12 +4,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="scancaf.new" >
+                <button class="btn btn-primary" ng-click="initTest()">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs-down" >
                        1st Level Segregation
                     </span>
+                    
                 </button>
+              <!--   <a ui-sref="{{ init() ? '.': 'scancaf.new'}}">Disabled Link</a>  -->
                  <button class="btn btn-primary" ui-sref="scancaf.second" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs-down" >

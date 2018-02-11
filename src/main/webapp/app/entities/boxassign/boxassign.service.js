@@ -33,7 +33,7 @@
                 }
             },'getCatLatest' :{
                 method: 'POST',
-                url: 'api/scancafs/getCatLatest',
+                url: 'api/boxassigns/getCatLatest',
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
@@ -41,6 +41,17 @@
                     return data;
                 }
             	
+            },
+            'system': {
+                method: 'GET',
+                url: 'api/systems',
+                isArray: true,
+                transformResponse: function (data) {
+                    if (data) {
+                        data = angular.fromJson(data);
+                    }
+                    return data;
+                }
             }
         });
     }

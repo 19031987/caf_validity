@@ -41,10 +41,11 @@
             vm.isSaving = false;
         }
         $scope.users = Boxassign.users();
+        $scope.system = Boxassign.system();
         
         $scope.catChange = function(){
         	
-        	Boxassign.getCatLatest(vm.boxassign,onSave);
+        	Boxassign.getCatLatest(onSave);
         	
         	 function onSave(result){
            		 var boxassign = result;
@@ -63,6 +64,29 @@
            	}
            	if(vm.boxassign.churntype==='category_5'){
            		vm.boxassign.boxassign = 'EDA'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8)); 
+           	}
+           	vm.boxassign.boxassign = result.boxassign;
+           	
+           	if(vm.boxassign.churntype===null){
+           	 var array = result.boxassign.split(',');
+           	 
+           	if(array[0].indexOf('E1A') > -1){
+           		vm.boxassign.boxassign = 'E1A'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8)); 
+           	}
+           	if(array[1].indexOf('EC1') > -1){
+           		vm.boxassign.boxassign = vm.boxassign.boxassign+","+ 'EC1'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8)); 
+           	}
+           	if(array[2].indexOf('EC2')  > -1){
+           		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'EC2'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8)); 
+           	}
+           	if(array[3].indexOf('EC3')  > -1){
+           		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'EC3'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8)); 
+           	}
+           	if(array[4].indexOf('EDA')  > -1){
+           		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'EDA'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8)); 
+           	}
+           	 
+           		
            	}
            	
          }

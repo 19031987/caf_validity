@@ -5,9 +5,9 @@
         .module('cafvalidityV2App')
         .controller('ScancafController', ScancafController);
 
-    ScancafController.$inject = ['$state', 'Scancaf', 'ScancafSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    ScancafController.$inject = ['$state', '$scope','Scancaf', 'ScancafSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function ScancafController($state, Scancaf, ScancafSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function ScancafController($state,$scope, Scancaf, ScancafSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -23,6 +23,22 @@
         vm.currentSearch = pagingParams.search;
 
         loadAll();
+        
+         $scope.initTest = function(){
+        	 Scancaf.getSystemByName(null,onSuccess,onError);
+        	 function onSuccess(data){
+        		 if(data.boxassign!= null){
+        		 $state.go("scancaf.new");
+        		 }else{
+        			 alert("You are not assingned to any system, Please check with your Team leader");
+        		 }
+        	 }
+        	function onError(){
+        		alert("You are not allowed to work on the system, Please check with your Team leader");
+        	}
+        }
+     ///  init();
+        
 
         function loadAll () {
             if (pagingParams.search) {

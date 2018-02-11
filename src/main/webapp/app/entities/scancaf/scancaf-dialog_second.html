@@ -1,6 +1,6 @@
 
 <form name="editForm" role="form" novalidate >
-
+<script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"></script>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
@@ -105,6 +105,23 @@
          <button type="button" class="btn btn-primary" ng-click="BoxComplete()" >
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span>OutBox Completed</span>
         </button>
+        
+         <td>{{item.boxstatus}}</td>
+        <div hidden="true">
+         <div id="exportable">
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>{{item.boxstatus}}</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    </div>
+</div>
+      </div>  
         </div>
         </div>
         </form>
