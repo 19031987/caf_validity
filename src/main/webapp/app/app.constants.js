@@ -5,6 +5,6 @@
         .module('cafvalidityV2App')
         .constant('VERSION', "0.0.1-SNAPSHOT")
         .constant('DEBUG_INFO_ENABLED', false)
-        .constant('BUILD_TIMESTAMP', 1511885083487)
+        .constant('BUILD_TIMESTAMP', 1518557892966)
 ;
 })();

@@ -46,6 +46,54 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="isselected" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="category_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="category_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="category_3" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="catergory_4" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="catergory_5" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="count_category_1" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="count_category_2" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="count_category_3" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="count_category_4" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="count_category_5" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sourcebox" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

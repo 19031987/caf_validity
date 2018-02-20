@@ -1,5 +1,5 @@
 # ===================================================================
-# Spring Boot configuration for the "dev" profile.
+# Spring Boot configuration for the "prod" profile.
 #
 # This configuration overrides the application.yml file.
 #
@@ -14,16 +14,11 @@
 # ===================================================================
 
 spring:
-    profiles:
-        active: dev
-        include: swagger
     devtools:
         restart:
-            enabled: true
+            enabled: false
         livereload:
-            enabled: false # we use gulp + BrowserSync for livereload
-    jackson:
-        serialization.indent_output: true
+            enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:mysql://localhost:3306/cafvalidity_v2?useUnicode=true&characterEncoding=utf8&useSSL=false
@@ -38,33 +33,27 @@ spring:
     jpa:
         database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
         database: MYSQL
-        show-sql: true
+        show-sql: false
         properties:
             hibernate.id.new_generator_mappings: true
             hibernate.cache.use_second_level_cache: true
             hibernate.cache.use_query_cache: false
-            hibernate.generate_statistics: true
+            hibernate.generate_statistics: false
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.NoDefaultJCacheRegionFactory
     data:
         elasticsearch:
             cluster-name:
-            cluster-nodes:
-            properties:
-                path:
-                    logs: target/elasticsearch/log
-                    data: target/elasticsearch/data
+            cluster-nodes: localhost:9300
     mail:
         host: localhost
         port: 25
         username:
         password:
-    messages:
-        cache-seconds: 1
     thymeleaf:
-        cache: false
+        cache: true
 
 liquibase:
-    contexts: dev
+    contexts: prod
 
 # ===================================================================
 # To enable SSL, generate a certificate using:
@@ -76,7 +65,7 @@ liquibase:
 # Then, modify the server.ssl properties so your "server" configuration looks like:
 #
 # server:
-#    port: 8443
+#    port: 443
 #    ssl:
 #        key-store: keystore.p12
 #        key-store-password: <your-password>
@@ -85,6 +74,10 @@ liquibase:
 # ===================================================================
 server:
     port: 8080
+    compression:
+        enabled: true
+        mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+        min-response-size: 1024
 
 # ===================================================================
 # JHipster specific properties
@@ -95,47 +88,42 @@ server:
 jhipster:
     http:
         version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
+        cache: # Used by the CachingHttpHeadersFilter
+            timeToLiveInDays: 1461
     cache: # Cache configuration
         ehcache: # Ehcache configuration
             time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache
-            max-entries: 100 # Number of objects in each cache entry
-    # CORS is only enabled by default with the "dev" profile, so BrowserSync can access the API
-    cors:
-        allowed-origins: "*"
-        allowed-methods: GET, PUT, POST, DELETE, OPTIONS
-        allowed-headers: "*"
-        exposed-headers:
-        allow-credentials: true
-        max-age: 1800
+            max-entries: 1000 # Number of objects in each cache entry
     security:
         authentication:
             jwt:
-                secret: my-secret-token-to-change-in-production
+                secret: e6209413147382cdf9befb930e1ad7e8debc054a
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: cafvalidity_v2@localhost
-        base-url: http://127.0.0.1:8080
+        base-url: http://my-server-url-to-change # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
-        graphite: # Use the "graphite" Maven profile to have the Graphite dependencies
+        graphite:
             enabled: false
             host: localhost
             port: 2003
             prefix: cafvalidity_v2
-        prometheus: # Use the "prometheus" Maven profile to have the Prometheus dependencies
+        prometheus:
             enabled: false
             endpoint: /prometheusMetrics
         logs: # Reports Dropwizard metrics in the logs
-            enabled: false
+            enabled: true
             report-frequency: 60 # in seconds
     logging:
         logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
-            enabled: false
+            enabled: true
             host: localhost
             port: 5000
             queue-size: 512
+           
 
 # ===================================================================
 # Application specific properties

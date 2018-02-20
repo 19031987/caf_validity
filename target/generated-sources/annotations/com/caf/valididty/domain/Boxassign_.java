@@ -9,6 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Boxassign_ {
 
 	public static volatile SingularAttribute<Boxassign, String> churntype;
+	public static volatile SingularAttribute<Boxassign, String> system;
 	public static volatile SingularAttribute<Boxassign, Long> id;
 	public static volatile SingularAttribute<Boxassign, String> boxassign;
 	public static volatile SingularAttribute<Boxassign, String> user;

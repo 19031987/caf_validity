@@ -5,8 +5,6 @@ import com.caf.valididty.CafvalidityV2App;
 import com.caf.valididty.domain.MobileValidation;
 import com.caf.valididty.repository.MobileValidationRepository;
 import com.caf.valididty.repository.search.MobileValidationSearchRepository;
-import com.caf.valididty.service.dto.MobileValidationDTO;
-import com.caf.valididty.service.mapper.MobileValidationMapper;
 import com.caf.valididty.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -60,11 +58,44 @@ public class MobileValidationResourceIntTest {
     private static final LocalDate DEFAULT_USER_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_USER_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    @Autowired
-    private MobileValidationRepository mobileValidationRepository;
+    private static final Boolean DEFAULT_ISSELECTED = false;
+    private static final Boolean UPDATED_ISSELECTED = true;
+
+    private static final String DEFAULT_CATEGORY_1 = "AAAAAAAAAA";
+    private static final String UPDATED_CATEGORY_1 = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CATEGORY_2 = "AAAAAAAAAA";
+    private static final String UPDATED_CATEGORY_2 = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CATEGORY_3 = "AAAAAAAAAA";
+    private static final String UPDATED_CATEGORY_3 = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CATERGORY_4 = "AAAAAAAAAA";
+    private static final String UPDATED_CATERGORY_4 = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CATERGORY_5 = "AAAAAAAAAA";
+    private static final String UPDATED_CATERGORY_5 = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_COUNT_CATEGORY_1 = 1;
+    private static final Integer UPDATED_COUNT_CATEGORY_1 = 2;
+
+    private static final Integer DEFAULT_COUNT_CATEGORY_2 = 1;
+    private static final Integer UPDATED_COUNT_CATEGORY_2 = 2;
+
+    private static final Integer DEFAULT_COUNT_CATEGORY_3 = 1;
+    private static final Integer UPDATED_COUNT_CATEGORY_3 = 2;
+
+    private static final Integer DEFAULT_COUNT_CATEGORY_4 = 1;
+    private static final Integer UPDATED_COUNT_CATEGORY_4 = 2;
+
+    private static final Integer DEFAULT_COUNT_CATEGORY_5 = 1;
+    private static final Integer UPDATED_COUNT_CATEGORY_5 = 2;
+
+    private static final String DEFAULT_SOURCEBOX = "AAAAAAAAAA";
+    private static final String UPDATED_SOURCEBOX = "BBBBBBBBBB";
 
     @Autowired
-    private MobileValidationMapper mobileValidationMapper;
+    private MobileValidationRepository mobileValidationRepository;
 
     @Autowired
     private MobileValidationSearchRepository mobileValidationSearchRepository;
@@ -88,7 +119,7 @@ public class MobileValidationResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final MobileValidationResource mobileValidationResource = new MobileValidationResource(mobileValidationRepository, mobileValidationMapper, mobileValidationSearchRepository);
+        final MobileValidationResource mobileValidationResource = new MobileValidationResource(mobileValidationRepository, mobileValidationSearchRepository);
         this.restMobileValidationMockMvc = MockMvcBuilders.standaloneSetup(mobileValidationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -108,7 +139,19 @@ public class MobileValidationResourceIntTest {
             .customerName(DEFAULT_CUSTOMER_NAME)
             .colorCode(DEFAULT_COLOR_CODE)
             .user(DEFAULT_USER)
-            .userDate(DEFAULT_USER_DATE);
+            .userDate(DEFAULT_USER_DATE)
+            .isselected(DEFAULT_ISSELECTED)
+            .category1(DEFAULT_CATEGORY_1)
+            .category2(DEFAULT_CATEGORY_2)
+            .category3(DEFAULT_CATEGORY_3)
+            .catergory4(DEFAULT_CATERGORY_4)
+            .catergory5(DEFAULT_CATERGORY_5)
+            .countCategory1(DEFAULT_COUNT_CATEGORY_1)
+            .countCategory2(DEFAULT_COUNT_CATEGORY_2)
+            .countCategory3(DEFAULT_COUNT_CATEGORY_3)
+            .countCategory4(DEFAULT_COUNT_CATEGORY_4)
+            .countCategory5(DEFAULT_COUNT_CATEGORY_5)
+            .sourcebox(DEFAULT_SOURCEBOX);
         return mobileValidation;
     }
 
@@ -124,10 +167,9 @@ public class MobileValidationResourceIntTest {
         int databaseSizeBeforeCreate = mobileValidationRepository.findAll().size();
 
         // Create the MobileValidation
-        MobileValidationDTO mobileValidationDTO = mobileValidationMapper.toDto(mobileValidation);
         restMobileValidationMockMvc.perform(post("/api/mobile-validations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(mobileValidationDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(mobileValidation)))
             .andExpect(status().isCreated());
 
         // Validate the MobileValidation in the database
@@ -140,6 +182,18 @@ public class MobileValidationResourceIntTest {
         assertThat(testMobileValidation.getColorCode()).isEqualTo(DEFAULT_COLOR_CODE);
         assertThat(testMobileValidation.getUser()).isEqualTo(DEFAULT_USER);
         assertThat(testMobileValidation.getUserDate()).isEqualTo(DEFAULT_USER_DATE);
+        assertThat(testMobileValidation.isIsselected()).isEqualTo(DEFAULT_ISSELECTED);
+        assertThat(testMobileValidation.getCategory1()).isEqualTo(DEFAULT_CATEGORY_1);
+        assertThat(testMobileValidation.getCategory2()).isEqualTo(DEFAULT_CATEGORY_2);
+        assertThat(testMobileValidation.getCategory3()).isEqualTo(DEFAULT_CATEGORY_3);
+        assertThat(testMobileValidation.getCatergory4()).isEqualTo(DEFAULT_CATERGORY_4);
+        assertThat(testMobileValidation.getCatergory5()).isEqualTo(DEFAULT_CATERGORY_5);
+        assertThat(testMobileValidation.getCountCategory1()).isEqualTo(DEFAULT_COUNT_CATEGORY_1);
+        assertThat(testMobileValidation.getCountCategory2()).isEqualTo(DEFAULT_COUNT_CATEGORY_2);
+        assertThat(testMobileValidation.getCountCategory3()).isEqualTo(DEFAULT_COUNT_CATEGORY_3);
+        assertThat(testMobileValidation.getCountCategory4()).isEqualTo(DEFAULT_COUNT_CATEGORY_4);
+        assertThat(testMobileValidation.getCountCategory5()).isEqualTo(DEFAULT_COUNT_CATEGORY_5);
+        assertThat(testMobileValidation.getSourcebox()).isEqualTo(DEFAULT_SOURCEBOX);
 
         // Validate the MobileValidation in Elasticsearch
         MobileValidation mobileValidationEs = mobileValidationSearchRepository.findOne(testMobileValidation.getId());
@@ -153,12 +207,11 @@ public class MobileValidationResourceIntTest {
 
         // Create the MobileValidation with an existing ID
         mobileValidation.setId(1L);
-        MobileValidationDTO mobileValidationDTO = mobileValidationMapper.toDto(mobileValidation);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restMobileValidationMockMvc.perform(post("/api/mobile-validations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(mobileValidationDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(mobileValidation)))
             .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
@@ -182,7 +235,19 @@ public class MobileValidationResourceIntTest {
             .andExpect(jsonPath("$.[*].customerName").value(hasItem(DEFAULT_CUSTOMER_NAME.toString())))
             .andExpect(jsonPath("$.[*].colorCode").value(hasItem(DEFAULT_COLOR_CODE.toString())))
             .andExpect(jsonPath("$.[*].user").value(hasItem(DEFAULT_USER.toString())))
-            .andExpect(jsonPath("$.[*].userDate").value(hasItem(DEFAULT_USER_DATE.toString())));
+            .andExpect(jsonPath("$.[*].userDate").value(hasItem(DEFAULT_USER_DATE.toString())))
+            .andExpect(jsonPath("$.[*].isselected").value(hasItem(DEFAULT_ISSELECTED.booleanValue())))
+            .andExpect(jsonPath("$.[*].category1").value(hasItem(DEFAULT_CATEGORY_1.toString())))
+            .andExpect(jsonPath("$.[*].category2").value(hasItem(DEFAULT_CATEGORY_2.toString())))
+            .andExpect(jsonPath("$.[*].category3").value(hasItem(DEFAULT_CATEGORY_3.toString())))
+            .andExpect(jsonPath("$.[*].catergory4").value(hasItem(DEFAULT_CATERGORY_4.toString())))
+            .andExpect(jsonPath("$.[*].catergory5").value(hasItem(DEFAULT_CATERGORY_5.toString())))
+            .andExpect(jsonPath("$.[*].countCategory1").value(hasItem(DEFAULT_COUNT_CATEGORY_1)))
+            .andExpect(jsonPath("$.[*].countCategory2").value(hasItem(DEFAULT_COUNT_CATEGORY_2)))
+            .andExpect(jsonPath("$.[*].countCategory3").value(hasItem(DEFAULT_COUNT_CATEGORY_3)))
+            .andExpect(jsonPath("$.[*].countCategory4").value(hasItem(DEFAULT_COUNT_CATEGORY_4)))
+            .andExpect(jsonPath("$.[*].countCategory5").value(hasItem(DEFAULT_COUNT_CATEGORY_5)))
+            .andExpect(jsonPath("$.[*].sourcebox").value(hasItem(DEFAULT_SOURCEBOX.toString())));
     }
 
     @Test
@@ -201,7 +266,19 @@ public class MobileValidationResourceIntTest {
             .andExpect(jsonPath("$.customerName").value(DEFAULT_CUSTOMER_NAME.toString()))
             .andExpect(jsonPath("$.colorCode").value(DEFAULT_COLOR_CODE.toString()))
             .andExpect(jsonPath("$.user").value(DEFAULT_USER.toString()))
-            .andExpect(jsonPath("$.userDate").value(DEFAULT_USER_DATE.toString()));
+            .andExpect(jsonPath("$.userDate").value(DEFAULT_USER_DATE.toString()))
+            .andExpect(jsonPath("$.isselected").value(DEFAULT_ISSELECTED.booleanValue()))
+            .andExpect(jsonPath("$.category1").value(DEFAULT_CATEGORY_1.toString()))
+            .andExpect(jsonPath("$.category2").value(DEFAULT_CATEGORY_2.toString()))
+            .andExpect(jsonPath("$.category3").value(DEFAULT_CATEGORY_3.toString()))
+            .andExpect(jsonPath("$.catergory4").value(DEFAULT_CATERGORY_4.toString()))
+            .andExpect(jsonPath("$.catergory5").value(DEFAULT_CATERGORY_5.toString()))
+            .andExpect(jsonPath("$.countCategory1").value(DEFAULT_COUNT_CATEGORY_1))
+            .andExpect(jsonPath("$.countCategory2").value(DEFAULT_COUNT_CATEGORY_2))
+            .andExpect(jsonPath("$.countCategory3").value(DEFAULT_COUNT_CATEGORY_3))
+            .andExpect(jsonPath("$.countCategory4").value(DEFAULT_COUNT_CATEGORY_4))
+            .andExpect(jsonPath("$.countCategory5").value(DEFAULT_COUNT_CATEGORY_5))
+            .andExpect(jsonPath("$.sourcebox").value(DEFAULT_SOURCEBOX.toString()));
     }
 
     @Test
@@ -228,12 +305,23 @@ public class MobileValidationResourceIntTest {
             .customerName(UPDATED_CUSTOMER_NAME)
             .colorCode(UPDATED_COLOR_CODE)
             .user(UPDATED_USER)
-            .userDate(UPDATED_USER_DATE);
-        MobileValidationDTO mobileValidationDTO = mobileValidationMapper.toDto(updatedMobileValidation);
+            .userDate(UPDATED_USER_DATE)
+            .isselected(UPDATED_ISSELECTED)
+            .category1(UPDATED_CATEGORY_1)
+            .category2(UPDATED_CATEGORY_2)
+            .category3(UPDATED_CATEGORY_3)
+            .catergory4(UPDATED_CATERGORY_4)
+            .catergory5(UPDATED_CATERGORY_5)
+            .countCategory1(UPDATED_COUNT_CATEGORY_1)
+            .countCategory2(UPDATED_COUNT_CATEGORY_2)
+            .countCategory3(UPDATED_COUNT_CATEGORY_3)
+            .countCategory4(UPDATED_COUNT_CATEGORY_4)
+            .countCategory5(UPDATED_COUNT_CATEGORY_5)
+            .sourcebox(UPDATED_SOURCEBOX);
 
         restMobileValidationMockMvc.perform(put("/api/mobile-validations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(mobileValidationDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(updatedMobileValidation)))
             .andExpect(status().isOk());
 
         // Validate the MobileValidation in the database
@@ -246,6 +334,18 @@ public class MobileValidationResourceIntTest {
         assertThat(testMobileValidation.getColorCode()).isEqualTo(UPDATED_COLOR_CODE);
         assertThat(testMobileValidation.getUser()).isEqualTo(UPDATED_USER);
         assertThat(testMobileValidation.getUserDate()).isEqualTo(UPDATED_USER_DATE);
+        assertThat(testMobileValidation.isIsselected()).isEqualTo(UPDATED_ISSELECTED);
+        assertThat(testMobileValidation.getCategory1()).isEqualTo(UPDATED_CATEGORY_1);
+        assertThat(testMobileValidation.getCategory2()).isEqualTo(UPDATED_CATEGORY_2);
+        assertThat(testMobileValidation.getCategory3()).isEqualTo(UPDATED_CATEGORY_3);
+        assertThat(testMobileValidation.getCatergory4()).isEqualTo(UPDATED_CATERGORY_4);
+        assertThat(testMobileValidation.getCatergory5()).isEqualTo(UPDATED_CATERGORY_5);
+        assertThat(testMobileValidation.getCountCategory1()).isEqualTo(UPDATED_COUNT_CATEGORY_1);
+        assertThat(testMobileValidation.getCountCategory2()).isEqualTo(UPDATED_COUNT_CATEGORY_2);
+        assertThat(testMobileValidation.getCountCategory3()).isEqualTo(UPDATED_COUNT_CATEGORY_3);
+        assertThat(testMobileValidation.getCountCategory4()).isEqualTo(UPDATED_COUNT_CATEGORY_4);
+        assertThat(testMobileValidation.getCountCategory5()).isEqualTo(UPDATED_COUNT_CATEGORY_5);
+        assertThat(testMobileValidation.getSourcebox()).isEqualTo(UPDATED_SOURCEBOX);
 
         // Validate the MobileValidation in Elasticsearch
         MobileValidation mobileValidationEs = mobileValidationSearchRepository.findOne(testMobileValidation.getId());
@@ -258,12 +358,11 @@ public class MobileValidationResourceIntTest {
         int databaseSizeBeforeUpdate = mobileValidationRepository.findAll().size();
 
         // Create the MobileValidation
-        MobileValidationDTO mobileValidationDTO = mobileValidationMapper.toDto(mobileValidation);
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
         restMobileValidationMockMvc.perform(put("/api/mobile-validations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(mobileValidationDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(mobileValidation)))
             .andExpect(status().isCreated());
 
         // Validate the MobileValidation in the database
@@ -310,7 +409,19 @@ public class MobileValidationResourceIntTest {
             .andExpect(jsonPath("$.[*].customerName").value(hasItem(DEFAULT_CUSTOMER_NAME.toString())))
             .andExpect(jsonPath("$.[*].colorCode").value(hasItem(DEFAULT_COLOR_CODE.toString())))
             .andExpect(jsonPath("$.[*].user").value(hasItem(DEFAULT_USER.toString())))
-            .andExpect(jsonPath("$.[*].userDate").value(hasItem(DEFAULT_USER_DATE.toString())));
+            .andExpect(jsonPath("$.[*].userDate").value(hasItem(DEFAULT_USER_DATE.toString())))
+            .andExpect(jsonPath("$.[*].isselected").value(hasItem(DEFAULT_ISSELECTED.booleanValue())))
+            .andExpect(jsonPath("$.[*].category1").value(hasItem(DEFAULT_CATEGORY_1.toString())))
+            .andExpect(jsonPath("$.[*].category2").value(hasItem(DEFAULT_CATEGORY_2.toString())))
+            .andExpect(jsonPath("$.[*].category3").value(hasItem(DEFAULT_CATEGORY_3.toString())))
+            .andExpect(jsonPath("$.[*].catergory4").value(hasItem(DEFAULT_CATERGORY_4.toString())))
+            .andExpect(jsonPath("$.[*].catergory5").value(hasItem(DEFAULT_CATERGORY_5.toString())))
+            .andExpect(jsonPath("$.[*].countCategory1").value(hasItem(DEFAULT_COUNT_CATEGORY_1)))
+            .andExpect(jsonPath("$.[*].countCategory2").value(hasItem(DEFAULT_COUNT_CATEGORY_2)))
+            .andExpect(jsonPath("$.[*].countCategory3").value(hasItem(DEFAULT_COUNT_CATEGORY_3)))
+            .andExpect(jsonPath("$.[*].countCategory4").value(hasItem(DEFAULT_COUNT_CATEGORY_4)))
+            .andExpect(jsonPath("$.[*].countCategory5").value(hasItem(DEFAULT_COUNT_CATEGORY_5)))
+            .andExpect(jsonPath("$.[*].sourcebox").value(hasItem(DEFAULT_SOURCEBOX.toString())));
     }
 
     @Test
@@ -326,28 +437,5 @@ public class MobileValidationResourceIntTest {
         assertThat(mobileValidation1).isNotEqualTo(mobileValidation2);
         mobileValidation1.setId(null);
         assertThat(mobileValidation1).isNotEqualTo(mobileValidation2);
-    }
-
-    @Test
-    @Transactional
-    public void dtoEqualsVerifier() throws Exception {
-        TestUtil.equalsVerifier(MobileValidationDTO.class);
-        MobileValidationDTO mobileValidationDTO1 = new MobileValidationDTO();
-        mobileValidationDTO1.setId(1L);
-        MobileValidationDTO mobileValidationDTO2 = new MobileValidationDTO();
-        assertThat(mobileValidationDTO1).isNotEqualTo(mobileValidationDTO2);
-        mobileValidationDTO2.setId(mobileValidationDTO1.getId());
-        assertThat(mobileValidationDTO1).isEqualTo(mobileValidationDTO2);
-        mobileValidationDTO2.setId(2L);
-        assertThat(mobileValidationDTO1).isNotEqualTo(mobileValidationDTO2);
-        mobileValidationDTO1.setId(null);
-        assertThat(mobileValidationDTO1).isNotEqualTo(mobileValidationDTO2);
-    }
-
-    @Test
-    @Transactional
-    public void testEntityFromId() {
-        assertThat(mobileValidationMapper.fromId(42L).getId()).isEqualTo(42);
-        assertThat(mobileValidationMapper.fromId(null)).isNull();
     }
 }

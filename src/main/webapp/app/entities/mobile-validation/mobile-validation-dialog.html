@@ -1,6 +1,26 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+<form name="editForm" role="form" novalidate >
 
+<script>
+$(document).ready(function() {
+    $('#field_mobilenumber').keyup(function() {
+        if ($(this).val().length >= 10) {
+            $('#field_remobilenumber').focus();
+        }
+    });
+    
+    $('#field_remobilenumber').keyup(function() {
+        if ($(this).val().length >= 10) {
+          if($('#field_remobilenumber').val() !=  $('#field_mobilenumber').val()){
+        	  alert('mobile numbers should be equal');
+        	  $('#search').prop('disabled', true);;
+          }else{
+        	  $('#search').prop('disabled', false);;
+          }
+        }
+    });
+});
+</script>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
@@ -19,48 +39,57 @@
                     ng-model="vm.mobileValidation.mobilenumber"
                     />
         </div>
-        <div class="form-group">
-            <label class="control-label" for="field_activationDate">Activation Date</label>
-            <input type="text" class="form-control" name="activationDate" id="field_activationDate"
-                    ng-model="vm.mobileValidation.activationDate"
+         <div class="form-group">
+            <label class="control-label" for="field_mobilenumber">Re Mobilenumber</label>
+            <input type="number" class="form-control" name="mobilenumber" id="field_remobilenumber"
+                    ng-model="vm.mobileValidation.remobilenumber"
                     />
         </div>
-        <div class="form-group">
-            <label class="control-label" for="field_customerName">Customer Name</label>
-            <input type="text" class="form-control" name="customerName" id="field_customerName"
-                    ng-model="vm.mobileValidation.customerName"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_colorCode">Color Code</label>
-            <input type="text" class="form-control" name="colorCode" id="field_colorCode"
-                    ng-model="vm.mobileValidation.colorCode"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_user">User</label>
-            <input type="text" class="form-control" name="user" id="field_user"
-                    ng-model="vm.mobileValidation.user"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_userDate">User Date</label>
-                <div class="input-group">
-                    <input id="field_userDate" type="text" class="form-control" name="userDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.mobileValidation.userDate" is-open="vm.datePickerOpenStatus.userDate"
-                    />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('userDate')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
-        </div>
-
+        
+         <button type="button" class="btn btn-default" id="search"  ng-click="vm.search()">
+            <span class="glyphicon"></span>&nbsp;<span>Search</span>
+        </button>
+         <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                   
+                    <th jh-sort-by="mobilenumber"><span>Mobilenumber</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="activationDate"><span>Activation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customerName"><span>Customer Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="colorCode"><span>Color Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="mobileValidation in vm.mobileValidations track by mobileValidation.activationDate">
+                    <td>{{mobileValidation.mobilenumber}}</td>
+                    <td>{{mobileValidation.activationDate}}</td>
+                    <td>{{mobileValidation.customerName}}</td>
+                    <td>{{mobileValidation.colorCode}}</td>
+                    
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            
+                           <input type="checkbox"  ng-model="mobileValidation.isselected" />
+                           
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="modal-footer">
+     <button type="submit" class="btn btn-primary" ng-click="vm.save()">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+   <!--  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
         </button>
         <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
         </button>
-    </div>
+    </div> -->
 </form>

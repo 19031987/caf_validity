@@ -204,12 +204,12 @@
         		
         		
         		 
-        		 if(vm.scancaf.countCategory1===300){
+        		 if(vm.scancaf.countCategory1===1600){
         			alert('Category1 Box is completed please ask for another one') ;
         			vm.scancaf.boxstatus='category1-completed'
         		 }
         		 
-        		 if(vm.scancaf.countCategory2===300){
+        		 if(vm.scancaf.countCategory2===800){
         	alert('Category2 Box is completed please ask for another one') ; 
         			if(vm.scancaf.boxstatus!=null){
         				vm.scancaf.boxstatus=' ,category2-completed'
@@ -242,12 +242,27 @@
 		 			}
         		 }
         		 if(vm.scancaf.countCategory1===50|| vm.scancaf.countCategory1===100||vm.scancaf.countCategory1===150||
-        				 vm.scancaf.countCategory1===200|| vm.scancaf.countCategory1===250){
+        				 vm.scancaf.countCategory1===200|| vm.scancaf.countCategory1===250||vm.scancaf.countCategory1===300|| 
+        				 vm.scancaf.countCategory1===350||vm.scancaf.countCategory1===400||
+        				 vm.scancaf.countCategory1===450|| vm.scancaf.countCategory1===500||vm.scancaf.countCategory1===550|| 
+        				 vm.scancaf.countCategory1===600||vm.scancaf.countCategory1===650||
+        				 vm.scancaf.countCategory1===700|| vm.scancaf.countCategory1===750){
          			alert('For Category1 : Lot is completed') ;
          		 }
          		 
-        		 if(vm.scancaf.countCategory2===50|| vm.scancaf.countCategory2===100||vm.scancaf.countCategory2===150||
-        				 vm.scancaf.countCategory2===200|| vm.scancaf.countCategory2===250){
+        		 if(vm.scancaf.countCategory1===50|| vm.scancaf.countCategory1===100||vm.scancaf.countCategory1===150||
+        				 vm.scancaf.countCategory1===200|| vm.scancaf.countCategory1===250||vm.scancaf.countCategory1===300|| 
+        				 vm.scancaf.countCategory1===350||vm.scancaf.countCategory1===400||
+        				 vm.scancaf.countCategory1===450|| vm.scancaf.countCategory1===500||vm.scancaf.countCategory1===550|| 
+        				 vm.scancaf.countCategory1===600||vm.scancaf.countCategory1===650||
+        				 vm.scancaf.countCategory1===700|| vm.scancaf.countCategory1===750||vm.scancaf.countCategory1===800|| 
+        				 vm.scancaf.countCategory1===850||vm.scancaf.countCategory1===900||
+        				 vm.scancaf.countCategory1===950|| vm.scancaf.countCategory1===1000||vm.scancaf.countCategory1===1050|| 
+        				 vm.scancaf.countCategory1===1100||vm.scancaf.countCategory1===1150||
+        				 vm.scancaf.countCategory1===1200|| vm.scancaf.countCategory1===1250||vm.scancaf.countCategory1===1300|| 
+        				 vm.scancaf.countCategory1===1350||vm.scancaf.countCategory1===1400||
+        				 vm.scancaf.countCategory1===1450|| vm.scancaf.countCategory1===1500
+        				 || vm.scancaf.countCategory1===1550){
         			 alert('For Category2 : Lot is completed') ;
          		 }
         		 if(vm.scancaf.countCategory3===50|| vm.scancaf.countCategory3===100||vm.scancaf.countCategory3===150||

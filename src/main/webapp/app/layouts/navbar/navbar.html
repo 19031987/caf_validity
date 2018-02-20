@@ -56,12 +56,12 @@
                                     <span>Suspendedusers</span>
                                 </a>
                             </li>
-                        <li ui-sref-active="active">
+                      <!--   <li ui-sref-active="active">
                                 <a ui-sref="adminstats" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span>Adminstats</span>
                                 </a>
-                            </li>
+                            </li> -->
                         <li ui-sref-active="active">
                                 <a ui-sref="system" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
@@ -74,6 +74,7 @@
                                     <span>Mobile Validation</span>
                                 </a>
                             </li>
+                       
                         <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                     </ul>
                 </li>
@@ -169,6 +170,12 @@
                             <a ui-sref="docs" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-book"></span>&nbsp;
                                 <span>API</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="elasticsearch-reindex" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;
+                                <span>Elasticsearch Reindex</span>
                             </a>
                         </li>
                         <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->

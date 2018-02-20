@@ -42,6 +42,42 @@ public class MobileValidation implements Serializable {
     @Column(name = "user_date")
     private LocalDate userDate;
 
+    @Column(name = "isselected")
+    private Boolean isselected;
+
+    @Column(name = "category_1")
+    private String category1;
+
+    @Column(name = "category_2")
+    private String category2;
+
+    @Column(name = "category_3")
+    private String category3;
+
+    @Column(name = "catergory_4")
+    private String catergory4;
+
+    @Column(name = "catergory_5")
+    private String catergory5;
+
+    @Column(name = "count_category_1")
+    private Integer countCategory1;
+
+    @Column(name = "count_category_2")
+    private Integer countCategory2;
+
+    @Column(name = "count_category_3")
+    private Integer countCategory3;
+
+    @Column(name = "count_category_4")
+    private Integer countCategory4;
+
+    @Column(name = "count_category_5")
+    private Integer countCategory5;
+
+    @Column(name = "sourcebox")
+    private String sourcebox;
+
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -128,6 +164,162 @@ public class MobileValidation implements Serializable {
     public void setUserDate(LocalDate userDate) {
         this.userDate = userDate;
     }
+
+    public Boolean isIsselected() {
+        return isselected;
+    }
+
+    public MobileValidation isselected(Boolean isselected) {
+        this.isselected = isselected;
+        return this;
+    }
+
+    public void setIsselected(Boolean isselected) {
+        this.isselected = isselected;
+    }
+
+    public String getCategory1() {
+        return category1;
+    }
+
+    public MobileValidation category1(String category1) {
+        this.category1 = category1;
+        return this;
+    }
+
+    public void setCategory1(String category1) {
+        this.category1 = category1;
+    }
+
+    public String getCategory2() {
+        return category2;
+    }
+
+    public MobileValidation category2(String category2) {
+        this.category2 = category2;
+        return this;
+    }
+
+    public void setCategory2(String category2) {
+        this.category2 = category2;
+    }
+
+    public String getCategory3() {
+        return category3;
+    }
+
+    public MobileValidation category3(String category3) {
+        this.category3 = category3;
+        return this;
+    }
+
+    public void setCategory3(String category3) {
+        this.category3 = category3;
+    }
+
+    public String getCatergory4() {
+        return catergory4;
+    }
+
+    public MobileValidation catergory4(String catergory4) {
+        this.catergory4 = catergory4;
+        return this;
+    }
+
+    public void setCatergory4(String catergory4) {
+        this.catergory4 = catergory4;
+    }
+
+    public String getCatergory5() {
+        return catergory5;
+    }
+
+    public MobileValidation catergory5(String catergory5) {
+        this.catergory5 = catergory5;
+        return this;
+    }
+
+    public void setCatergory5(String catergory5) {
+        this.catergory5 = catergory5;
+    }
+
+    public Integer getCountCategory1() {
+        return countCategory1;
+    }
+
+    public MobileValidation countCategory1(Integer countCategory1) {
+        this.countCategory1 = countCategory1;
+        return this;
+    }
+
+    public void setCountCategory1(Integer countCategory1) {
+        this.countCategory1 = countCategory1;
+    }
+
+    public Integer getCountCategory2() {
+        return countCategory2;
+    }
+
+    public MobileValidation countCategory2(Integer countCategory2) {
+        this.countCategory2 = countCategory2;
+        return this;
+    }
+
+    public void setCountCategory2(Integer countCategory2) {
+        this.countCategory2 = countCategory2;
+    }
+
+    public Integer getCountCategory3() {
+        return countCategory3;
+    }
+
+    public MobileValidation countCategory3(Integer countCategory3) {
+        this.countCategory3 = countCategory3;
+        return this;
+    }
+
+    public void setCountCategory3(Integer countCategory3) {
+        this.countCategory3 = countCategory3;
+    }
+
+    public Integer getCountCategory4() {
+        return countCategory4;
+    }
+
+    public MobileValidation countCategory4(Integer countCategory4) {
+        this.countCategory4 = countCategory4;
+        return this;
+    }
+
+    public void setCountCategory4(Integer countCategory4) {
+        this.countCategory4 = countCategory4;
+    }
+
+    public Integer getCountCategory5() {
+        return countCategory5;
+    }
+
+    public MobileValidation countCategory5(Integer countCategory5) {
+        this.countCategory5 = countCategory5;
+        return this;
+    }
+
+    public void setCountCategory5(Integer countCategory5) {
+        this.countCategory5 = countCategory5;
+    }
+
+    public String getSourcebox() {
+        return sourcebox;
+    }
+
+    public MobileValidation sourcebox(String sourcebox) {
+        this.sourcebox = sourcebox;
+        return this;
+    }
+
+    public void setSourcebox(String sourcebox) {
+        this.sourcebox = sourcebox;
+    }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override
@@ -160,6 +352,18 @@ public class MobileValidation implements Serializable {
             ", colorCode='" + getColorCode() + "'" +
             ", user='" + getUser() + "'" +
             ", userDate='" + getUserDate() + "'" +
+            ", isselected='" + isIsselected() + "'" +
+            ", category1='" + getCategory1() + "'" +
+            ", category2='" + getCategory2() + "'" +
+            ", category3='" + getCategory3() + "'" +
+            ", catergory4='" + getCatergory4() + "'" +
+            ", catergory5='" + getCatergory5() + "'" +
+            ", countCategory1='" + getCountCategory1() + "'" +
+            ", countCategory2='" + getCountCategory2() + "'" +
+            ", countCategory3='" + getCountCategory3() + "'" +
+            ", countCategory4='" + getCountCategory4() + "'" +
+            ", countCategory5='" + getCountCategory5() + "'" +
+            ", sourcebox='" + getSourcebox() + "'" +
             "}";
     }
 }

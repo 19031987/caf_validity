@@ -57,7 +57,7 @@ public interface ScancafRepository extends JpaRepository<Scancaf, Long> {
 	List<Scancaf> findByOutBoxCompletionCat4(String category1, String colorcode);
 	@Query(value ="select * from scancaf where category_5=?1 and boxstatus='FIRST_LEVEL' and colorcode=?2",nativeQuery=true)
 	List<Scancaf> findByOutBoxCompletionCat5(String category1, String colorcode);
-	@Query(value ="select * from scancaf where jhi_user=?1 order by scancaf.jhi_user desc LIMIT 1",nativeQuery=true)
+	@Query(value ="select * from scancaf where jhi_user=?1 order by scancaf.id desc LIMIT 1",nativeQuery=true)
 	Scancaf findByuserOrderByDsc(String user);
 
 }

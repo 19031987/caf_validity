@@ -36,6 +36,16 @@
                     copy.userDate = DateUtils.convertLocalDateToServer(copy.userDate);
                     return angular.toJson(copy);
                 }
+            },
+            'getByMobileNum': {
+                method: 'POST',
+                url:'/api/getmobilenumber',
+                isArray:true,
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                    copy.userDate = DateUtils.convertLocalDateToServer(copy.userDate);
+                    return angular.toJson(copy);
+                }
             }
         });
     }

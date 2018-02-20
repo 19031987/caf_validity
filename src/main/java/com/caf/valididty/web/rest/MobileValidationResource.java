@@ -7,8 +7,6 @@ import com.caf.valididty.repository.MobileValidationRepository;
 import com.caf.valididty.repository.search.MobileValidationSearchRepository;
 import com.caf.valididty.web.rest.util.HeaderUtil;
 import com.caf.valididty.web.rest.util.PaginationUtil;
-import com.caf.valididty.service.dto.MobileValidationDTO;
-import com.caf.valididty.service.mapper.MobileValidationMapper;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -18,11 +16,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,33 +45,33 @@ public class MobileValidationResource {
 
     private final MobileValidationRepository mobileValidationRepository;
 
-    private final MobileValidationMapper mobileValidationMapper;
-
     private final MobileValidationSearchRepository mobileValidationSearchRepository;
-    public MobileValidationResource(MobileValidationRepository mobileValidationRepository, MobileValidationMapper mobileValidationMapper, MobileValidationSearchRepository mobileValidationSearchRepository) {
+    public MobileValidationResource(MobileValidationRepository mobileValidationRepository, MobileValidationSearchRepository mobileValidationSearchRepository) {
         this.mobileValidationRepository = mobileValidationRepository;
-        this.mobileValidationMapper = mobileValidationMapper;
         this.mobileValidationSearchRepository = mobileValidationSearchRepository;
     }
 
     /**
      * POST  /mobile-validations : Create a new mobileValidation.
      *
-     * @param mobileValidationDTO the mobileValidationDTO to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new mobileValidationDTO, or with status 400 (Bad Request) if the mobileValidation has already an ID
+     * @param mobileValidation the mobileValidation to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new mobileValidation, or with status 400 (Bad Request) if the mobileValidation has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/mobile-validations")
     @Timed
-    public ResponseEntity<MobileValidationDTO> createMobileValidation(@RequestBody MobileValidationDTO mobileValidationDTO) throws URISyntaxException {
-        log.debug("REST request to save MobileValidation : {}", mobileValidationDTO);
-        if (mobileValidationDTO.getId() != null) {
+    public ResponseEntity<MobileValidation> createMobileValidation(@RequestBody MobileValidation mobileValidation) throws URISyntaxException {
+        log.debug("REST request to save MobileValidation : {}", mobileValidation);
+        mobileValidation.setId(null);
+        if (mobileValidation.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new mobileValidation cannot already have an ID")).body(null);
         }
-        MobileValidation mobileValidation = mobileValidationMapper.toEntity(mobileValidationDTO);
-        mobileValidation = mobileValidationRepository.save(mobileValidation);
-        MobileValidationDTO result = mobileValidationMapper.toDto(mobileValidation);
-        mobileValidationSearchRepository.save(mobileValidation);
+        mobileValidation.setUser(getCurrentUserLogin());
+        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDate localDate = localDateTime.toLocalDate();
+        mobileValidation.setUserDate(localDate);
+        MobileValidation result = mobileValidationRepository.save(mobileValidation);
+        mobileValidationSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/mobile-validations/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -78,25 +80,23 @@ public class MobileValidationResource {
     /**
      * PUT  /mobile-validations : Updates an existing mobileValidation.
      *
-     * @param mobileValidationDTO the mobileValidationDTO to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated mobileValidationDTO,
-     * or with status 400 (Bad Request) if the mobileValidationDTO is not valid,
-     * or with status 500 (Internal Server Error) if the mobileValidationDTO couldn't be updated
+     * @param mobileValidation the mobileValidation to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated mobileValidation,
+     * or with status 400 (Bad Request) if the mobileValidation is not valid,
+     * or with status 500 (Internal Server Error) if the mobileValidation couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/mobile-validations")
     @Timed
-    public ResponseEntity<MobileValidationDTO> updateMobileValidation(@RequestBody MobileValidationDTO mobileValidationDTO) throws URISyntaxException {
-        log.debug("REST request to update MobileValidation : {}", mobileValidationDTO);
-        if (mobileValidationDTO.getId() == null) {
-            return createMobileValidation(mobileValidationDTO);
+    public ResponseEntity<MobileValidation> updateMobileValidation(@RequestBody MobileValidation mobileValidation) throws URISyntaxException {
+        log.debug("REST request to update MobileValidation : {}", mobileValidation);
+        if (mobileValidation.getId() == null) {
+            return createMobileValidation(mobileValidation);
         }
-        MobileValidation mobileValidation = mobileValidationMapper.toEntity(mobileValidationDTO);
-        mobileValidation = mobileValidationRepository.save(mobileValidation);
-        MobileValidationDTO result = mobileValidationMapper.toDto(mobileValidation);
-        mobileValidationSearchRepository.save(mobileValidation);
+        MobileValidation result = mobileValidationRepository.save(mobileValidation);
+        mobileValidationSearchRepository.save(result);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, mobileValidationDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, mobileValidation.getId().toString()))
             .body(result);
     }
 
@@ -108,32 +108,31 @@ public class MobileValidationResource {
      */
     @GetMapping("/mobile-validations")
     @Timed
-    public ResponseEntity<List<MobileValidationDTO>> getAllMobileValidations(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<MobileValidation>> getAllMobileValidations(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of MobileValidations");
         Page<MobileValidation> page = mobileValidationRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/mobile-validations");
-        return new ResponseEntity<>(mobileValidationMapper.toDto(page.getContent()), headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
      * GET  /mobile-validations/:id : get the "id" mobileValidation.
      *
-     * @param id the id of the mobileValidationDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the mobileValidationDTO, or with status 404 (Not Found)
+     * @param id the id of the mobileValidation to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the mobileValidation, or with status 404 (Not Found)
      */
     @GetMapping("/mobile-validations/{id}")
     @Timed
-    public ResponseEntity<MobileValidationDTO> getMobileValidation(@PathVariable Long id) {
+    public ResponseEntity<MobileValidation> getMobileValidation(@PathVariable Long id) {
         log.debug("REST request to get MobileValidation : {}", id);
         MobileValidation mobileValidation = mobileValidationRepository.findOne(id);
-        MobileValidationDTO mobileValidationDTO = mobileValidationMapper.toDto(mobileValidation);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(mobileValidationDTO));
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(mobileValidation));
     }
 
     /**
      * DELETE  /mobile-validations/:id : delete the "id" mobileValidation.
      *
-     * @param id the id of the mobileValidationDTO to delete
+     * @param id the id of the mobileValidation to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/mobile-validations/{id}")
@@ -155,11 +154,33 @@ public class MobileValidationResource {
      */
     @GetMapping("/_search/mobile-validations")
     @Timed
-    public ResponseEntity<List<MobileValidationDTO>> searchMobileValidations(@RequestParam String query, @ApiParam Pageable pageable) {
+    public ResponseEntity<List<MobileValidation>> searchMobileValidations(@RequestParam String query, @ApiParam Pageable pageable) {
         log.debug("REST request to search for a page of MobileValidations for query {}", query);
         Page<MobileValidation> page = mobileValidationSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/mobile-validations");
-        return new ResponseEntity<>(mobileValidationMapper.toDto(page.getContent()), headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    @PostMapping("/getmobilenumber")
+    @Timed
+    public ResponseEntity<List<MobileValidation>> getMobileValidation(@RequestBody MobileValidation mobileValidation) throws URISyntaxException {
+               List<MobileValidation> result = mobileValidationRepository.getMobileNumber(mobileValidation.getMobilenumber());
+       return new ResponseEntity<List<MobileValidation>>(result, HttpStatus.ACCEPTED);
+    }
+
+    public String getCurrentUserLogin() {
+        org.springframework.security.core.context.SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String login = null;
+        if (authentication != null)
+            if (authentication.getPrincipal() instanceof UserDetails)
+            	login = ((UserDetails) authentication.getPrincipal()).getUsername();
+            else if (authentication.getPrincipal() instanceof String)
+            	login = (String) authentication.getPrincipal();
+        
+        return login; 
+        
+
+}
 
 }

@@ -25,10 +25,58 @@
         {
             "fieldName": "userDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "isselected",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "category1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "category2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "category3",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "catergory4",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "catergory5",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "countCategory1",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "countCategory2",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "countCategory3",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "countCategory4",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "countCategory5",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "sourcebox",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180211175727",
-    "dto": "mapstruct",
+    "dto": "no",
     "service": "no",
     "entityTableName": "mobile_validation",
     "jpaMetamodelFiltering": false,
