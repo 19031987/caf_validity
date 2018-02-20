@@ -2,7 +2,7 @@ package com.caf.valididty.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.caf.valididty.domain.MobileValidation;
-
+import com.caf.valididty.domain.Scancaf;
 import com.caf.valididty.repository.MobileValidationRepository;
 import com.caf.valididty.repository.search.MobileValidationSearchRepository;
 import com.caf.valididty.web.rest.util.HeaderUtil;
@@ -182,5 +182,19 @@ public class MobileValidationResource {
         
 
 }
+    @PostMapping("/scancafs/getDetailsByName")
+    @Timed
+    public ResponseEntity<MobileValidation> getDetailsByName(@RequestBody MobileValidation scancaf) {
+    	
+    	 MobileValidation scancafLocal  = mobileValidationRepository.findByuserOrderByDsc(scancaf.getUser());
+    	if(scancafLocal!= null) {
+		return ResponseEntity.ok().body(scancafLocal);
+    	}else {
+    		return ResponseEntity.badRequest().body(null);
+    	}
+    		
+    	
+    
+    }
 
 }

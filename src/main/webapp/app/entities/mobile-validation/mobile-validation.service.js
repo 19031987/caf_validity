@@ -46,6 +46,22 @@
                     copy.userDate = DateUtils.convertLocalDateToServer(copy.userDate);
                     return angular.toJson(copy);
                 }
+            },'getSystemByName': {
+                method: 'GET',
+                url: 'api/boxassigns/getSystemName',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'getDetailsByName': {
+                method: 'POST',
+                url: 'api/mobile-validations/getDetailsByName',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
             }
         });
     }
