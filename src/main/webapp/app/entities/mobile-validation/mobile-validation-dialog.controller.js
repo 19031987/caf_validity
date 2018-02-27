@@ -30,9 +30,7 @@
         function save () {
             vm.isSaving = true;
             if (vm.mobileValidation.id !== null) {
-            	
-            	    	 MobileValidation.update(vm.mobileValidation[i], onSaveSuccess, onSaveError);
-            	  
+               MobileValidation.update(vm.mobileValidation[i], onSaveSuccess, onSaveError);
             	
             } else {
             	for (var i=0;i<vm.mobileValidations.length;i++)
@@ -65,7 +63,7 @@
                  		 }
                  		 
                  		 if( vm.mobileValidation.countCategory2===800){
-                 	alert('Category2 Box is completed please ask for another one') ; 
+                 			 alert('Category2 Box is completed please ask for another one') ; 
                  			if( vm.mobileValidation.boxstatus!=null){
                  				 vm.mobileValidation.boxstatus=' ,category2-completed'
                  			}else{
@@ -165,7 +163,7 @@
      	           	 vm.mobileValidation.category5 = array[4];
      	           	}
     				}
-        		MobileValidation.getDetailsByName(vm.mobilevalidation,onSuccessName);
+        		MobileValidation.getDetailsByName(vm.mobileValidation,onSuccessName);
         			function onSuccessName(result){
         				if(result != null){
         					vm.mobileValidation.sourcebox = result.sourcebox;
@@ -181,17 +179,19 @@
         		           vm.mobileValidation.category5 = result.category5;
         				}
         			}
+        		
+        		
         				
         		}
-        				
+        	 function onError(result){
+     			alert(result)
+     		}		
 }
         
         function search (){
         	MobileValidation.getByMobileNum(vm.mobileValidation, onSaveSuccessmob, onSaveErrormob);
         	function onSaveSuccessmob(result){
         		vm.mobileValidations = result;
-        		
-
         	}
         	function onSaveErrormob(){
         		
@@ -205,6 +205,35 @@
             $uibModalInstance.close(result);
             vm.isSaving = false;*/
         }
+        
+$scope.validate1 = function(){
+        	
+            if(vm.mobileValidation.category1.length===8){
+            	  if(vm.mobileValidation.category1.substring(0,3)!='EDA'){
+            		 alert('Assigned Box in Category 1 is not correct !!! Please Check') 
+            	  }
+            }
+            if(vm.mobileValidation.category2.length===8){
+          	  if(vm.mobileValidation.category2.substring(0,3)!='E1A'){
+          		 alert('Assigned Box in Category 2 is not correct !!! Please Check') 
+          	  }
+          }
+            if(vm.mobileValidation.category3.length===8){
+          	  if(vm.mobileValidation.category3.substring(0,3)!='EC1'){
+          		 alert('Assigned Box in Category 3 is not correct !!! Please Check') 
+          	  }
+          }
+            if(vm.mobileValidation.category4.length===8){
+          	  if(vm.mobileValidation.category4.substring(0,3)!='EC2'){
+          		 alert('Assigned Box in Category 4 is not correct !!! Please Check') 
+          	  }
+          }
+            if(vm.mobileValidation.category5.length===8){
+          	  if(vm.mobileValidation.category5.substring(0,3)!='EC3'){
+          		 alert('Assigned Box in Category 5 is not correct !!! Please Check') 
+          	  }
+          }
+}
 
         function onSaveError () {
             vm.isSaving = false;
@@ -215,6 +244,10 @@
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }
+        
+        $scope.toggleCustom = function() {
+            $scope.custom = $scope.custom === false ? true: false;
+        };
         
        
     }

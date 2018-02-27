@@ -182,7 +182,7 @@ public class MobileValidationResource {
         
 
 }
-    @PostMapping("/scancafs/getDetailsByName")
+    @PostMapping("/mobile-validation/getDetailsByName")
     @Timed
     public ResponseEntity<MobileValidation> getDetailsByName(@RequestBody MobileValidation scancaf) {
     	

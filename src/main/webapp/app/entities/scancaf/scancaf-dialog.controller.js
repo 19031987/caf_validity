@@ -59,7 +59,6 @@
         		if(data.user != null){
         			vm.scancaf.user=data.user
         			 var array =  data.boxassign.split(",");
-                 	 
      	           	if(array[0].indexOf('E1A') > -1){
      	           		vm.scancaf.category1 = array[0];
      	           	}
@@ -80,7 +79,7 @@
         			function onSuccessName(result){
         				if(result != null){
         					vm.scancaf.sourcebox = result.sourcebox;
-        				 vm.scancaf.countCategory1 = result.countCategory1;
+        				   vm.scancaf.countCategory1 = result.countCategory1;
         	        	   vm.scancaf.countCategory2 = result.countCategory2;
         	        	   vm.scancaf.countCategory3 = result.countCategory3;
         	        	   vm.scancaf.countCategory4 = result.countCategory4;
@@ -130,6 +129,7 @@
          			 
           			$cookieStore.put('completed', vm.scancaf.category1);
           				vm.scancaf.countCategory1= 0;
+          				vm.scancaf.category1 = Scancaf.findCategory1();
           			  vm.scancaf.category1= 'EDA'+increment_alphanumeric_str(vm.scancaf.category1.substring(3, 8));
           		      $scope.lastcompletedbox = $cookieStore.get('completed')
 
@@ -139,23 +139,27 @@
           		  if(vm.scancaf.countCategory2===300){
           			  $cookieStore.put('completed', vm.scancaf.category2);
           			  vm.scancaf.countCategory2= 0;
+          			vm.scancaf.category2 = Scancaf.findCategory2();
           			  vm.scancaf.category2= 'E1A'+increment_alphanumeric_str(vm.scancaf.category2.substring(3, 8));
           			  $scope.lastcompletedbox = $cookieStore.get('completed')
       		       }
           		  if(vm.scancaf.countCategory3===300){
           			$cookieStore.put('completed', vm.scancaf.category3);
         			  vm.scancaf.countCategory3= 0;
+        			  vm.scancaf.category3 = Scancaf.findCategory3();
         			  vm.scancaf.category3= 'EC1'+increment_alphanumeric_str(vm.scancaf.category3.substring(3, 8));
         			  $scope.lastcompletedbox = $cookieStore.get('completed')
           		  }
           		  if(vm.scancaf.countCategory4===300){
           			$cookieStore.put('completed', vm.scancaf.category4);
       			  vm.scancaf.countCategory4= 0;
+      			vm.scancaf.category4 = Scancaf.findCategory4();
       			  vm.scancaf.category4= 'EC2'+increment_alphanumeric_str(vm.scancaf.category4.substring(3, 8));
       			  $scope.lastcompletedbox = $cookieStore.get('completed')}
           		  if(vm.scancaf.countCategory5===300){
           			$cookieStore.put('completed', vm.scancaf.category5);
       			  vm.scancaf.countCategory5= 0;
+      			vm.scancaf.category5 = Scancaf.findCategory5();
       			  vm.scancaf.category5= 'EC3'+increment_alphanumeric_str(vm.scancaf.category5.substring(3, 8));
       			  $scope.lastcompletedbox = $cookieStore.get('completed')
           		  }
@@ -196,14 +200,8 @@
         			 vm.scancaf.colorcode = 'blue';
         			 vm.scancaf.countCategory5 =  vm.scancaf.countCategory5+1;
         		 }
-        		
-        		 
         		 vm.scancaf.mobilenumber = result.mobilenumber;
         		 vm.scancaf.cafbarcode = result.cafbarcode;
-        		 
-        		
-        		
-        		 
         		 if(vm.scancaf.countCategory1===1600){
         			alert('Category1 Box is completed please ask for another one') ;
         			vm.scancaf.boxstatus='category1-completed'
@@ -248,6 +246,8 @@
         				 vm.scancaf.countCategory1===600||vm.scancaf.countCategory1===650||
         				 vm.scancaf.countCategory1===700|| vm.scancaf.countCategory1===750){
          			alert('For Category1 : Lot is completed') ;
+         			vm.scancaf.category1 = Scancaf.findCategory1();
+        			  vm.scancaf.category1= 'EDA'+increment_alphanumeric_str(vm.scancaf.category1.substring(3, 8));
          		 }
          		 
         		 if(vm.scancaf.countCategory1===50|| vm.scancaf.countCategory1===100||vm.scancaf.countCategory1===150||
@@ -282,14 +282,12 @@
         		 
         		 function onSaveSuccessFinal() {
         			 vm.scancaf.cafbarcode ='';
-           		  if(vm.scancaf.countCategory1===300){
+           		  if(vm.scancaf.countCategory1===1600){
            			 
            			$cookieStore.put('completed', vm.scancaf.category1);
            				vm.scancaf.countCategory1= 0;
            			  vm.scancaf.category1= 'EDA'+increment_alphanumeric_str(vm.scancaf.category1.substring(3, 8));
            		      $scope.lastcompletedbox = $cookieStore.get('completed')
-
-           			  
            		  }
            		  
            		  if(vm.scancaf.countCategory2===300){
@@ -338,6 +336,7 @@
             	  if(vm.scancaf.category1.substring(0,3)!='EDA'){
             		 alert('Assigned Box in Category 1 is not correct !!! Please Check') 
             	  }
+            	  
             }
             if(vm.scancaf.category2.length===8){
           	  if(vm.scancaf.category2.substring(0,3)!='E1A'){

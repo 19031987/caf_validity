@@ -56,7 +56,7 @@
                 }
             },'getDetailsByName': {
                 method: 'POST',
-                url: 'api/mobile-validations/getDetailsByName',
+                url: 'api/mobile-validation/getDetailsByName',
                 transformRequest: function (data) {
                     var copy = angular.copy(data);
                    // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);

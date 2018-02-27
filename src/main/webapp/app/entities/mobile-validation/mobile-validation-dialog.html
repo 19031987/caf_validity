@@ -49,6 +49,7 @@ $(document).ready(function() {
          <button type="button" class="btn btn-default" id="search"  ng-click="vm.search()">
             <span class="glyphicon"></span>&nbsp;<span>Search</span>
         </button>
+        
          <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
@@ -67,7 +68,7 @@ $(document).ready(function() {
                     <td>{{mobileValidation.mobilenumber}}</td>
                     <td>{{mobileValidation.activationDate}}</td>
                     <td>{{mobileValidation.customerName}}</td>
-                    <td  ng-style="{'background-color':mobileValidation.colorcode}">{{mobileValidation.colorCode}}</td>
+                    <td  ng-style="{'background-color':{{mobileValidation.colorcode}}}">{{mobileValidation.colorCode}}</td>
                     
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
@@ -80,6 +81,57 @@ $(document).ready(function() {
             </tbody>
         </table>
     </div>
+    
+     <input type="button" ng-click="toggleCustom()" value="In progress"></input>
+        <span ng-hide="custom">
+        <div >
+            <label class="control-label" for="field_category1">Churn 1</label>
+            <input type="text"  name="category1" id="field_category1"
+                    ng-model="vm.mobileValidation.category1"
+            maxlength="8"        ng-change="validate1()"/>
+            <input type="number"  name="countCategory1" id="field_countCategory1"
+                    ng-model="vm.mobileValidation.countCategory1"
+                   />
+        </div>
+        <div >
+            <label class="control-label" for="field_category2">Chrun 2</label>
+            <input type="text"  name="category2" id="field_category2"
+                    ng-model="vm.mobileValidation.category2"
+            maxlength="8"      ng-change="validate1()" />
+            <input type="number"  name="countCategory2" id="field_countCategory2"
+                    ng-model="vm.mobileValidation.countCategory2"
+                   />
+        </div>
+        <div >
+            <label class="control-label" for="field_category3">Churn 3</label>
+            <input type="text"  name="category3" id="field_category3"
+                    ng-model="vm.mobileValidation.category3"
+             maxlength="8"     ng-change="validate1()" />
+            <input type="number"  name="countCategory3" id="field_countCategory3"
+                    ng-model="vm.mobileValidation.countCategory3"
+                   />
+        </div>
+        
+        <div >
+            <label class="control-label" for="field_category4">Churn 4</label>
+            <input type="text"  name="category4" id="field_category4"
+                    ng-model="vm.mobileValidation.category4"
+            maxlength="8"      ng-change="validate1()" />
+            <input type="number"  name="countCategory4" id="field_countCategory4"
+                    ng-model="vm.mobileValidation.countCategory4"
+                   />
+        </div>
+        <div >
+            <label class="control-label" for="field_category5">Churn 5</label>
+            <input type="text"  name="category5" id="field_category5"
+                    ng-model="vm.mobileValidation.category5"
+           maxlength="8"       ng-change="validate1()" />
+            <input type="number"  name="countCategory5" id="field_countCategory5"
+                    ng-model="vm.mobileValidation.countCategory5"
+                   />
+        </div>
+        </span>
+       <br/>
      <button type="submit" class="btn btn-primary" ng-click="vm.save()">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
         </button>

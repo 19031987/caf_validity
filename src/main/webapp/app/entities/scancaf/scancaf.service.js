@@ -84,6 +84,46 @@
                    // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
                     return angular.toJson(copy);
                 }
+            },'findCategory1': {
+                method: 'POST',
+                url: 'api/scancafs/category1',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'findCategory2': {
+                method: 'POST',
+                url: 'api/scancafs/category2',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'findCategory3': {
+                method: 'POST',
+                url: 'api/scancafs/category3',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'findCategory4': {
+                method: 'POST',
+                url: 'api/scancafs/category4',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'findCategory5': {
+                method: 'POST',
+                url: 'api/scancafs/category5',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
             },'getDetailsByName': {
                 method: 'POST',
                 url: 'api/scancafs/getDetailsByName',

@@ -57,6 +57,18 @@ public interface ScancafRepository extends JpaRepository<Scancaf, Long> {
 	List<Scancaf> findByOutBoxCompletionCat4(String category1, String colorcode);
 	@Query(value ="select * from scancaf where category_5=?1 and boxstatus='FIRST_LEVEL' and colorcode=?2",nativeQuery=true)
 	List<Scancaf> findByOutBoxCompletionCat5(String category1, String colorcode);
+	
+	@Query(value ="select category_1 from scancaf where colorcode='red' order by id desc LIMIT 1",nativeQuery=true)
+	String getCategory1();
+	@Query(value ="select category_2 from scancaf where colorcode='green' order by id desc LIMIT 1",nativeQuery=true)
+	String getCategory2();
+	@Query(value ="select category_3 from scancaf where colorcode='white' order by id desc LIMIT 1",nativeQuery=true)
+	String getCategory3();
+	@Query(value ="select category_4 from scancaf where colorcode='yellow' order by id desc LIMIT 1",nativeQuery=true)
+	String getCategory4();
+	@Query(value ="select category_5 from scancaf where colorcode='blue' order by id desc LIMIT 1",nativeQuery=true)
+	String getCategory5();
+	
 	@Query(value ="select * from scancaf where jhi_user=?1 order by scancaf.id desc LIMIT 1",nativeQuery=true)
 	Scancaf findByuserOrderByDsc(String user);
 
