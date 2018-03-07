@@ -17,7 +17,7 @@ module.exports = {
     vendor: vendor,
     test: test,
     troubleshoot: troubleshoot
-}
+};
 
 function app() {
     return gulp.src(config.app + 'index.html')

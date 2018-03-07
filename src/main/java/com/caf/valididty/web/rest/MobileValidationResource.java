@@ -1,14 +1,14 @@
 package com.caf.valididty.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.caf.valididty.domain.MobileValidation;
 import com.caf.valididty.domain.Scancaf;
 import com.caf.valididty.repository.MobileValidationRepository;
 import com.caf.valididty.repository.search.MobileValidationSearchRepository;
 import com.caf.valididty.web.rest.util.HeaderUtil;
 import com.caf.valididty.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
+import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,10 +27,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * REST controller for managing MobileValidation.
@@ -160,7 +158,7 @@ public class MobileValidationResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/mobile-validations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-    
+
     @PostMapping("/getmobilenumber")
     @Timed
     public ResponseEntity<List<MobileValidation>> getMobileValidation(@RequestBody MobileValidation mobileValidation) throws URISyntaxException {
@@ -177,24 +175,81 @@ public class MobileValidationResource {
             	login = ((UserDetails) authentication.getPrincipal()).getUsername();
             else if (authentication.getPrincipal() instanceof String)
             	login = (String) authentication.getPrincipal();
-        
-        return login; 
-        
+
+        return login;
+
 
 }
     @PostMapping("/mobile-validation/getDetailsByName")
     @Timed
     public ResponseEntity<MobileValidation> getDetailsByName(@RequestBody MobileValidation scancaf) {
-    	
+
     	 MobileValidation scancafLocal  = mobileValidationRepository.findByuserOrderByDsc(scancaf.getUser());
     	if(scancafLocal!= null) {
 		return ResponseEntity.ok().body(scancafLocal);
     	}else {
     		return ResponseEntity.badRequest().body(null);
     	}
-    		
-    	
-    
+
+
+
+    }
+
+    @PostMapping("/mobile-validation/category1")
+	@Timed
+	public Scancaf getByCategory1() {
+		String scancafLocal = mobileValidationRepository.getCategory1();
+		Scancaf scancaf = new Scancaf();
+            scancaf.setCategory1(scancafLocal);
+		return  (scancaf);
+	}
+
+	@PostMapping("/mobile-validation/category2")
+	@Timed
+	public Scancaf getByCategory2() {
+		String scancafLocal = mobileValidationRepository.getCategory2();
+        Scancaf scancaf = new Scancaf();
+        scancaf.setCategory2(scancafLocal);
+		return  (scancaf);
+	}
+
+	@PostMapping("/mobile-validation/category3")
+	@Timed
+	public Scancaf getByCategory3() {
+		String scancafLocal = mobileValidationRepository.getCategory3();
+        Scancaf scancaf = new Scancaf();
+        scancaf.setCategory3(scancafLocal);
+		return  (scancaf);
+	}
+
+	@PostMapping("/mobile-validation/category4")
+	@Timed
+	public Scancaf getByCategory4() {
+		String scancafLocal = mobileValidationRepository.getCategory4();
+        Scancaf scancaf = new Scancaf();
+        scancaf.setCategory4(scancafLocal);
+        return  (scancaf);
+	}
+
+	@PostMapping("/mobile-validation/category5")
+	@Timed
+	public Scancaf getByCategory5() {
+		String scancafLocal = mobileValidationRepository.getCategory5();
+        Scancaf scancaf = new Scancaf();
+        scancaf.setCategory5(scancafLocal);
+        return  (scancaf);
+	}
+
+    @PostMapping("/mobile-validation/getBox")
+    @Timed
+    private ResponseEntity<MobileValidation> getBox(@RequestBody MobileValidation id) {
+        log.debug("REST request to get Mobile validation : {}", id);
+        MobileValidation mobileValidation = mobileValidationRepository.findByMobileNumber(id.getMobilenumber());
+        if (mobileValidation != null) {
+            return ResponseEntity.ok().body(mobileValidation);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

@@ -40,7 +40,7 @@
         	   alert('Lot Completed')
            }
            if(vm.suspendedusers.count==300){
-        	   alert('Box Completed')
+        	   alert('Box Completed');
         	   vm.suspendedusers.count =0;
     			  vm.scancaf.centralbarcode= 'SUS'+increment_alphanumeric_str(vm.scancaf.category1.substring(3, 8));
            }

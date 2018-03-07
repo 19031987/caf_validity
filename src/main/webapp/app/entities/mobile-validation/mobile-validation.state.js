@@ -119,6 +119,11 @@
                                 activationDate: null,
                                 customerName: null,
                                 colorCode: null,
+                                 countCategory1: 0,
+                                 countCategory2: 0,
+                                 countCategory3: 0,
+                                 countCategory4: 0,
+                                 countCategory5: 0,
                                 user: null,
                                 userDate: null,
                                 id: null
@@ -178,6 +183,48 @@
                     $state.go('mobile-validation', null, { reload: 'mobile-validation' });
                 }, function() {
                     $state.go('^');
+                });
+            }]
+        }) .state('mobile-validation.second', {
+            parent: 'mobile-validation',
+            url: '/second',
+            data: {
+                authorities: ['ROLE_USER']
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'app/entities/mobile-validation/mobile-validation-dialog_second.html',
+                    controller: 'MobileValidationDialogController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'lg',
+                    resolve: {
+                        entity: function () {
+                            return {
+                                sourcebox: null,
+                                category1: null,
+                                category2: null,
+                                category3: null,
+                                category4: null,
+                                category5: null,
+                                countCategory1: 0,
+                                countCategory2: 0,
+                                countCategory3: 0,
+                                countCategory4: 0,
+                                countCategory5: 0,
+                                colorcode: null,
+                                user: null,
+                                userdate: null,
+                                boxstatus: null,
+                                mobilenumber: null,
+                                id: null
+                            };
+                        }
+                    }
+                }).result.then(function() {
+                    $state.go('mobile-validation', null, { reload: 'mobile-validation' });
+                }, function() {
+                    $state.go('mobile-validation');
                 });
             }]
         });

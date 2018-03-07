@@ -1,142 +1,162 @@
 
-<form name="editForm" role="form" novalidate >
+<form name="editForm" role="form" novalidate>
 
-<script>
+	<script>
 $(document).ready(function() {
     $('#field_mobilenumber').keyup(function() {
         if ($(this).val().length >= 10) {
             $('#field_remobilenumber').focus();
         }
     });
-    
+
     $('#field_remobilenumber').keyup(function() {
         if ($(this).val().length >= 10) {
           if($('#field_remobilenumber').val() !=  $('#field_mobilenumber').val()){
         	  alert('mobile numbers should be equal');
-        	  $('#search').prop('disabled', true);;
+              $('#search').prop('disabled', true);
           }else{
-        	  $('#search').prop('disabled', false);;
+              $('#search').prop('disabled', false);
           }
         }
     });
 });
 </script>
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myMobileValidationLabel">Create or edit a Mobile Validation</h4>
-    </div>
-    <div class="modal-body">
-        <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.mobileValidation.id">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.mobileValidation.id" readonly />
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="vm.clear()">&times;</button>
+		<h4 class="modal-title" id="myMobileValidationLabel">Create or
+			edit a Mobile Validation</h4>
+	</div>
+	<div class="modal-body">
+		<jhi-alert-error></jhi-alert-error>
+		<div class="form-group" ng-show="vm.mobileValidation.id">
+			<label for="id">ID</label> <input type="text" class="form-control"
+				id="id" name="id" ng-model="vm.mobileValidation.id" readonly />
+		</div>
+		 <div >
+            <label class="control-label" for="field_sourcebox">Sourcebox</label>
+            <input type="text"  name="sourcebox" id="field_sourcebox"
+                    ng-model="vm.mobileValidation.sourcebox"
+                  maxlength="8"  />
         </div>
-        <div class="form-group">
-            <label class="control-label" for="field_mobilenumber">Mobilenumber</label>
-            <input type="number" class="form-control" name="mobilenumber" id="field_mobilenumber"
-                    ng-model="vm.mobileValidation.mobilenumber"
-                    />
-        </div>
-         <div class="form-group">
-            <label class="control-label" for="field_mobilenumber">Re Mobilenumber</label>
-            <input type="number" class="form-control" name="mobilenumber" id="field_remobilenumber"
-                    ng-model="vm.mobileValidation.remobilenumber"
-                    />
-        </div>
-        
-         <button type="button" class="btn btn-default" id="search"  ng-click="vm.search()">
-            <span class="glyphicon"></span>&nbsp;<span>Search</span>
-        </button>
-        
-         <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                   
-                    <th jh-sort-by="mobilenumber"><span>Mobilenumber</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="activationDate"><span>Activation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="customerName"><span>Customer Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="colorCode"><span>Color Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="mobileValidation in vm.mobileValidations track by mobileValidation.activationDate">
-                    <td>{{mobileValidation.mobilenumber}}</td>
-                    <td>{{mobileValidation.activationDate}}</td>
-                    <td>{{mobileValidation.customerName}}</td>
-                    <td  ng-style="{'background-color':{{mobileValidation.colorcode}}}">{{mobileValidation.colorCode}}</td>
-                    
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            
-                           <input type="checkbox"  ng-model="mobileValidation.isselected" />
-                           
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-     <input type="button" ng-click="toggleCustom()" value="In progress"></input>
+		<div class="form-group">
+			<label class="control-label" for="field_mobilenumber">Mobilenumber</label>
+			<input type="number" class="form-control" name="mobilenumber"
+				id="field_mobilenumber" ng-model="vm.mobileValidation.mobilenumber" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_mobilenumber">Re
+				Mobilenumber</label> <input type="number" class="form-control"
+				name="mobilenumber" id="field_remobilenumber"
+				ng-model="vm.mobileValidation.remobilenumber" />
+		</div>
+
+		<button type="button" class="btn btn-default" id="search"
+			ng-click="vm.search()">
+			<span class="glyphicon"></span>&nbsp;<span>Search</span>
+		</button>
+
+		<div class="table-responsive">
+			<table class="jh-table table table-striped">
+				<thead>
+					<tr jh-sort="vm.predicate" ascending="vm.reverse"
+						callback="vm.transition()">
+
+						<th jh-sort-by="mobilenumber"><span>Mobilenumber</span> <span
+							class="glyphicon glyphicon-sort"></span></th>
+						<th jh-sort-by="activationDate"><span>Activation Date</span>
+							<span class="glyphicon glyphicon-sort"></span></th>
+						<th jh-sort-by="customerName"><span>Customer Name</span> <span
+							class="glyphicon glyphicon-sort"></span></th>
+						<th jh-sort-by="colorCode"><span>Color Code</span> <span
+							class="glyphicon glyphicon-sort"></span></th>
+
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						ng-repeat="mobileValidation in vm.mobileValidations track by mobileValidation.activationDate">
+						<td>{{mobileValidation.mobilenumber}}</td>
+						<td>{{mobileValidation.activationDate}}</td>
+						<td>{{mobileValidation.customerName}}</td>
+						<td>{{mobileValidation.colorCode}}</td>
+
+						<td class="text-right">
+							<div class="btn-group flex-btn-group-container">
+
+								<input type="checkbox" ng-model="mobileValidation.isselected"
+									ng-change="isSelected(mobileValidation)" />
+
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<textarea type="text" name="colorcode" id="field_colorcode"
+			ng-model="vm.mobileValidation.colorCode"
+			ng-style="{'background-color':vm.mobileValidation.colorCode}"
+			cols="70" rows="10">
+        </textarea>
+		 <input type="button" ng-click="toggleCustom()"
+			value="In progress"/>
+
         <span ng-hide="custom">
-        <div >
-            <label class="control-label" for="field_category1">Churn 1</label>
-            <input type="text"  name="category1" id="field_category1"
-                    ng-model="vm.mobileValidation.category1"
-            maxlength="8"        ng-change="validate1()"/>
-            <input type="number"  name="countCategory1" id="field_countCategory1"
-                    ng-model="vm.mobileValidation.countCategory1"
-                   />
-        </div>
-        <div >
-            <label class="control-label" for="field_category2">Chrun 2</label>
-            <input type="text"  name="category2" id="field_category2"
-                    ng-model="vm.mobileValidation.category2"
-            maxlength="8"      ng-change="validate1()" />
-            <input type="number"  name="countCategory2" id="field_countCategory2"
-                    ng-model="vm.mobileValidation.countCategory2"
-                   />
-        </div>
-        <div >
-            <label class="control-label" for="field_category3">Churn 3</label>
-            <input type="text"  name="category3" id="field_category3"
-                    ng-model="vm.mobileValidation.category3"
-             maxlength="8"     ng-change="validate1()" />
-            <input type="number"  name="countCategory3" id="field_countCategory3"
-                    ng-model="vm.mobileValidation.countCategory3"
-                   />
-        </div>
-        
-        <div >
-            <label class="control-label" for="field_category4">Churn 4</label>
-            <input type="text"  name="category4" id="field_category4"
-                    ng-model="vm.mobileValidation.category4"
-            maxlength="8"      ng-change="validate1()" />
-            <input type="number"  name="countCategory4" id="field_countCategory4"
-                    ng-model="vm.mobileValidation.countCategory4"
-                   />
-        </div>
-        <div >
-            <label class="control-label" for="field_category5">Churn 5</label>
-            <input type="text"  name="category5" id="field_category5"
-                    ng-model="vm.mobileValidation.category5"
-           maxlength="8"       ng-change="validate1()" />
-            <input type="number"  name="countCategory5" id="field_countCategory5"
-                    ng-model="vm.mobileValidation.countCategory5"
-                   />
-        </div>
-        </span>
-       <br/>
-     <button type="submit" class="btn btn-primary" ng-click="vm.save()">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>
-   <!--  <div class="modal-footer">
+			<div>
+				<label class="control-label" for="field_category1">Churn 1</label> <input
+					type="text" name="category1" id="field_category1"
+					ng-model="vm.mobileValidation.category1" maxlength="8"
+					ng-change="validate1()" /> <input type="number"
+					name="countCategory1" id="field_countCategory1"
+					ng-model="vm.mobileValidation.countCategory1" />
+			</div>
+			<div>
+				<label class="control-label" for="field_category2">Chrun 2</label> <input
+					type="text" name="category2" id="field_category2"
+					ng-model="vm.mobileValidation.category2" maxlength="8"
+					ng-change="validate1()" /> <input type="number"
+					name="countCategory2" id="field_countCategory2"
+					ng-model="vm.mobileValidation.countCategory2" />
+			</div>
+			<div>
+				<label class="control-label" for="field_category3">Churn 3</label> <input
+					type="text" name="category3" id="field_category3"
+					ng-model="vm.mobileValidation.category3" maxlength="8"
+					ng-change="validate1()" /> <input type="number"
+					name="countCategory3" id="field_countCategory3"
+					ng-model="vm.mobileValidation.countCategory3" />
+			</div>
+
+			<div>
+				<label class="control-label" for="field_category4">Churn 4</label> <input
+					type="text" name="category4" id="field_category4"
+					ng-model="vm.mobileValidation.catergory4" maxlength="8"
+					ng-change="validate1()" /> <input type="number"
+					name="countCategory4" id="field_countCategory4"
+					ng-model="vm.mobileValidation.countCategory4" />
+			</div>
+			<div>
+				<label class="control-label" for="field_category5">Churn 5</label> <input
+					type="text" name="category5" id="field_category5"
+					ng-model="vm.mobileValidation.catergory5" maxlength="8"
+					ng-change="validate1()" /> <input type="number"
+					name="countCategory5" id="field_countCategory5"
+					ng-model="vm.mobileValidation.countCategory5" />
+			</div>
+		</span> <br />
+
+		<div>
+			<label class="control-label" >Completed
+				Box</label> <input type="text" name="caftype" id="field_lastcompletedbox"
+				ng-model="lastcompletedbox" readonly="readonly" />
+		</div>
+		<button type="submit" class="btn btn-primary" ng-click="vm.save()">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+		</button>
+	</div>
+	<!--  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
         </button>

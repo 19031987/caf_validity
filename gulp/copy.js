@@ -17,7 +17,7 @@ module.exports = {
     common: common,
     swagger: swagger,
     images: images
-}
+};
 
 function fonts() {
     return es.merge(gulp.src(config.bower + 'bootstrap/fonts/*.*')

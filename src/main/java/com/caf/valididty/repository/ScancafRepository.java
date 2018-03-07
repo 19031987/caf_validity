@@ -18,32 +18,32 @@ public interface ScancafRepository extends JpaRepository<Scancaf, Long> {
 
 	@Query(value ="SELECT * FROM cafvalidity_v2.getdata where CentralBarcode =?1 ",nativeQuery=true)
 	Object getCaf(String id);
-	
+
 	@Query(value ="SELECT * FROM cafvalidity_v2.scancaf where sourcebox =?1 and jhi_user =?2 order by userdate desc LIMIT 1",nativeQuery=true)
 	Scancaf findByCategory(String sourcebox, String currentUserLogin);
-	
-	@Query(value ="SELECT sub.*" + 
-			"FROM (SELECT CASE WHEN count_category_1 = 300 THEN category_1 END category_1," + 
-			"             CASE WHEN count_category_2 = 300 THEN category_2 END category_2," + 
-			"             CASE WHEN count_category_3 = 300 THEN category_3 END category_3," + 
-			"             CASE WHEN count_category_4 = 300 THEN category_4 END category_4," + 
-			"             CASE WHEN count_category_5 = 300 THEN category_5 END category_5" + 
-			"      FROM scancaf" + 
-			"      WHERE scancaf.jhi_user = ?1 " + 
-			"      ORDER BY scancaf.userdate) as sub" + 
-			"WHERE sub.category_1 IS NOT NULL" + 
-			"      OR sub.category_2 IS NOT NULL" + 
-			"      OR sub.category_3 IS NOT NULL" + 
-			"      OR sub.category_4 IS NOT NULL" + 
+
+	@Query(value ="SELECT sub.*" +
+			"FROM (SELECT CASE WHEN count_category_1 = 300 THEN category_1 END category_1," +
+			"             CASE WHEN count_category_2 = 300 THEN category_2 END category_2," +
+			"             CASE WHEN count_category_3 = 300 THEN category_3 END category_3," +
+			"             CASE WHEN count_category_4 = 300 THEN category_4 END category_4," +
+			"             CASE WHEN count_category_5 = 300 THEN category_5 END category_5" +
+			"      FROM scancaf" +
+			"      WHERE scancaf.jhi_user = ?1 " +
+			"      ORDER BY scancaf.userdate) as sub" +
+			"WHERE sub.category_1 IS NOT NULL" +
+			"      OR sub.category_2 IS NOT NULL" +
+			"      OR sub.category_3 IS NOT NULL" +
+			"      OR sub.category_4 IS NOT NULL" +
 			"      OR sub.category_5 IS NOT NULL",nativeQuery=true)
 	List<Object> getComletedBox(String currentUserLogin);
-	
+
 	@Query(value ="select * from scancaf order by ?1 desc limit 1",nativeQuery=true)
 	Scancaf getCatLatest(String id);
-	
+
 	@Query(value ="select * from boxassign order by category_1,category_2,category_3,category_4,category_5 desc limit 1",nativeQuery=true)
 	Scancaf getCatALl();
-	
+
 	@Query(value ="select * from scancaf where centralBarcode=?1 ",nativeQuery=true)
 	Scancaf findByBarcode( String cafbarcode);
 
@@ -57,18 +57,18 @@ public interface ScancafRepository extends JpaRepository<Scancaf, Long> {
 	List<Scancaf> findByOutBoxCompletionCat4(String category1, String colorcode);
 	@Query(value ="select * from scancaf where category_5=?1 and boxstatus='FIRST_LEVEL' and colorcode=?2",nativeQuery=true)
 	List<Scancaf> findByOutBoxCompletionCat5(String category1, String colorcode);
-	
-	@Query(value ="select category_1 from scancaf where colorcode='red' order by id desc LIMIT 1",nativeQuery=true)
+
+	@Query(value ="select category_1 from scancaf where colorcode='green' order by id desc LIMIT 1",nativeQuery=true)
 	String getCategory1();
-	@Query(value ="select category_2 from scancaf where colorcode='green' order by id desc LIMIT 1",nativeQuery=true)
+	@Query(value ="select category_2 from scancaf where colorcode='white' order by id desc LIMIT 1",nativeQuery=true)
 	String getCategory2();
-	@Query(value ="select category_3 from scancaf where colorcode='white' order by id desc LIMIT 1",nativeQuery=true)
+	@Query(value ="select category_3 from scancaf where colorcode='yellow' order by id desc LIMIT 1",nativeQuery=true)
 	String getCategory3();
-	@Query(value ="select category_4 from scancaf where colorcode='yellow' order by id desc LIMIT 1",nativeQuery=true)
+	@Query(value ="select category_4 from scancaf where colorcode='blue' order by id desc LIMIT 1",nativeQuery=true)
 	String getCategory4();
-	@Query(value ="select category_5 from scancaf where colorcode='blue' order by id desc LIMIT 1",nativeQuery=true)
+	@Query(value ="select category_5 from scancaf where colorcode='red' order by id desc LIMIT 1",nativeQuery=true)
 	String getCategory5();
-	
+
 	@Query(value ="select * from scancaf where jhi_user=?1 order by scancaf.id desc LIMIT 1",nativeQuery=true)
 	Scancaf findByuserOrderByDsc(String user);
 

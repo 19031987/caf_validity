@@ -23,7 +23,7 @@
         vm.currentSearch = pagingParams.search;
 
         loadAll();
-        
+
          $scope.initTest = function(){
         	 Scancaf.getSystemByName(null,onSuccess,onError);
         	 function onSuccess(data){
@@ -36,9 +36,9 @@
         	function onError(){
         		alert("You are not allowed to work on the system, Please check with your Team leader");
         	}
-        }
+        };
      ///  init();
-        
+
 
         function loadAll () {
             if (pagingParams.search) {

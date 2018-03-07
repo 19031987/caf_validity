@@ -62,7 +62,55 @@
                    // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
                     return angular.toJson(copy);
                 }
-            }
+            },'findCategory1': {
+                method: 'POST',
+                url: 'api/mobile-validation/category1',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'findCategory2': {
+                method: 'POST',
+                url: 'api/mobile-validation/category2',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'findCategory3': {
+                method: 'POST',
+                url: 'api/mobile-validation/category3',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'findCategory4': {
+                method: 'POST',
+                url: 'api/mobile-validation/category4',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'findCategory5': {
+                method: 'POST',
+                url: 'api/mobile-validation/category5',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'getBox': {
+                              method: 'POST',
+                              url: 'api/mobile-validaiton/getBox',
+                              transformRequest: function (data) {
+                                  var copy = angular.copy(data);
+                                 // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                                  return angular.toJson(copy);
+                              }
+                          }
         });
     }
 })();

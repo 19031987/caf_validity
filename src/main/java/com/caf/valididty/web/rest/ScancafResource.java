@@ -374,40 +374,50 @@ public class ScancafResource {
 			return ResponseEntity.badRequest().body(null);
 		}
 	}
-	
+
 	@PostMapping("/scancafs/category1")
 	@Timed
-	public ResponseEntity<String> getByCategory1() {
+	public Scancaf getByCategory1() {
 		String scancafLocal = scancafRepository.getCategory1();
-		return  ResponseEntity.ok().body(scancafLocal);
+		Scancaf scancaf = new Scancaf();
+            scancaf.setCategory1(scancafLocal);
+		return  (scancaf);
 	}
 
 	@PostMapping("/scancafs/category2")
 	@Timed
-	public ResponseEntity<String> getByCategory2() {
+	public Scancaf getByCategory2() {
 		String scancafLocal = scancafRepository.getCategory2();
-		return  ResponseEntity.ok().body(scancafLocal);
+        Scancaf scancaf = new Scancaf();
+        scancaf.setCategory2(scancafLocal);
+		return  (scancaf);
 	}
 
 	@PostMapping("/scancafs/category3")
 	@Timed
-	public ResponseEntity<String> getByCategory3() {
+	public Scancaf getByCategory3() {
 		String scancafLocal = scancafRepository.getCategory3();
-		return  ResponseEntity.ok().body(scancafLocal);
+        Scancaf scancaf = new Scancaf();
+        scancaf.setCategory3(scancafLocal);
+		return  (scancaf);
 	}
 
 	@PostMapping("/scancafs/category4")
 	@Timed
-	public ResponseEntity<String> getByCategory4() {
+	public Scancaf getByCategory4() {
 		String scancafLocal = scancafRepository.getCategory4();
-		return  ResponseEntity.ok().body(scancafLocal);
+        Scancaf scancaf = new Scancaf();
+        scancaf.setCategory4(scancafLocal);
+        return  (scancaf);
 	}
 
 	@PostMapping("/scancafs/category5")
 	@Timed
-	public ResponseEntity<String> getByCategory5() {
+	public Scancaf getByCategory5() {
 		String scancafLocal = scancafRepository.getCategory5();
-		return  ResponseEntity.ok().body(scancafLocal);
+        Scancaf scancaf = new Scancaf();
+        scancaf.setCategory5(scancafLocal);
+        return  (scancaf);
 	}
 
 }
