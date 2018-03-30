@@ -3,6 +3,7 @@ package com.caf.valididty.web.rest;
 import com.caf.valididty.CafvalidityV2App;
 
 import com.caf.valididty.domain.Scancaf;
+import com.caf.valididty.repository.BoxassignRepository;
 import com.caf.valididty.repository.ScancafRepository;
 import com.caf.valididty.repository.search.ScancafSearchRepository;
 import com.caf.valididty.web.rest.errors.ExceptionTranslator;
@@ -42,6 +43,9 @@ public class ScancafResourceIntTest {
 
     private static final String DEFAULT_SOURCEBOX = "AAAAAAAAAA";
     private static final String UPDATED_SOURCEBOX = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CATEGORY = "AAAAAAAAAA";
+    private static final String UPDATED_CATEGORY = "BBBBBBBBBB";
 
     private static final String DEFAULT_CATEGORY_1 = "AAAAAAAAAA";
     private static final String UPDATED_CATEGORY_1 = "BBBBBBBBBB";
@@ -100,11 +104,26 @@ public class ScancafResourceIntTest {
     private static final String DEFAULT_CAFTYPE = "AAAAAAAAAA";
     private static final String UPDATED_CAFTYPE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_CATEGORY_RV = "AAAAAAAAAA";
+    private static final String UPDATED_CATEGORY_RV = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_COUNT_CATEGORY_RV = 1;
+    private static final Integer UPDATED_COUNT_CATEGORY_RV = 2;
+
+    private static final String DEFAULT_CATEGORY_NA = "AAAAAAAAAA";
+    private static final String UPDATED_CATEGORY_NA = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_COUNT_CATEGORY_NA = 1;
+    private static final Integer UPDATED_COUNT_CATEGORY_NA = 2;
+
     @Autowired
     private ScancafRepository scancafRepository;
 
     @Autowired
     private ScancafSearchRepository scancafSearchRepository;
+    
+    @Autowired
+    private BoxassignRepository boxassignRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -125,7 +144,7 @@ public class ScancafResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ScancafResource scancafResource = new ScancafResource(scancafRepository, scancafSearchRepository, null);
+        final ScancafResource scancafResource = new ScancafResource(scancafRepository, scancafSearchRepository,boxassignRepository);
         this.restScancafMockMvc = MockMvcBuilders.standaloneSetup(scancafResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -141,6 +160,7 @@ public class ScancafResourceIntTest {
     public static Scancaf createEntity(EntityManager em) {
         Scancaf scancaf = new Scancaf()
             .sourcebox(DEFAULT_SOURCEBOX)
+            .category(DEFAULT_CATEGORY)
             .category1(DEFAULT_CATEGORY_1)
             .category2(DEFAULT_CATEGORY_2)
             .category3(DEFAULT_CATEGORY_3)
@@ -159,7 +179,11 @@ public class ScancafResourceIntTest {
             .sourceboxstaus(DEFAULT_SOURCEBOXSTAUS)
             .mobilenumber(DEFAULT_MOBILENUMBER)
             .centralbarcode(DEFAULT_CENTRALBARCODE)
-            .caftype(DEFAULT_CAFTYPE);
+            .caftype(DEFAULT_CAFTYPE)
+            .categoryRv(DEFAULT_CATEGORY_RV)
+            .countCategoryRv(DEFAULT_COUNT_CATEGORY_RV)
+            .categoryNA(DEFAULT_CATEGORY_NA)
+            .countCategoryNA(DEFAULT_COUNT_CATEGORY_NA);
         return scancaf;
     }
 
@@ -185,6 +209,7 @@ public class ScancafResourceIntTest {
         assertThat(scancafList).hasSize(databaseSizeBeforeCreate + 1);
         Scancaf testScancaf = scancafList.get(scancafList.size() - 1);
         assertThat(testScancaf.getSourcebox()).isEqualTo(DEFAULT_SOURCEBOX);
+        assertThat(testScancaf.getCategory()).isEqualTo(DEFAULT_CATEGORY);
         assertThat(testScancaf.getCategory1()).isEqualTo(DEFAULT_CATEGORY_1);
         assertThat(testScancaf.getCategory2()).isEqualTo(DEFAULT_CATEGORY_2);
         assertThat(testScancaf.getCategory3()).isEqualTo(DEFAULT_CATEGORY_3);
@@ -204,6 +229,10 @@ public class ScancafResourceIntTest {
         assertThat(testScancaf.getMobilenumber()).isEqualTo(DEFAULT_MOBILENUMBER);
         assertThat(testScancaf.getCentralbarcode()).isEqualTo(DEFAULT_CENTRALBARCODE);
         assertThat(testScancaf.getCaftype()).isEqualTo(DEFAULT_CAFTYPE);
+        assertThat(testScancaf.getCategoryRv()).isEqualTo(DEFAULT_CATEGORY_RV);
+        assertThat(testScancaf.getCountCategoryRv()).isEqualTo(DEFAULT_COUNT_CATEGORY_RV);
+        assertThat(testScancaf.getCategoryNA()).isEqualTo(DEFAULT_CATEGORY_NA);
+        assertThat(testScancaf.getCountCategoryNA()).isEqualTo(DEFAULT_COUNT_CATEGORY_NA);
 
         // Validate the Scancaf in Elasticsearch
         Scancaf scancafEs = scancafSearchRepository.findOne(testScancaf.getId());
@@ -241,6 +270,7 @@ public class ScancafResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(scancaf.getId().intValue())))
             .andExpect(jsonPath("$.[*].sourcebox").value(hasItem(DEFAULT_SOURCEBOX.toString())))
+            .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())))
             .andExpect(jsonPath("$.[*].category1").value(hasItem(DEFAULT_CATEGORY_1.toString())))
             .andExpect(jsonPath("$.[*].category2").value(hasItem(DEFAULT_CATEGORY_2.toString())))
             .andExpect(jsonPath("$.[*].category3").value(hasItem(DEFAULT_CATEGORY_3.toString())))
@@ -259,7 +289,11 @@ public class ScancafResourceIntTest {
             .andExpect(jsonPath("$.[*].sourceboxstaus").value(hasItem(DEFAULT_SOURCEBOXSTAUS.toString())))
             .andExpect(jsonPath("$.[*].mobilenumber").value(hasItem(DEFAULT_MOBILENUMBER.intValue())))
             .andExpect(jsonPath("$.[*].centralbarcode").value(hasItem(DEFAULT_CENTRALBARCODE.toString())))
-            .andExpect(jsonPath("$.[*].caftype").value(hasItem(DEFAULT_CAFTYPE.toString())));
+            .andExpect(jsonPath("$.[*].caftype").value(hasItem(DEFAULT_CAFTYPE.toString())))
+            .andExpect(jsonPath("$.[*].categoryRv").value(hasItem(DEFAULT_CATEGORY_RV.toString())))
+            .andExpect(jsonPath("$.[*].countCategoryRv").value(hasItem(DEFAULT_COUNT_CATEGORY_RV)))
+            .andExpect(jsonPath("$.[*].categoryNA").value(hasItem(DEFAULT_CATEGORY_NA.toString())))
+            .andExpect(jsonPath("$.[*].countCategoryNA").value(hasItem(DEFAULT_COUNT_CATEGORY_NA)));
     }
 
     @Test
@@ -274,6 +308,7 @@ public class ScancafResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(scancaf.getId().intValue()))
             .andExpect(jsonPath("$.sourcebox").value(DEFAULT_SOURCEBOX.toString()))
+            .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY.toString()))
             .andExpect(jsonPath("$.category1").value(DEFAULT_CATEGORY_1.toString()))
             .andExpect(jsonPath("$.category2").value(DEFAULT_CATEGORY_2.toString()))
             .andExpect(jsonPath("$.category3").value(DEFAULT_CATEGORY_3.toString()))
@@ -292,7 +327,11 @@ public class ScancafResourceIntTest {
             .andExpect(jsonPath("$.sourceboxstaus").value(DEFAULT_SOURCEBOXSTAUS.toString()))
             .andExpect(jsonPath("$.mobilenumber").value(DEFAULT_MOBILENUMBER.intValue()))
             .andExpect(jsonPath("$.centralbarcode").value(DEFAULT_CENTRALBARCODE.toString()))
-            .andExpect(jsonPath("$.caftype").value(DEFAULT_CAFTYPE.toString()));
+            .andExpect(jsonPath("$.caftype").value(DEFAULT_CAFTYPE.toString()))
+            .andExpect(jsonPath("$.categoryRv").value(DEFAULT_CATEGORY_RV.toString()))
+            .andExpect(jsonPath("$.countCategoryRv").value(DEFAULT_COUNT_CATEGORY_RV))
+            .andExpect(jsonPath("$.categoryNA").value(DEFAULT_CATEGORY_NA.toString()))
+            .andExpect(jsonPath("$.countCategoryNA").value(DEFAULT_COUNT_CATEGORY_NA));
     }
 
     @Test
@@ -315,6 +354,7 @@ public class ScancafResourceIntTest {
         Scancaf updatedScancaf = scancafRepository.findOne(scancaf.getId());
         updatedScancaf
             .sourcebox(UPDATED_SOURCEBOX)
+            .category(UPDATED_CATEGORY)
             .category1(UPDATED_CATEGORY_1)
             .category2(UPDATED_CATEGORY_2)
             .category3(UPDATED_CATEGORY_3)
@@ -333,7 +373,11 @@ public class ScancafResourceIntTest {
             .sourceboxstaus(UPDATED_SOURCEBOXSTAUS)
             .mobilenumber(UPDATED_MOBILENUMBER)
             .centralbarcode(UPDATED_CENTRALBARCODE)
-            .caftype(UPDATED_CAFTYPE);
+            .caftype(UPDATED_CAFTYPE)
+            .categoryRv(UPDATED_CATEGORY_RV)
+            .countCategoryRv(UPDATED_COUNT_CATEGORY_RV)
+            .categoryNA(UPDATED_CATEGORY_NA)
+            .countCategoryNA(UPDATED_COUNT_CATEGORY_NA);
 
         restScancafMockMvc.perform(put("/api/scancafs")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -345,6 +389,7 @@ public class ScancafResourceIntTest {
         assertThat(scancafList).hasSize(databaseSizeBeforeUpdate);
         Scancaf testScancaf = scancafList.get(scancafList.size() - 1);
         assertThat(testScancaf.getSourcebox()).isEqualTo(UPDATED_SOURCEBOX);
+        assertThat(testScancaf.getCategory()).isEqualTo(UPDATED_CATEGORY);
         assertThat(testScancaf.getCategory1()).isEqualTo(UPDATED_CATEGORY_1);
         assertThat(testScancaf.getCategory2()).isEqualTo(UPDATED_CATEGORY_2);
         assertThat(testScancaf.getCategory3()).isEqualTo(UPDATED_CATEGORY_3);
@@ -364,6 +409,10 @@ public class ScancafResourceIntTest {
         assertThat(testScancaf.getMobilenumber()).isEqualTo(UPDATED_MOBILENUMBER);
         assertThat(testScancaf.getCentralbarcode()).isEqualTo(UPDATED_CENTRALBARCODE);
         assertThat(testScancaf.getCaftype()).isEqualTo(UPDATED_CAFTYPE);
+        assertThat(testScancaf.getCategoryRv()).isEqualTo(UPDATED_CATEGORY_RV);
+        assertThat(testScancaf.getCountCategoryRv()).isEqualTo(UPDATED_COUNT_CATEGORY_RV);
+        assertThat(testScancaf.getCategoryNA()).isEqualTo(UPDATED_CATEGORY_NA);
+        assertThat(testScancaf.getCountCategoryNA()).isEqualTo(UPDATED_COUNT_CATEGORY_NA);
 
         // Validate the Scancaf in Elasticsearch
         Scancaf scancafEs = scancafSearchRepository.findOne(testScancaf.getId());
@@ -423,6 +472,7 @@ public class ScancafResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(scancaf.getId().intValue())))
             .andExpect(jsonPath("$.[*].sourcebox").value(hasItem(DEFAULT_SOURCEBOX.toString())))
+            .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())))
             .andExpect(jsonPath("$.[*].category1").value(hasItem(DEFAULT_CATEGORY_1.toString())))
             .andExpect(jsonPath("$.[*].category2").value(hasItem(DEFAULT_CATEGORY_2.toString())))
             .andExpect(jsonPath("$.[*].category3").value(hasItem(DEFAULT_CATEGORY_3.toString())))
@@ -441,7 +491,11 @@ public class ScancafResourceIntTest {
             .andExpect(jsonPath("$.[*].sourceboxstaus").value(hasItem(DEFAULT_SOURCEBOXSTAUS.toString())))
             .andExpect(jsonPath("$.[*].mobilenumber").value(hasItem(DEFAULT_MOBILENUMBER.intValue())))
             .andExpect(jsonPath("$.[*].centralbarcode").value(hasItem(DEFAULT_CENTRALBARCODE.toString())))
-            .andExpect(jsonPath("$.[*].caftype").value(hasItem(DEFAULT_CAFTYPE.toString())));
+            .andExpect(jsonPath("$.[*].caftype").value(hasItem(DEFAULT_CAFTYPE.toString())))
+            .andExpect(jsonPath("$.[*].categoryRv").value(hasItem(DEFAULT_CATEGORY_RV.toString())))
+            .andExpect(jsonPath("$.[*].countCategoryRv").value(hasItem(DEFAULT_COUNT_CATEGORY_RV)))
+            .andExpect(jsonPath("$.[*].categoryNA").value(hasItem(DEFAULT_CATEGORY_NA.toString())))
+            .andExpect(jsonPath("$.[*].countCategoryNA").value(hasItem(DEFAULT_COUNT_CATEGORY_NA)));
     }
 
     @Test

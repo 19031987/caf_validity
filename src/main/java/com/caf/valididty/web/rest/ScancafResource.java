@@ -11,8 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.NonUniqueResultException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -82,6 +85,7 @@ public class ScancafResource {
 	@Timed
 	public ResponseEntity<Scancaf> createScancaf(@RequestBody Scancaf scancaf) throws URISyntaxException {
 		log.debug("REST request to save Scancaf : {}", scancaf);
+		try {
 		if (scancaf.getId() != null) {
 			return ResponseEntity.badRequest().headers(
 					HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new scancaf cannot already have an ID"))
@@ -96,6 +100,12 @@ public class ScancafResource {
 		scancafSearchRepository.save(result);
 		return ResponseEntity.created(new URI("/api/scancafs/" + result.getId()))
 				.headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString())).body(result);
+		}catch(DataIntegrityViolationException dive) {
+			
+			return ResponseEntity.badRequest().headers(
+					HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "You have already entered "))
+					.body(null);
+		}
 	}
 
 	/**
@@ -117,7 +127,7 @@ public class ScancafResource {
 		if (scancaf.getId() == null) {
 			return createScancaf(scancaf);
 		}
-		scancaf.setSecaudit(getCurrentUserLogin());
+		scancaf.setScaaudit(getCurrentUserLogin());
 		LocalDateTime localDateTime = LocalDateTime.now();
 		LocalDate localDate = localDateTime.toLocalDate();
 		scancaf.setSecauditdate(localDate);
@@ -207,15 +217,28 @@ public class ScancafResource {
 	@Timed
 	public Scancaf getCaf(@RequestBody Scancaf id) {
 		log.debug("REST request to get Scancaf : {}", id);
+		Scancaf scan = new Scancaf();
+		try {
 		Object scancaf = scancafRepository.getCaf(id.getCafbarcode());
 		Object[] getdata = (Object[]) scancaf;
-		Scancaf scan = new Scancaf();
+		
 		if (getdata != null) {
+			scan.setActivationdate((String) getdata[4]);
+			scan.setCustomername((String) getdata[3]);
 			scan.setCaftype((String) getdata[2]);
 			scan.setCafbarcode((String) getdata[1]);
-			BigInteger mobno = new BigInteger(getdata[0].toString());
+			BigInteger mobno = new BigInteger(String.valueOf(getdata[0]));
 			scan.setMobilenumber(mobno.longValue());
 		}
+		/*else {
+			scan.setCaftype("NA");
+			scan.setCafbarcode(id.getCafbarcode());
+			scan.setMobilenumber(0L);
+		}*/
+		}catch(NonUniqueResultException  nure) {
+			
+		}
+		
 		return scan;
 	}
 
@@ -247,9 +270,10 @@ public class ScancafResource {
 	public Boxassign getCatLatest(@RequestBody Boxassign id) {
 		log.debug("REST request to get Scancaf : {}", id);
 		Boxassign assign = new Boxassign();
-		Scancaf scancaf = new Scancaf();
-		if (id.getChurntype() == null) {
-			scancaf = scancafRepository.getCatALl();
+		//Scancaf scancaf = new Scancaf();
+		Scancaf scancaf = getScanCafReset();
+		/*if (id.getChurntype() == null) {
+			scancaf = getScanCafReset();
 			if (scancaf == null) {
 				scancaf = new Scancaf();
 				scancaf.setCategory("E1A00000");
@@ -263,9 +287,9 @@ public class ScancafResource {
 			id.setChurntype("Any");
 		} else {
 			scancaf = scancafRepository.getCatLatest(id.getChurntype());
-		}
+		}*/
 
-		if (id.getChurntype().equalsIgnoreCase("category_1")) {
+		/*if (id.getChurntype().equalsIgnoreCase("category_1")) {
 			assign.setBoxassign(scancaf.getCategory1());
 		}
 		if (id.getChurntype().equalsIgnoreCase("category_2")) {
@@ -283,28 +307,36 @@ public class ScancafResource {
 		if (id.getChurntype().equalsIgnoreCase("category_5")) {
 			assign.setBoxassign((scancaf.getCategory5()));
 		}
-		if (id.getChurntype().equalsIgnoreCase("Any")) {
-			assign.setBoxassign((scancaf.getCategory() + "," + scancaf.getCategory1() + "," + scancaf.getCategory2()
-					+ "," + scancaf.getCategory3() + "," + scancaf.getCategory4() + "," + scancaf.getCategory5()));
-		}
+		if (id.getChurntype().equalsIgnoreCase("Any")) {*/
+			assign.setBoxassign((scancaf.getCategory1() + "," + scancaf.getCategory2()
+					+ "," + scancaf.getCategory3() + "," + scancaf.getCategory4() + "," + scancaf.getCategory5()+ "," + scancaf.getCategoryRv()
+					+ "," + scancaf.getCategoryNA()));
+		//}
 		return assign;
 
+	}
+
+	private Scancaf getScanCafReset() {
+		Scancaf scanCaf = new Scancaf();
+		scanCaf.setCategory1(getByCategory1().getCategory1());
+		scanCaf.setCategory2(getByCategory2().getCategory2());
+		scanCaf.setCategory3(getByCategory3().getCategory3());
+		scanCaf.setCategory4(getByCategory4().getCategory4());
+		scanCaf.setCategory5(getByCategory5().getCategory5());
+		scanCaf.setCategoryRv(getByCategoryRv().getCategoryRv());
+		scanCaf.setCategoryNA(getByCategoryNA().getCategoryNA());
+		return scanCaf;
 	}
 
 	@PostMapping("/scancafs/getBox")
 	@Timed
 	public ResponseEntity<Scancaf> getBox(@RequestBody Scancaf id) {
 		log.debug("REST request to get Scancaf : {}", id);
-		Scancaf scancaf = scancafRepository.findByBarcode(id.getBoxstatus());
+		Scancaf scancaf = scancafRepository.findByBarcode(id.getCategory());
 		if (scancaf != null) {
 			scancaf.setCafbarcode("");
 			return ResponseEntity.ok().body(scancaf);
 		} else {
-			Boxassign box = new Boxassign();
-			box.boxassign(id.getSourceboxstaus());
-			box.setUser(id.getUser());
-			box.setBoxassign(id.getBoxstatus());
-			boxassignRepository.save(box);
 			return ResponseEntity.badRequest()
 					.headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "Caf is Not segregated"))
 					.body(null);
@@ -419,5 +451,25 @@ public class ScancafResource {
         scancaf.setCategory5(scancafLocal);
         return  (scancaf);
 	}
+	
+	@PostMapping("/scancafs/categoryRv")
+	@Timed
+	public Scancaf getByCategoryRv() {
+		String scancafLocal = scancafRepository.getCategoryRv();
+        Scancaf scancaf = new Scancaf();
+        scancaf.setCategory5(scancafLocal);
+        return  (scancaf);
+	}
+
+	
+	@PostMapping("/scancafs/categoryNA")
+	@Timed
+	public Scancaf getByCategoryNA() {
+		String scancafLocal = scancafRepository.getCategoryNA();
+        Scancaf scancaf = new Scancaf();
+        scancaf.setCategory5(scancafLocal);
+        return  (scancaf);
+	}
+
 
 }

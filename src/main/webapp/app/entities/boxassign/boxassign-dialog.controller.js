@@ -42,6 +42,41 @@
         }
         $scope.users = Boxassign.users();
         $scope.system = Boxassign.system();
+        
+        
+        $scope.catChangeGetLatest = function(){
+
+        	Boxassign.getCatLatestRes(vm.boxassign,onSave);
+
+        	 function onSave(result){
+               	 var array = result.boxassign.split(',');
+
+                	if(array[0].indexOf('E1A') > -1){
+                		vm.boxassign.boxassign = 'E1A'+increment_alphanumeric_str(array[0].substring(3, 8));
+                	}
+                	if(array[1].indexOf('EC1') > -1){
+                		vm.boxassign.boxassign = vm.boxassign.boxassign+","+ 'EC1'+increment_alphanumeric_str(array[1].substring(3, 8));
+                	}
+                	if(array[2].indexOf('EC2')  > -1){
+                		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'EC2'+increment_alphanumeric_str(array[2].substring(3, 8));
+                	}
+                	if(array[3].indexOf('EC3')  > -1){
+                		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'EC3'+increment_alphanumeric_str(array[3].substring(3, 8));
+                	}
+                	if(array[4].indexOf('EDA')  > -1){
+                		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'EDA'+increment_alphanumeric_str(array[4].substring(3, 8));
+                	}
+                	if(array[5].indexOf('ERV')  > -1){
+                		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'ERV'+increment_alphanumeric_str(array[5].substring(3, 8));
+                	}
+                	if(array[6].indexOf('ENA')  > -1){
+                		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'ENA'+increment_alphanumeric_str(array[6].substring(3, 8));
+                	}
+
+
+                	}
+        	 }
+        
 
         $scope.catChange = function(){
 
@@ -65,6 +100,12 @@
            	if(vm.boxassign.churntype==='category_5'){
            		vm.boxassign.boxassign = 'EDA'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
            	}
+           	if(vm.boxassign.churntype==='categoryRv'){
+           		vm.boxassign.boxassign = 'ERV'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
+           	}
+           	if(vm.boxassign.churntype==='categoryNA'){
+           		vm.boxassign.boxassign = 'ENA'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
+           	}
            	vm.boxassign.boxassign = result.boxassign;
 
            	if(vm.boxassign.churntype===null){
@@ -84,6 +125,12 @@
            	}
            	if(array[4].indexOf('EDA')  > -1){
            		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'EDA'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
+           	}
+           	if(array[5].indexOf('ERV')  > -1){
+           		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'ERV'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
+           	}
+           	if(array[6].indexOf('ENA')  > -1){
+           		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'ENA'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
            	}
 
 

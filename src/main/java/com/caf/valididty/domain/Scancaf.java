@@ -26,11 +26,9 @@ public class Scancaf implements Serializable {
 
     @Column(name = "sourcebox")
     private String sourcebox;
-    
-    @Transient
+
+    @Column(name = "category")
     private String category;
-    @Transient
-    private String churntype;   
 
     @Column(name = "category_1")
     private String category1;
@@ -68,7 +66,7 @@ public class Scancaf implements Serializable {
     @Column(name = "colorcode")
     private String colorcode;
 
-	@Column(name = "jhi_user")
+    @Column(name = "jhi_user")
     private String user;
 
     @Column(name = "userdate")
@@ -88,13 +86,30 @@ public class Scancaf implements Serializable {
 
     @Column(name = "caftype")
     private String caftype;
-    
-    @Column(name = "secaudit")
-    private String secaudit;
-    
+
+    @Column(name = "category_rv")
+    private String categoryRv;
+
+    @Column(name = "count_category_rv")
+    private Integer countCategoryRv;
+
+    @Column(name = "category_na")
+    private String categoryNA;
+
+    @Column(name = "count_category_na")
+    private Integer countCategoryNA;
+
+    @Column(name = "customername")
+    private String customername;
+
+    @Column(name = "activationdate")
+    private String activationdate;
+
+    @Column(name = "scaaudit")
+    private String scaaudit;
+
     @Column(name = "secauditdate")
     private LocalDate secauditdate;
-
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -118,6 +133,19 @@ public class Scancaf implements Serializable {
         this.sourcebox = sourcebox;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public Scancaf category(String category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getCategory1() {
         return category1;
     }
@@ -131,33 +159,7 @@ public class Scancaf implements Serializable {
         this.category1 = category1;
     }
 
-    public String getChurntype() {
-		return churntype;
-	}
-
-	public void setChurntype(String churntype) {
-		this.churntype = churntype;
-	}
-	
-	 public Scancaf churntype(String churntype) {
-	        this.churntype = churntype;
-	        return this;
-	    }
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	
-	 public Scancaf category(String category) {
-	        this.category = category;
-	        return this;
-	    }
-
-	public String getCategory2() {
+    public String getCategory2() {
         return category2;
     }
 
@@ -390,26 +392,110 @@ public class Scancaf implements Serializable {
     public void setCaftype(String caftype) {
         this.caftype = caftype;
     }
-    
-    public String getSecaudit() {
-  		return secaudit;
-  	}
 
-  	public void setSecaudit(String secaudit) {
-  		this.secaudit = secaudit;
-  	}
+    public String getCategoryRv() {
+        return categoryRv;
+    }
 
-  	public LocalDate getSecauditdate() {
-  		return secauditdate;
-  	}
+    public Scancaf categoryRv(String categoryRv) {
+        this.categoryRv = categoryRv;
+        return this;
+    }
 
-  	public void setSecauditdate(LocalDate secauditdate) {
-  		this.secauditdate = secauditdate;
-  	}
-  	 public Scancaf secauditdate(LocalDate secauditdate) {
-         this.secauditdate = secauditdate;
-         return this;
-     }
+    public void setCategoryRv(String categoryRv) {
+        this.categoryRv = categoryRv;
+    }
+
+    public Integer getCountCategoryRv() {
+        return countCategoryRv;
+    }
+
+    public Scancaf countCategoryRv(Integer countCategoryRv) {
+        this.countCategoryRv = countCategoryRv;
+        return this;
+    }
+
+    public void setCountCategoryRv(Integer countCategoryRv) {
+        this.countCategoryRv = countCategoryRv;
+    }
+
+    public String getCategoryNA() {
+        return categoryNA;
+    }
+
+    public Scancaf categoryNA(String categoryNA) {
+        this.categoryNA = categoryNA;
+        return this;
+    }
+
+    public void setCategoryNA(String categoryNA) {
+        this.categoryNA = categoryNA;
+    }
+
+    public Integer getCountCategoryNA() {
+        return countCategoryNA;
+    }
+
+    public Scancaf countCategoryNA(Integer countCategoryNA) {
+        this.countCategoryNA = countCategoryNA;
+        return this;
+    }
+
+    public void setCountCategoryNA(Integer countCategoryNA) {
+        this.countCategoryNA = countCategoryNA;
+    }
+
+    public String getCustomername() {
+        return customername;
+    }
+
+    public Scancaf customername(String customername) {
+        this.customername = customername;
+        return this;
+    }
+
+    public void setCustomername(String customername) {
+        this.customername = customername;
+    }
+
+    public String getActivationdate() {
+        return activationdate;
+    }
+
+    public Scancaf activationdate(String activationdate) {
+        this.activationdate = activationdate;
+        return this;
+    }
+
+    public void setActivationdate(String activationdate) {
+        this.activationdate = activationdate;
+    }
+
+    public String getScaaudit() {
+        return scaaudit;
+    }
+
+    public Scancaf scaaudit(String scaaudit) {
+        this.scaaudit = scaaudit;
+        return this;
+    }
+
+    public void setScaaudit(String scaaudit) {
+        this.scaaudit = scaaudit;
+    }
+
+    public LocalDate getSecauditdate() {
+        return secauditdate;
+    }
+
+    public Scancaf secauditdate(LocalDate secauditdate) {
+        this.secauditdate = secauditdate;
+        return this;
+    }
+
+    public void setSecauditdate(LocalDate secauditdate) {
+        this.secauditdate = secauditdate;
+    }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override
@@ -437,6 +523,7 @@ public class Scancaf implements Serializable {
         return "Scancaf{" +
             "id=" + getId() +
             ", sourcebox='" + getSourcebox() + "'" +
+            ", category='" + getCategory() + "'" +
             ", category1='" + getCategory1() + "'" +
             ", category2='" + getCategory2() + "'" +
             ", category3='" + getCategory3() + "'" +
@@ -456,6 +543,14 @@ public class Scancaf implements Serializable {
             ", mobilenumber='" + getMobilenumber() + "'" +
             ", centralbarcode='" + getCentralbarcode() + "'" +
             ", caftype='" + getCaftype() + "'" +
+            ", categoryRv='" + getCategoryRv() + "'" +
+            ", countCategoryRv='" + getCountCategoryRv() + "'" +
+            ", categoryNA='" + getCategoryNA() + "'" +
+            ", countCategoryNA='" + getCountCategoryNA() + "'" +
+            ", customername='" + getCustomername() + "'" +
+            ", activationdate='" + getActivationdate() + "'" +
+            ", scaaudit='" + getScaaudit() + "'" +
+            ", secauditdate='" + getSecauditdate() + "'" +
             "}";
     }
 }

@@ -285,7 +285,8 @@ function slashEscape(str) {
     '\x00': 'z0',
     'z': 'zZ',
   };
-  return str.replace(/[\\:\/\x00z]/g, match => (ESCAPE_LOOKUP[match]));
+    return str.replace(/[\\:\/\x00z]/g, match = > (ESCAPE_LOOKUP[match]);
+)
 }
 
 function supportsCachedData() {
@@ -327,11 +328,11 @@ if (!process.env.DISABLE_V8_COMPILE_CACHE && supportsCachedData()) {
   nativeCompileCache.install();
 
   process.once('exit', code => {
-    if (blobStore.isDirty()) {
+    if (blobStore.isDirty();) {
       blobStore.save();
     }
     nativeCompileCache.uninstall();
-  });
+})
 }
 
 module.exports.__TEST__ = {

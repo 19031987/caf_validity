@@ -165,28 +165,16 @@ public class BoxassignResource {
         	assign = boxassignRepository.getCatAll();
         	if(assign == null) {
         		assign = new Boxassign();
-        		assign.setBoxassign("E1A00000"+","+"EC100000"+","+"EC200000"+","+"EC300000"+","+"EDA00000");
+        		assign.setBoxassign("E1A00000"+","+"EC100000"+","+"EC200000"+","+"EC300000"+","+"EDA00000"+",ERV00000"+",ENA00000");
         	}
  		return assign;
     }
     
     @GetMapping("/boxassigns/getSystemName")
     @Timed
-    public Boxassign getSystemByName() {
+    public ResponseEntity<Boxassign> getSystemByName() {
     	Boxassign system =boxassignRepository.findByuser(getCurrentUserLogin());
-    	String systemName = null;
-    	if(system!= null) {
-    		try {
-    		 systemName =InetAddress.getLocalHost().getHostName(); 
-    		} catch (UnknownHostException e) {
-				e.printStackTrace();
-			}
-    	}
-    	if(system!= null&& system.getSystem().equalsIgnoreCase(systemName)) {
-			return system;
-		}else {
-			return null;
-			}
+    	return ResponseEntity.ok().body(system);
     }
     
     public String getCurrentUserLogin() {

@@ -26,6 +26,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="category" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="category_1" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -99,6 +103,38 @@
             </column>
 
             <column name="caftype" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="category_rv" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="count_category_rv" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="category_na" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="count_category_na" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="customername" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="activationdate" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="scaaudit" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="secauditdate" type="date">
                 <constraints nullable="true" />
             </column>
 

@@ -161,7 +161,7 @@ public class MobileValidationResource {
 
     @PostMapping("/getmobilenumber")
     @Timed
-    public ResponseEntity<List<MobileValidation>> getMobileValidation(@RequestBody MobileValidation mobileValidation) throws URISyntaxException {
+    public ResponseEntity<List<MobileValidation>> getMobileValidation(@RequestBody MobileValidation mobileValidation) {
                List<MobileValidation> result = mobileValidationRepository.getMobileNumber(mobileValidation.getMobilenumber());
        return new ResponseEntity<List<MobileValidation>>(result, HttpStatus.ACCEPTED);
     }

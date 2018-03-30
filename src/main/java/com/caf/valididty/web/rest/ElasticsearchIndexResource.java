@@ -36,7 +36,7 @@ public class ElasticsearchIndexResource {
     @PostMapping("/elasticsearch/index")
     @Timed
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<Void> reindexAll() throws URISyntaxException {
+    public ResponseEntity<Void> reindexAll() {
         log.info("REST request to reindex Elasticsearch by user : {}", SecurityUtils.getCurrentUserLogin());
         elasticsearchIndexService.reindexAll();
         return ResponseEntity.accepted()

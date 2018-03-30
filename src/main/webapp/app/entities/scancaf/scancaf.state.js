@@ -126,6 +126,8 @@
                                 countCategory3: 0,
                                 countCategory4: 0,
                                 countCategory5: 0,
+                                countCategoryRv: 0,
+                                countCategoryNA: 0,
                                 cafbarcode: null,
                                 colorcode: null,
                                 user: null,

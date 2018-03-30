@@ -52,6 +52,16 @@
                     }
                     return data;
                 }
+            },'getCatLatestRes' :{
+                method: 'POST',
+                url: 'api/scancafs/getCatLatest',
+                transformResponse: function (data) {
+                    if (data) {
+                        data = angular.fromJson(data);
+                    }
+                    return data;
+                }
+            	
             }
         });
     }

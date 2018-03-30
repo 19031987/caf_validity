@@ -85,6 +85,38 @@
         {
             "fieldName": "caftype",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "categoryRv",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "countCategoryRv",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "categoryNA",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "countCategoryNA",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "customername",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "activationdate",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "scaaudit",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "secauditdate",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20171022120651",

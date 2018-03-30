@@ -33,6 +33,9 @@ public class Sourcebox implements Serializable {
     @Column(name = "createddate")
     private LocalDate createddate;
 
+    @Column(name = "vehical_number")
+    private String vehicalNumber;
+
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -80,6 +83,19 @@ public class Sourcebox implements Serializable {
     public void setCreateddate(LocalDate createddate) {
         this.createddate = createddate;
     }
+
+    public String getVehicalNumber() {
+        return vehicalNumber;
+    }
+
+    public Sourcebox vehicalNumber(String vehicalNumber) {
+        this.vehicalNumber = vehicalNumber;
+        return this;
+    }
+
+    public void setVehicalNumber(String vehicalNumber) {
+        this.vehicalNumber = vehicalNumber;
+    }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override
@@ -109,6 +125,7 @@ public class Sourcebox implements Serializable {
             ", sourceboxname='" + getSourceboxname() + "'" +
             ", createduser='" + getCreateduser() + "'" +
             ", createddate='" + getCreateddate() + "'" +
+            ", vehicalNumber='" + getVehicalNumber() + "'" +
             "}";
     }
 }

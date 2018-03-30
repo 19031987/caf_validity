@@ -124,6 +124,22 @@
                    // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
                     return angular.toJson(copy);
                 }
+            },'findCategoryRv': {
+                method: 'POST',
+                url: 'api/scancafs/categoryRv',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
+            },'findCategoryNA': {
+                method: 'POST',
+                url: 'api/scancafs/categoryNA',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                    return angular.toJson(copy);
+                }
             },'getDetailsByName': {
                 method: 'POST',
                 url: 'api/scancafs/getDetailsByName',

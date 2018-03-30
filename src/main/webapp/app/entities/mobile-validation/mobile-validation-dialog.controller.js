@@ -39,7 +39,7 @@
             	    {
                   		 if( vm.mobileValidation.countCategory5===1600){
                  			alert('Category1 Box is completed please ask for another one') ;
-                 			 vm.mobileValidation.boxstatus='category5-completed'
+                 			 vm.mobileValidation.boxstatus='category5-completed';
                  				 vm.mobileValidation.countCatergory5 = 0;
                  				vm.mobileValidation.catergory5 = mobileValidation.findCategory5(onSucess);
                				function onSuccess(result){
@@ -213,7 +213,7 @@
         	MobileValidation.getByMobileNum(vm.mobileValidation, onSaveSuccessmob, onSaveErrormob);
         	function onSaveSuccessmob(result){
         		vm.mobileValidations = result;
-        		
+
         	}
         	function onSaveErrormob(){
 
@@ -225,7 +225,7 @@
         function onSaveSuccess (result) {
 			 vm.mobileValidation.mobilenumber ='';
      		vm.mobileValidation.remobilenumber='';
-     	
+
       		  if(vm.mobileValidation.countCategory5===1600){
 
       			$cookieStore.put('completed', vm.mobileValidation.category1);
@@ -347,7 +347,7 @@ $scope.validate1 = function(){
  			 vm.mobileValidation.countCategory4 =  vm.mobileValidation.countCategory4+1;
  		 }
     }
-        }
+        };
 
         vm.datePickerOpenStatus.userDate = false;
 

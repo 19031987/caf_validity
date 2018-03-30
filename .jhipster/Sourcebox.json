@@ -13,6 +13,10 @@
         {
             "fieldName": "createddate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "vehicalNumber",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171022102957",

@@ -21,12 +21,14 @@
         </div>
         
         <div class="form-group">
-            <label class="control-label" for="field_churntype">System</label>
+            <!-- <label class="control-label" for="field_churntype">System</label>
              <select ng-model="vm.boxassign.system" id="field_churntype">
 				<option ng-repeat="x in system" value="{{x.systemname}}">{{x.systemname}}</option>
-				</select>
+				</select>  -->
 				
 				 <input type="button" class="btn btn-primary" ng-click="catChange()" value="Assign Box">
+				 
+				  <input type="button" class="btn btn-primary" ng-click="catChangeGetLatest()" value="Get Latest">
           </div>  
           
         <div class="form-group">
