@@ -6,6 +6,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -70,7 +72,7 @@ public class Scancaf implements Serializable {
     private String user;
 
     @Column(name = "userdate")
-    private LocalDate userdate;
+    private Instant userdate;
 
     @Column(name = "boxstatus")
     private String boxstatus;
@@ -109,7 +111,7 @@ public class Scancaf implements Serializable {
     private String scaaudit;
 
     @Column(name = "secauditdate")
-    private LocalDate secauditdate;
+    private Instant secauditdate;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -315,17 +317,17 @@ public class Scancaf implements Serializable {
         this.user = user;
     }
 
-    public LocalDate getUserdate() {
+    public Instant getUserdate() {
         return userdate;
     }
 
-    public Scancaf userdate(LocalDate userdate) {
+    public Scancaf userdate(Instant userdate) {
         this.userdate = userdate;
         return this;
     }
 
     public void setUserdate(LocalDate userdate) {
-        this.userdate = userdate;
+        this.userdate = Instant.now();
     }
 
     public String getBoxstatus() {
@@ -484,17 +486,17 @@ public class Scancaf implements Serializable {
         this.scaaudit = scaaudit;
     }
 
-    public LocalDate getSecauditdate() {
+    public Instant getSecauditdate() {
         return secauditdate;
     }
 
-    public Scancaf secauditdate(LocalDate secauditdate) {
+    public Scancaf secauditdate(Instant secauditdate) {
         this.secauditdate = secauditdate;
         return this;
     }
 
     public void setSecauditdate(LocalDate secauditdate) {
-        this.secauditdate = secauditdate;
+        this.secauditdate = Instant.now();
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

@@ -23,6 +23,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -86,8 +88,8 @@ public class ScancafResourceIntTest {
     private static final String DEFAULT_USER = "AAAAAAAAAA";
     private static final String UPDATED_USER = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_USERDATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_USERDATE = LocalDate.now(ZoneId.systemDefault());
+    private static final Instant DEFAULT_USERDATE = Instant.now();
+    private static final Instant UPDATED_USERDATE = Instant.now();
 
     private static final String DEFAULT_BOXSTATUS = "AAAAAAAAAA";
     private static final String UPDATED_BOXSTATUS = "BBBBBBBBBB";

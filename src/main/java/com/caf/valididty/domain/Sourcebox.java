@@ -6,6 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -31,7 +32,7 @@ public class Sourcebox implements Serializable {
     private String createduser;
 
     @Column(name = "createddate")
-    private LocalDate createddate;
+    private Instant createddate;
 
     @Column(name = "vehical_number")
     private String vehicalNumber;
@@ -71,17 +72,17 @@ public class Sourcebox implements Serializable {
         this.createduser = createduser;
     }
 
-    public LocalDate getCreateddate() {
+    public Instant getCreateddate() {
         return createddate;
     }
 
-    public Sourcebox createddate(LocalDate createddate) {
+    public Sourcebox createddate(Instant createddate) {
         this.createddate = createddate;
         return this;
     }
 
-    public void setCreateddate(LocalDate createddate) {
-        this.createddate = createddate;
+    public void setCreateddate(Instant createddate) {
+        this.createddate = Instant.now();
     }
 
     public String getVehicalNumber() {

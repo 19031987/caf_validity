@@ -19,6 +19,10 @@
             <input type="text"  name="sourcebox" id="field_sourcebox"
                     ng-model="vm.scancaf.sourcebox"
                    />
+                   <label class="control-label" for="field_category">Count</label>
+            <input type="text"  name="category" id="field_category"
+                    ng-model="vm.scancaf.category" readonly="readonly"
+                   />
         </div>
 
          <div >
@@ -57,7 +61,7 @@
                    />
         </div>
         <div >
-            <label class="control-label" for="field_category3">0-1 years</label>
+            <label class="control-label" for="field_category3">1-2 years</label>
             <input type="text"  name="category3" id="field_category3"
                     ng-model="vm.scancaf.category3"
              maxlength="8"     ng-change="validate1()" />
@@ -67,7 +71,7 @@
         </div>
 
         <div >
-            <label class="control-label" for="field_category4">1-2 years</label>
+            <label class="control-label" for="field_category4">2-3 years</label>
             <input type="text"  name="category4" id="field_category4"
                     ng-model="vm.scancaf.category4"
             maxlength="8"      ng-change="validate1()" />

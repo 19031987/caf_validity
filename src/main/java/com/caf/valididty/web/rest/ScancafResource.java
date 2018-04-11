@@ -59,15 +59,12 @@ public class ScancafResource {
 
 	private final ScancafRepository scancafRepository;
 
-	private final BoxassignRepository boxassignRepository;
-
 	private final ScancafSearchRepository scancafSearchRepository;
 
 	public ScancafResource(ScancafRepository scancafRepository, ScancafSearchRepository scancafSearchRepository,
 			BoxassignRepository boxassignRepository) {
 		this.scancafRepository = scancafRepository;
 		this.scancafSearchRepository = scancafSearchRepository;
-		this.boxassignRepository = boxassignRepository;
 	}
 
 	/**
@@ -92,9 +89,6 @@ public class ScancafResource {
 					.body(null);
 		}
 		scancaf.setUser(getCurrentUserLogin());
-		LocalDateTime localDateTime = LocalDateTime.now();
-		LocalDate localDate = localDateTime.toLocalDate();
-		scancaf.userdate(localDate);
 		scancaf.setBoxstatus("FIRST_LEVEL");
 		Scancaf result = scancafRepository.save(scancaf);
 		scancafSearchRepository.save(result);
@@ -220,6 +214,7 @@ public class ScancafResource {
 		Scancaf scan = new Scancaf();
 		try {
 		Object scancaf = scancafRepository.getCaf(id.getCafbarcode());
+		if(checkIfBarcodeExits(id.getCafbarcode())) {
 		Object[] getdata = (Object[]) scancaf;
 		
 		if (getdata != null) {
@@ -230,16 +225,29 @@ public class ScancafResource {
 			BigInteger mobno = new BigInteger(String.valueOf(getdata[0]));
 			scan.setMobilenumber(mobno.longValue());
 		}
-		/*else {
+		else {
 			scan.setCaftype("NA");
 			scan.setCafbarcode(id.getCafbarcode());
 			scan.setMobilenumber(0L);
-		}*/
+		}
+		}else {
+			log.debug(ENTITY_NAME + "data already exists");
+		}
 		}catch(NonUniqueResultException  nure) {
 			
 		}
 		
+		
 		return scan;
+	}
+
+	private boolean checkIfBarcodeExits(String centralbarcode) {
+		Scancaf scancaf = scancafRepository.findByBarcode(centralbarcode);
+		if(scancaf!= null) {
+		return false;
+		}else {
+			return true;
+		}
 	}
 
 	@PostMapping("/scancafs/getBoxCount")
@@ -270,48 +278,10 @@ public class ScancafResource {
 	public Boxassign getCatLatest(@RequestBody Boxassign id) {
 		log.debug("REST request to get Scancaf : {}", id);
 		Boxassign assign = new Boxassign();
-		//Scancaf scancaf = new Scancaf();
 		Scancaf scancaf = getScanCafReset();
-		/*if (id.getChurntype() == null) {
-			scancaf = getScanCafReset();
-			if (scancaf == null) {
-				scancaf = new Scancaf();
-				scancaf.setCategory("E1A00000");
-				scancaf.setCategory1("EC100000");
-				scancaf.setCategory2("EC200000");
-				scancaf.setCategory3("EC300000");
-				scancaf.setCategory4("EC400000");
-				scancaf.setCategory5("EDA00000");
-			}
-
-			id.setChurntype("Any");
-		} else {
-			scancaf = scancafRepository.getCatLatest(id.getChurntype());
-		}*/
-
-		/*if (id.getChurntype().equalsIgnoreCase("category_1")) {
-			assign.setBoxassign(scancaf.getCategory1());
-		}
-		if (id.getChurntype().equalsIgnoreCase("category_2")) {
-			assign.setBoxassign((scancaf.getCategory2()));
-		}
-
-		if (id.getChurntype().equalsIgnoreCase("category_3")) {
-			assign.setBoxassign((scancaf.getCategory3()));
-		}
-
-		if (id.getChurntype().equalsIgnoreCase("category_4")) {
-			assign.setBoxassign((scancaf.getCategory4()));
-		}
-
-		if (id.getChurntype().equalsIgnoreCase("category_5")) {
-			assign.setBoxassign((scancaf.getCategory5()));
-		}
-		if (id.getChurntype().equalsIgnoreCase("Any")) {*/
-			assign.setBoxassign((scancaf.getCategory1() + "," + scancaf.getCategory2()
+					assign.setBoxassign((scancaf.getCategory1() + "," + scancaf.getCategory2()
 					+ "," + scancaf.getCategory3() + "," + scancaf.getCategory4() + "," + scancaf.getCategory5()+ "," + scancaf.getCategoryRv()
 					+ "," + scancaf.getCategoryNA()));
-		//}
 		return assign;
 
 	}
@@ -457,7 +427,7 @@ public class ScancafResource {
 	public Scancaf getByCategoryRv() {
 		String scancafLocal = scancafRepository.getCategoryRv();
         Scancaf scancaf = new Scancaf();
-        scancaf.setCategory5(scancafLocal);
+        scancaf.setCategoryRv(scancafLocal);
         return  (scancaf);
 	}
 
@@ -467,7 +437,7 @@ public class ScancafResource {
 	public Scancaf getByCategoryNA() {
 		String scancafLocal = scancafRepository.getCategoryNA();
         Scancaf scancaf = new Scancaf();
-        scancaf.setCategory5(scancafLocal);
+        scancaf.setCategoryNA(scancafLocal);
         return  (scancaf);
 	}
 

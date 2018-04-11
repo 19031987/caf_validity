@@ -22,6 +22,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -46,8 +48,8 @@ public class SourceboxResourceIntTest {
     private static final String DEFAULT_CREATEDUSER = "AAAAAAAAAA";
     private static final String UPDATED_CREATEDUSER = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_CREATEDDATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CREATEDDATE = LocalDate.now(ZoneId.systemDefault());
+    private static final Instant DEFAULT_CREATEDDATE = Instant.now();
+    private static final Instant UPDATED_CREATEDDATE = Instant.now();
 
     @Autowired
     private SourceboxRepository sourceboxRepository;

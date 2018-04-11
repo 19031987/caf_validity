@@ -72,7 +72,7 @@ public class SourceboxResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new sourcebox cannot already have an ID")).body(null);
         }
         sourcebox.setCreateduser(getCurrentUserLogin());
-        sourcebox.setCreateddate(LocalDate.now() );
+        //sourcebox.setCreateddate(LocalDate.now() );
         Sourcebox result = sourceboxRepository.save(sourcebox);
         sourceboxSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/sourceboxes/" + result.getId()))

@@ -19,7 +19,8 @@
 		vm.datePickerOpenStatus = {};
 		vm.openCalendar = openCalendar;
 		vm.save = save;
-
+		
+		
 		$timeout(function() {
 			angular.element('.form-group:eq(1)>input').focus();
 		});
@@ -52,7 +53,7 @@
 		function openCalendar(date) {
 			vm.datePickerOpenStatus[date] = true;
 		}
-
+		$scope.count=0
 		function init() {
 
 			Scancaf.getSystemByName(vm.scancaf, onSuccess, onError);
@@ -101,11 +102,14 @@
 						vm.scancaf.categoryNA = result.categoryNA;
 						vm.scancaf.countCategoryRv = result.countCategoryRv;
 						vm.scancaf.countCategoryNA = result.countCategoryNA;
+						if( new Date().setHours(0,0,0,0) > new Date(result.userdate)){
+							vm.scancaf.category =0;
+						}else{
+							vm.scancaf.category =result.category;
+						}
 					}
 				}
-
 			}
-
 			function onError() {
 				alert("You are not allowed to work on the system, Please check with your Team leader");
 			}
@@ -126,142 +130,7 @@
 
 								Scancaf.getBoxCount(vm.scancaf, onSaveSuccess1);
 
-								function onSaveSuccess1(result) {/*
-									vm.scancaf.countCategory1 = result.countCategory1;
-									vm.scancaf.countCategory2 = result.countCategory2;
-									vm.scancaf.countCategory3 = result.countCategory3;
-									vm.scancaf.countCategory4 = result.countCategory4;
-									vm.scancaf.countCategory5 = result.countCategory5;
-									vm.scancaf.category1 = result.category1;
-									vm.scancaf.category2 = result.category2;
-									vm.scancaf.category3 = result.category3;
-									vm.scancaf.category4 = result.category4;
-									vm.scancaf.category5 = result.category5;
-
-									vm.scancaf.categoryRv = result.categoryRv;
-									vm.scancaf.categoryNA = result.categoryNA;
-									vm.scancaf.countCategoryRv = result.countCategoryRv;
-									vm.scancaf.countCategoryNA = result.countCategoryNA;
-
-									if (vm.scancaf.countCategoryRv === 800) {
-
-										$cookieStore.put('completed',
-												vm.scancaf.countCategoryRv);
-										vm.scancaf.countCategoryRv = 0;
-										vm.scancaf.categoryRv = Scancaf
-												.findCategoryRv(onSucess);
-										// noinspection JSAnnotator
-										function onSucess(result) {
-											vm.scancaf.countCategoryRv = result;
-										}
-										vm.scancaf.categoryRv = 'ERV'
-												+ increment_alphanumeric_str(vm.scancaf.categoryRv
-														.substring(3, 8));
-										$scope.lastcompletedbox = $cookieStore
-												.get('completed')
-
-									}
-
-									if (vm.scancaf.countCategoryNA === 800) {
-
-										$cookieStore.put('completed',
-												vm.scancaf.countCategoryNA);
-										vm.scancaf.countCategoryNA = 0;
-										vm.scancaf.countCategoryNA = Scancaf
-												.findCategoryNA(onSucess);
-										// noinspection JSAnnotator
-										function onSucess(result) {
-											vm.scancaf.countCategoryNA = result;
-										}
-										vm.scancaf.categoryNA = 'ENA'
-												+ increment_alphanumeric_str(vm.scancaf.categoryNA
-														.substring(3, 8));
-										$scope.lastcompletedbox = $cookieStore
-												.get('completed')
-
-									}
-
-									if (vm.scancaf.countCategory1 === 800) {
-
-										$cookieStore.put('completed',
-												vm.scancaf.category1);
-										vm.scancaf.countCategory1 = 0;
-										vm.scancaf.category1 = Scancaf
-												.findCategory1(onSucess);
-										// noinspection JSAnnotator
-										function onSucess(result) {
-											vm.scancaf.category1 = result;
-										}
-										vm.scancaf.category1 = 'E1A'
-												+ increment_alphanumeric_str(vm.scancaf.category1
-														.substring(3, 8));
-										$scope.lastcompletedbox = $cookieStore
-												.get('completed')
-
-									}
-
-									if (vm.scancaf.countCategory2 === 800) {
-										$cookieStore.put('completed',
-												vm.scancaf.category2);
-										vm.scancaf.countCategory2 = 0;
-										vm.scancaf.category2 = Scancaf
-												.findCategory2(onSuccess);
-										// noinspection JSAnnotator
-										function onSuccess(result) {
-											vm.scancaf.category2 = result;
-										}
-										vm.scancaf.category2 = 'EC1'
-												+ increment_alphanumeric_str(vm.scancaf.category2
-														.substring(3, 8));
-										$scope.lastcompletedbox = $cookieStore
-												.get('completed')
-									}
-									if (vm.scancaf.countCategory3 === 300) {
-										$cookieStore.put('completed',
-												vm.scancaf.category3);
-										vm.scancaf.countCategory3 = 0;
-										vm.scancaf.category3 = Scancaf
-												.findCategory3(onSuccess);
-										// noinspection JSAnnotator
-										function onSuccess(result) {
-											vm.scancaf.category3 = result;
-										}
-										vm.scancaf.category3 = 'EC2'
-												+ increment_alphanumeric_str(vm.scancaf.category3
-														.substring(3, 8));
-										$scope.lastcompletedbox = $cookieStore
-												.get('completed')
-									}
-									if (vm.scancaf.countCategory4 === 300) {
-										$cookieStore.put('completed',
-												vm.scancaf.category4);
-										vm.scancaf.countCategory4 = 0;
-										vm.scancaf.category4 = Scancaf
-												.findCategory4(onSuccess);
-										// noinspection JSAnnotator
-										function onSuccess(result) {
-											vm.scancaf.category4 = result;
-										}
-										vm.scancaf.category4 = 'EC3'
-												+ increment_alphanumeric_str(vm.scancaf.category4
-														.substring(3, 8));
-										$scope.lastcompletedbox = $cookieStore
-												.get('completed')
-									}
-
-									if (vm.scancaf.countCategory5 === 1600) {
-										$cookieStore.put('completed',
-												vm.scancaf.category5);
-										vm.scancaf.countCategory5 = 0;
-										vm.scancaf.category5 = Scancaf
-												.findCategory5();
-										vm.scancaf.category5 = 'EDA'
-												+ increment_alphanumeric_str(vm.scancaf.category5
-														.substring(3, 8));
-										$scope.lastcompletedbox = $cookieStore
-												.get('completed')
-									}
-								*/}
+								function onSaveSuccess1(result) {}
 
 							}
 						});
@@ -274,209 +143,171 @@
 								//vm.scancaf.colorcode = '';
 								vm.scancaf.mobilenumber = '';
 								Scancaf.getCaf(vm.scancaf, onSaveSuccess);
-
 							}
 							function onSaveSuccess(result) {
 								// $scope.$emit('cafvalidityV2App:scancafUpdate', result);
 								// $uibModalInstance.close(result);
 								vm.scancaf.centralbarcode = vm.scancaf.cafbarcode;
+								vm.scancaf.category = parseInt(vm.scancaf.category, 10) + 1
 								vm.scancaf.caftype = result.caftype;
 								if (vm.scancaf.caftype === 'G3y') {
 									vm.scancaf.colorcode = 'red';
 									vm.scancaf.countCategory5 = vm.scancaf.countCategory5 + 1;
+									if (vm.scancaf.countCategory5 === 50
+											|| vm.scancaf.countCategory5 === 100
+											|| vm.scancaf.countCategory5 === 150
+											|| vm.scancaf.countCategory5 === 200
+											|| vm.scancaf.countCategory5 === 250
+											|| vm.scancaf.countCategory5 === 300
+											|| vm.scancaf.countCategory5 === 350
+											|| vm.scancaf.countCategory5 === 400
+											|| vm.scancaf.countCategory5 === 450
+											|| vm.scancaf.countCategory5 === 500
+											|| vm.scancaf.countCategory5 === 550
+											|| vm.scancaf.countCategory5 === 600
+											|| vm.scancaf.countCategory5 === 650
+											|| vm.scancaf.countCategory5 === 700
+											|| vm.scancaf.countCategory5 === 750
+											) {
+										alert('For >3 years : Lot is completed, Lot number is:'+ vm.scancaf.countCategory5/50
+												+" Box Name "+ vm.scancaf.category5+" Color "+ vm.scancaf.colorcode);
+										alert('Please press ENTER');
+										
+									}
 								}
 								if (vm.scancaf.caftype === 'Active') {
 									vm.scancaf.colorcode = 'green';
 									vm.scancaf.countCategory1 = vm.scancaf.countCategory1 + 1;
+									if (vm.scancaf.countCategory1 === 50
+											|| vm.scancaf.countCategory1 === 100
+											|| vm.scancaf.countCategory1 === 150
+											|| vm.scancaf.countCategory1 === 200
+											|| vm.scancaf.countCategory1 === 250
+											|| vm.scancaf.countCategory1 === 300
+											|| vm.scancaf.countCategory1 === 350
+											|| vm.scancaf.countCategory1 === 400
+											|| vm.scancaf.countCategory1 === 450
+											|| vm.scancaf.countCategory1 === 500
+											|| vm.scancaf.countCategory1 === 550
+											|| vm.scancaf.countCategory1 === 600
+											|| vm.scancaf.countCategory1 === 650
+											|| vm.scancaf.countCategory1 === 700
+											|| vm.scancaf.countCategory1 === 750) {
+										alert('For Active : Lot is completed, Lot number is:'+ vm.scancaf.countCategory1/50
+												+" Box Name "+ vm.scancaf.category1+" Color "+ vm.scancaf.colorcode);
+										alert('Please press ENTER');
+									//	Scancaf.findCategory1(onSuccessCategory);
+									}
 								}
 								if (vm.scancaf.caftype === 'L1') {
-									vm.scancaf.colorcode = 'white';
+									vm.scancaf.colorcode = 'blue';
 									vm.scancaf.countCategory2 = vm.scancaf.countCategory2 + 1;
+									if (vm.scancaf.countCategory2 === 50
+											|| vm.scancaf.countCategory2 === 100
+											|| vm.scancaf.countCategory2 === 150
+											|| vm.scancaf.countCategory2 === 200
+											|| vm.scancaf.countCategory2 === 250
+											|| vm.scancaf.countCategory2 === 300
+											|| vm.scancaf.countCategory2 === 350
+											|| vm.scancaf.countCategory2 === 400
+											|| vm.scancaf.countCategory2 === 450
+											|| vm.scancaf.countCategory2 === 500
+											|| vm.scancaf.countCategory2 === 550
+											|| vm.scancaf.countCategory2 === 600
+											|| vm.scancaf.countCategory2 === 650
+											|| vm.scancaf.countCategory2 === 700
+											|| vm.scancaf.countCategory2 === 750) {
+										alert('For < 1 year : Lot is completed, Lot number is:'+ vm.scancaf.countCategory2/50
+												+" Box Name "+ vm.scancaf.category2+" Color "+ vm.scancaf.colorcode);
+										alert('Please press ENTER');
+									}
 								}
 								if (vm.scancaf.caftype === '1-2y') {
 									vm.scancaf.colorcode = 'yellow';
 									vm.scancaf.countCategory3 = vm.scancaf.countCategory3 + 1;
+									if (vm.scancaf.countCategory3 === 50
+											|| vm.scancaf.countCategory3 === 100
+											|| vm.scancaf.countCategory3 === 150
+											|| vm.scancaf.countCategory3 === 200
+											|| vm.scancaf.countCategory3 === 250
+											|| vm.scancaf.countCategory3 === 300
+											|| vm.scancaf.countCategory3 === 350
+											|| vm.scancaf.countCategory3 === 400
+											|| vm.scancaf.countCategory3 === 450
+											|| vm.scancaf.countCategory3 === 500
+											|| vm.scancaf.countCategory3 === 550
+											|| vm.scancaf.countCategory3 === 600
+											|| vm.scancaf.countCategory3 === 650
+											|| vm.scancaf.countCategory3 === 700
+											|| vm.scancaf.countCategory3 === 750) {
+										alert('For 1-2 years : Lot is completed, Lot number is:'+ vm.scancaf.countCategory3/50
+												+" Box Name "+ vm.scancaf.category3+" Color "+ vm.scancaf.colorcode);
+										alert('Please press ENTER');
+									}
 								}
 								if (vm.scancaf.caftype === '2-3y') {
-									vm.scancaf.colorcode = 'blue';
+									vm.scancaf.colorcode = 'white';
 									vm.scancaf.countCategory4 = vm.scancaf.countCategory4 + 1;
+									if (vm.scancaf.countCategory4 === 50
+											|| vm.scancaf.countCategory4 === 100
+											|| vm.scancaf.countCategory4 === 150
+											|| vm.scancaf.countCategory4 === 200
+											|| vm.scancaf.countCategory4 === 250
+											|| vm.scancaf.countCategory4 === 300
+											|| vm.scancaf.countCategory4 === 350
+											|| vm.scancaf.countCategory4 === 400
+											|| vm.scancaf.countCategory4 === 450
+											|| vm.scancaf.countCategory4 === 500
+											|| vm.scancaf.countCategory4 === 550
+											|| vm.scancaf.countCategory4 === 600
+											|| vm.scancaf.countCategory4 === 650
+											|| vm.scancaf.countCategory4 === 700
+											|| vm.scancaf.countCategory4 === 750) {
+										alert('For 2-3 years : Lot is completed, Lot number is:'+ vm.scancaf.countCategory4/50
+												+" Box Name "+ vm.scancaf.category4+" Color "+ vm.scancaf.colorcode);
+										alert('Please press ENTER');
+									}
 								}
 								if (vm.scancaf.caftype === 'RV') {
-									vm.scancaf.colorcode = 'voilet';
+									vm.scancaf.colorcode = 'orange';
 									vm.scancaf.countCategoryRv = vm.scancaf.countCategoryRv + 1;
+									if (vm.scancaf.countCategoryRv === 50
+											|| vm.scancaf.countCategoryRv === 100
+											|| vm.scancaf.countCategoryRv === 150
+											|| vm.scancaf.countCategoryRv === 200
+											|| vm.scancaf.countCategoryRv === 250
+											|| vm.scancaf.countCategoryRv === 300
+											|| vm.scancaf.countCategoryRv === 350
+											|| vm.scancaf.countCategoryRv === 400
+											|| vm.scancaf.countCategoryRv === 450
+											|| vm.scancaf.countCategoryRv === 500
+											|| vm.scancaf.countCategoryRv === 550
+											|| vm.scancaf.countCategoryRv === 600
+											|| vm.scancaf.countCategoryRv === 650
+											|| vm.scancaf.countCategoryRv === 700
+											|| vm.scancaf.countCategoryRv === 750) {
+										alert('RV : Lot is completed, Lot number is:'+ vm.scancaf.countCategoryRv/50
+												+" Box Name "+ vm.scancaf.categoryRv+" Color "+ vm.scancaf.colorcode);
+										alert('Please press ENTER');
+									}
 								}
 								if (vm.scancaf.caftype === 'NA') {
 									vm.scancaf.colorcode = 'pink';
 									vm.scancaf.countCategoryNA = vm.scancaf.countCategoryNA + 1;
+									vm.scancaf.centralbarcode = vm.scancaf.cafbarcode+"_NA"
 								}
 								vm.scancaf.mobilenumber = result.mobilenumber;
-								vm.scancaf.cafbarcode = result.cafbarcode;
+								//vm.scancaf.cafbarcode = result.cafbarcode;
 								vm.scancaf.customername = result.customername;
 								vm.scancaf.activationdate = result.activationdate;
-											
-
-								if (vm.scancaf.countCategory1 === 800) {
-									alert('Active Box is completed please ask for another one');
-									if (vm.scancaf.boxstatus != null) {
-										vm.scancaf.boxstatus = ' ,Active-completed'
-									} else {
-										vm.scancaf.boxstatus = 'Active-completed'
-									}
-								}
-								if (vm.scancaf.countCategory2 === 800) {
-									alert('< 1 year Box is completed please ask for another one');
-									if (vm.scancaf.boxstatus != null) {
-										vm.scancaf.boxstatus = ' ,< 1 year-completed'
-									} else {
-										vm.scancaf.boxstatus = '< 1 year-completed'
-									}
-								}
-								if (vm.scancaf.countCategory3 === 800) {
-									alert('1-2 years Box is completed please ask for another one');
-									if (vm.scancaf.boxstatus != null) {
-										vm.scancaf.boxstatus = ' ,1-2 years-completed'
-									} else {
-										vm.scancaf.boxstatus = '1-2 years-completed'
-									}
-								}
-								if (vm.scancaf.countCategory4 === 800) {
-									alert('2-3 years Box is completed please ask for another one');
-									if (vm.scancaf.boxstatus != null) {
-										vm.scancaf.boxstatus = ' ,2-3 years-completed'
-									} else {
-										vm.scancaf.boxstatus = '2-3 years-completed'
-									}
-								}
-								if (vm.scancaf.countCategory5 === 800) {
-									alert('> 3 years is completed please ask for another one');
-									if (vm.scancaf.boxstatus != null) {
-										vm.scancaf.boxstatus = ' ,> 3 years-completed'
-									} else {
-										vm.scancaf.boxstatus = '> 3 years-completed'
-									}
-								}
-
-								if (vm.scancaf.countCategoryRv === 800) {
-									alert(' RV Box is completed please ask for another one');
-									if (vm.scancaf.boxstatus != null) {
-										vm.scancaf.boxstatus = ' , RV-completed'
-									} else {
-										vm.scancaf.boxstatus = ' RV-completed'
-									}
-								}
-
-								if (vm.scancaf.countCategoryNA === 800) {
-									alert('Category NA Box is completed please ask for another one');
-									if (vm.scancaf.boxstatus != null) {
-										vm.scancaf.boxstatus = ' ,category NA-completed'
-									} else {
-										vm.scancaf.boxstatus = 'category NA -completed'
-									}
-								}
-
-								if (vm.scancaf.countCategory1 === 50
-										|| vm.scancaf.countCategory1 === 100
-										|| vm.scancaf.countCategory1 === 150
-										|| vm.scancaf.countCategory1 === 200
-										|| vm.scancaf.countCategory1 === 250
-										|| vm.scancaf.countCategory1 === 300
-										|| vm.scancaf.countCategory1 === 350
-										|| vm.scancaf.countCategory1 === 400
-										|| vm.scancaf.countCategory1 === 450
-										|| vm.scancaf.countCategory1 === 500
-										|| vm.scancaf.countCategory1 === 550
-										|| vm.scancaf.countCategory1 === 600
-										|| vm.scancaf.countCategory1 === 650
-										|| vm.scancaf.countCategory1 === 700
-										|| vm.scancaf.countCategory1 === 750) {
-									alert('For Active : Lot is completed');
-									Scancaf.findCategory1(onSuccessCategory);
-								}
-								function onSuccessCategory(result) {
-									vm.scancaf.category = result.category;
-									vm.scancaf.category = 'E1A'
-											+ increment_alphanumeric_str(vm.scancaf.category
-													.substring(3, 8));
-								}
-
-								if (vm.scancaf.countCategory5 === 50
-										|| vm.scancaf.countCategory5 === 100
-										|| vm.scancaf.countCategory5 === 150
-										|| vm.scancaf.countCategory5 === 200
-										|| vm.scancaf.countCategory5 === 250
-										|| vm.scancaf.countCategory5 === 300
-										|| vm.scancaf.countCategory5 === 350
-										|| vm.scancaf.countCategory5 === 400
-										|| vm.scancaf.countCategory5 === 450
-										|| vm.scancaf.countCategory5 === 500
-										|| vm.scancaf.countCategory5 === 550
-										|| vm.scancaf.countCategory5 === 600
-										|| vm.scancaf.countCategory5 === 650
-										|| vm.scancaf.countCategory5 === 700
-										|| vm.scancaf.countCategory5 === 750
-										) {
-									alert('For >3 years : Lot is completed');
-									
-								}
-
-								if (vm.scancaf.countCategory3 === 50
-										|| vm.scancaf.countCategory3 === 100
-										|| vm.scancaf.countCategory3 === 150
-										|| vm.scancaf.countCategory3 === 200
-										|| vm.scancaf.countCategory3 === 250
-										|| vm.scancaf.countCategory3 === 300
-										|| vm.scancaf.countCategory3 === 350
-										|| vm.scancaf.countCategory3 === 400
-										|| vm.scancaf.countCategory3 === 450
-										|| vm.scancaf.countCategory3 === 500
-										|| vm.scancaf.countCategory3 === 550
-										|| vm.scancaf.countCategory3 === 600
-										|| vm.scancaf.countCategory3 === 650
-										|| vm.scancaf.countCategory3 === 700
-										|| vm.scancaf.countCategory3 === 750) {
-									alert('For 1-2 years : Lot is completed');
-								}
-								if (vm.scancaf.countCategory4 === 50
-										|| vm.scancaf.countCategory4 === 100
-										|| vm.scancaf.countCategory4 === 150
-										|| vm.scancaf.countCategory4 === 200
-										|| vm.scancaf.countCategory4 === 250
-										|| vm.scancaf.countCategory4 === 300
-										|| vm.scancaf.countCategory4 === 350
-										|| vm.scancaf.countCategory4 === 400
-										|| vm.scancaf.countCategory4 === 450
-										|| vm.scancaf.countCategory4 === 500
-										|| vm.scancaf.countCategory4 === 550
-										|| vm.scancaf.countCategory4 === 600
-										|| vm.scancaf.countCategory4 === 650
-										|| vm.scancaf.countCategory4 === 700
-										|| vm.scancaf.countCategory4 === 750) {
-									alert('For 2-3 years : Lot is completed');
-								}
-								if (vm.scancaf.countCategory2 === 50
-										|| vm.scancaf.countCategory2 === 100
-										|| vm.scancaf.countCategory2 === 150
-										|| vm.scancaf.countCategory2 === 200
-										|| vm.scancaf.countCategory2 === 250
-										|| vm.scancaf.countCategory2 === 300
-										|| vm.scancaf.countCategory2 === 350
-										|| vm.scancaf.countCategory2 === 400
-										|| vm.scancaf.countCategory2 === 450
-										|| vm.scancaf.countCategory2 === 500
-										|| vm.scancaf.countCategory2 === 550
-										|| vm.scancaf.countCategory2 === 600
-										|| vm.scancaf.countCategory2 === 650
-										|| vm.scancaf.countCategory2 === 700
-										|| vm.scancaf.countCategory2 === 750) {
-									alert('For < 1 year : Lot is completed');
-								}
+								
 								// save functionality is being called
 								Scancaf.save(vm.scancaf, onSaveSuccessFinal,onScancafError);
 
 								function onSaveSuccessFinal() {
 									vm.scancaf.cafbarcode = '';
 									if (vm.scancaf.countCategory5 === 800) {
-
+										alert("Box Name is complete "+ vm.scancaf.category5);
 										$cookieStore.put('completed',
 												vm.scancaf.category1);
 										vm.scancaf.countCategory5 = 0;
@@ -494,6 +325,7 @@
 										}
 									}
 									if (vm.scancaf.countCategory1 === 800) {
+										alert("Box Name is complete "+ vm.scancaf.category1);
 										$cookieStore.put('completed',
 												vm.scancaf.category1);
 										vm.scancaf.countCategory1 = 0;
@@ -513,6 +345,7 @@
 									}
 
 									if (vm.scancaf.countCategory2 === 800) {
+										alert("Box Name is complete "+ vm.scancaf.category2);
 										$cookieStore.put('completed',
 												vm.scancaf.category2);
 										vm.scancaf.countCategory2 = 0;
@@ -531,6 +364,7 @@
 										}
 									}
 									if (vm.scancaf.countCategory3 === 800) {
+										alert("Box Name is complete "+ vm.scancaf.category3);
 										$cookieStore.put('completed',
 												vm.scancaf.category3);
 										vm.scancaf.countCategory3 = 0;
@@ -549,6 +383,7 @@
 										}
 									}
 									if (vm.scancaf.countCategory4 === 800) {
+										alert("Box Name is complete "+ vm.scancaf.category4);
 										$cookieStore.put('completed',
 												vm.scancaf.category4);
 										vm.scancaf.countCategory4 = 0;
@@ -566,9 +401,9 @@
 											.get('completed')
 										}
 									}
-
-
+									
 									if (vm.scancaf.countCategoryRv === 800) {
+										alert("Box Name is complete "+ vm.scancaf.categoryRv);
 										$cookieStore.put('completed',
 												vm.scancaf.categoryRv);
 										vm.scancaf.countCategoryRv = 0;
@@ -587,6 +422,7 @@
 									}
 
 									if (vm.scancaf.countCategoryNA === 800) {
+										alert("Box Name is complete "+ vm.scancaf.categoryNA);
 										$cookieStore.put('completed',
 												vm.scancaf.categoryNA);
 										vm.scancaf.countCategoryNA = 0;
@@ -607,14 +443,9 @@
 								function onScancafError(result){
 								vm.scancaf.cafbarcode='';
 								}
-
 							}
-							
-							
 						});
-
 		$scope.cat1 = function() {
-
 			if (vm.scancaf.category1.length === 12) {
 				Scancaf.getBoxCount(vm.scancaf, onSaveSuccess);
 			}
@@ -622,14 +453,11 @@
 				vm.scancaf.countCategory1 = result.countCategory1;
 			}
 		};
-
 		$scope.validate1 = function() {
-
 			if (vm.scancaf.category1.length === 8) {
 				if (vm.scancaf.category1.substring(0, 3) != 'EDA') {
 					alert('Assigned Box in Category 1 is not correct !!! Please Check')
 				}
-
 			}
 			if (vm.scancaf.category2.length === 8) {
 				if (vm.scancaf.category2.substring(0, 3) != 'E1A') {
@@ -669,7 +497,6 @@
 	
 
 	$scope.custom = true;
-	
 	$scope.toggleCustom = function() {
 		$scope.custom = $scope.custom === false ? true : false;
 	};
@@ -686,7 +513,8 @@
 		return prefix + increment_string_num(numeric);
 	}
 	$scope.sourceBoxComplete = function() {
-
+		vm.scancaf.sourcebox='';
+		alert('Source box is completed :  '+ vm.scancaf.sourcebox)
 		$cookieStore.put('sourcecompleted', vm.scancaf.sourcebox);
 		$scope.lastsourcebox = $cookieStore.get('sourcecompleted')
 
@@ -740,7 +568,6 @@
 		}
 
 		Scancaf.getOutBox(vm.scancaf, getoutbox, geterrorbox);
-
 		function getoutbox(result) {
 			$scope.item = result;
 			// alert(result.boxstatus);
