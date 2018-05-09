@@ -1,103 +1,115 @@
 
-<form name="editForm" role="form" novalidate >
+<form name="editForm" role="form" novalidate>
+	<script type="text/javascript">
+		var iosocket;
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myScancafLabel">CAF SCAN</h4>
-    </div>
-    <div class="modal-body">
-        <jhi-alert-error></jhi-alert-error>
-        <div  ng-show="vm.scancaf.id">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.scancaf.id" readonly />
-        </div>
+		
 
-         <div >
-            <label class="control-label" for="field_sourcebox">Sourcebox</label>
-            <input type="text"  name="sourcebox" id="field_sourcebox"
-                    ng-model="vm.scancaf.sourcebox"
-                   />
-                   <label class="control-label" for="field_category">Count</label>
-            <input type="text"  name="category" id="field_category"
-                    ng-model="vm.scancaf.category" readonly="readonly"
-                   />
-        </div>
+		$('#field_colorcode').change(function() {
+			
+			iosocket =  io.connect('http://localhost:1337');
+			iosocket.emit('buttonval', $('#field_colorcode').val());
+		});
 
-         <div >
-            <label class="control-label" for="field_cafbarcode">Cafbarcode</label>
-            <input type="text"  name="cafbarcode" id="field_cafbarcode"
-                    ng-model="vm.scancaf.cafbarcode"
-                    />
-        </div>
-        <div >
-            <label class="control-label" for="field_colorcode">Colorcode</label>
-            <textarea type="text"  name="colorcode" id="field_colorcode"
-                    ng-model="vm.scancaf.colorcode"
-                    ng-style="{'background-color':vm.scancaf.colorcode}" cols="70" rows="10"
-                    >
+		previousVal = "";
+		function InputChangeListener() {
+			if ($('#field_colorcode').val() != previousVal) {
+				previousVal = $('#field_colorcode').val();
+				$('#field_colorcode').change();
+			}
+		}
+
+		setInterval(InputChangeListener, 500);
+
+		
+	</script>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="vm.clear()">&times;</button>
+		<h4 class="modal-title" id="myScancafLabel">CAF SCAN</h4>
+	</div>
+	<div class="modal-body">
+		<jhi-alert-error></jhi-alert-error>
+		<div ng-show="vm.scancaf.id">
+			<label for="id">ID</label> <input type="text" class="form-control"
+				id="id" name="id" ng-model="vm.scancaf.id" readonly />
+		</div>
+
+		<div>
+			<label class="control-label" for="field_sourcebox">Sourcebox</label>
+			<input type="text" name="sourcebox" id="field_sourcebox"
+				ng-model="vm.scancaf.sourcebox" /> <label class="control-label"
+				for="field_category">Count</label> <input type="text"
+				name="category" id="field_category" ng-model="vm.scancaf.category"
+				readonly="readonly" />
+		</div>
+
+		<div>
+			<label class="control-label" for="field_cafbarcode">Cafbarcode</label>
+			<input type="text" name="cafbarcode" id="field_cafbarcode"
+				ng-model="vm.scancaf.cafbarcode" />
+		</div>
+		<div>
+			<label class="control-label" for="field_colorcode">Colorcode</label>
+			<textarea type="text" name="colorcode" id="field_colorcode"
+				ng-model="vm.scancaf.colorcode"
+				ng-style="{'background-color':vm.scancaf.colorcode}" cols="70"
+				rows="10">
             </textarea>
-        </div>
+		</div>
 
 
-        
-        <div >
-            <label class="control-label" for="field_category1">Active</label>
-            <input type="text"  name="category1" id="field_category1"
-                    ng-model="vm.scancaf.category1"
-            maxlength="8"        ng-change="validate1()"/>
-            <input type="number"  name="countCategory1" id="field_countCategory1"
-                    ng-model="vm.scancaf.countCategory1"
-                   />
-        </div>
-        <div >
-            <label class="control-label" for="field_category2">L1 years</label>
-            <input type="text"  name="category2" id="field_category2"
-                    ng-model="vm.scancaf.category2"
-            maxlength="8"      ng-change="validate1()" />
-            <input type="number"  name="countCategory2" id="field_countCategory2"
-                    ng-model="vm.scancaf.countCategory2"
-                   />
-        </div>
-        <div >
-            <label class="control-label" for="field_category3">1-2 years</label>
-            <input type="text"  name="category3" id="field_category3"
-                    ng-model="vm.scancaf.category3"
-             maxlength="8"     ng-change="validate1()" />
-            <input type="number"  name="countCategory3" id="field_countCategory3"
-                    ng-model="vm.scancaf.countCategory3"
-                   />
-        </div>
 
-        <div >
-            <label class="control-label" for="field_category4">2-3 years</label>
-            <input type="text"  name="category4" id="field_category4"
-                    ng-model="vm.scancaf.category4"
-            maxlength="8"      ng-change="validate1()" />
-            <input type="number"  name="countCategory4" id="field_countCategory4"
-                    ng-model="vm.scancaf.countCategory4"
-                   />
-        </div>
-        <div>
-            <label class="control-label" for="field_category5">> 3 years</label>
-            <input type="text"  name="category5" id="field_category5"
-                    ng-model="vm.scancaf.category5"
-           maxlength="8"       ng-change="validate1()" />
-            <input type="number"  name="countCategory5" id="field_countCategory5"
-                    ng-model="vm.scancaf.countCategory5"
-                   />
-        </div>
-           <div>
-            <label class="control-label" for="field_categoryRv">Rv</label>
-            <input type="text"  name="categoryRv" id="field_categoryRv"
-                    ng-model="vm.scancaf.categoryRv"
-           maxlength="8"       ng-change="validate1()" />
-            <input type="number"  name="countCategoryRv" id="field_countCategoryRv"
-                    ng-model="vm.scancaf.countCategoryRv"
-                   />
-        </div>
-          <!--  <div>
+		<div>
+			<label class="control-label" for="field_category1">Active</label> <input
+				type="text" name="category1" id="field_category1"
+				ng-model="vm.scancaf.category1" maxlength="8"
+				ng-change="validate1()" /> <input type="number"
+				name="countCategory1" id="field_countCategory1"
+				ng-model="vm.scancaf.countCategory1" />
+		</div>
+		<div>
+			<label class="control-label" for="field_category2">L1 years</label> <input
+				type="text" name="category2" id="field_category2"
+				ng-model="vm.scancaf.category2" maxlength="8"
+				ng-change="validate1()" /> <input type="number"
+				name="countCategory2" id="field_countCategory2"
+				ng-model="vm.scancaf.countCategory2" />
+		</div>
+		<div>
+			<label class="control-label" for="field_category3">1-2 years</label>
+			<input type="text" name="category3" id="field_category3"
+				ng-model="vm.scancaf.category3" maxlength="8"
+				ng-change="validate1()" /> <input type="number"
+				name="countCategory3" id="field_countCategory3"
+				ng-model="vm.scancaf.countCategory3" />
+		</div>
+
+		<div>
+			<label class="control-label" for="field_category4">2-3 years</label>
+			<input type="text" name="category4" id="field_category4"
+				ng-model="vm.scancaf.category4" maxlength="8"
+				ng-change="validate1()" /> <input type="number"
+				name="countCategory4" id="field_countCategory4"
+				ng-model="vm.scancaf.countCategory4" />
+		</div>
+		<div>
+			<label class="control-label" for="field_category5">> 3 years</label>
+			<input type="text" name="category5" id="field_category5"
+				ng-model="vm.scancaf.category5" maxlength="8"
+				ng-change="validate1()" /> <input type="number"
+				name="countCategory5" id="field_countCategory5"
+				ng-model="vm.scancaf.countCategory5" />
+		</div>
+		<div>
+			<label class="control-label" for="field_categoryRv">Rv</label> <input
+				type="text" name="categoryRv" id="field_categoryRv"
+				ng-model="vm.scancaf.categoryRv" maxlength="8"
+				ng-change="validate1()" /> <input type="number"
+				name="countCategoryRv" id="field_countCategoryRv"
+				ng-model="vm.scancaf.countCategoryRv" />
+		</div>
+		<!--  <div>
             <label class="control-label" for="field_category5">Churn NA</label>
             <input type="text"  name="categoryNA" id="field_categoryNA"
                     ng-model="vm.scancaf.categoryNA"
@@ -107,8 +119,8 @@
                    />
         </div> -->
 
-       
-        <!-- <div >
+
+		<!-- <div >
             <label class="control-label" for="field_user">User</label>
             <input type="text" class="form-control" name="user" id="field_user"
                     ng-model="vm.scancaf.user"
@@ -136,51 +148,48 @@
                     ng-model="vm.scancaf.sourceboxstaus"
                     />
         </div> -->
-        <div >
-          <label class="control-label" for="field_mobilenumber">Last entered Details </label>
-          <br/>
-            <label class="control-label" for="field_mobilenumber">Mobile Number</label>
-            <input type="number"  name="mobilenumber" id="field_mobilenumber"
-                    ng-model="vm.scancaf.mobilenumber"
-                    readonly="readonly" />
-            <label class="control-label" for="field_centralbarcode">Centralbarcode</label>
-            <input type="text"  name="centralbarcode" id="field_centralbarcode"
-                    ng-model="vm.scancaf.centralbarcode"
-                   readonly="readonly" />
-                    <label class="control-label" for="field_colorcode">Colorcode</label>
-            <input type="text"  name="colorcode" id="field_colorcode"
-                    ng-model="vm.scancaf.colorcode"
-                    ng-style="{'background-color':vm.scancaf.colorcode}" cols="70"
-                    readonly="readonly"
-                    >
-            </input>
-        </div>
-       <!--  <div >
+		<div>
+			<label class="control-label" for="field_mobilenumber">Last
+				entered Details </label> <br /> <label class="control-label"
+				for="field_mobilenumber">Mobile Number</label> <input type="number"
+				name="mobilenumber" id="field_mobilenumber"
+				ng-model="vm.scancaf.mobilenumber" readonly="readonly" /> <label
+				class="control-label" for="field_centralbarcode">Centralbarcode</label>
+			<input type="text" name="centralbarcode" id="field_centralbarcode"
+				ng-model="vm.scancaf.centralbarcode" readonly="readonly" /> <label
+				class="control-label" for="field_colorcode">Colorcode</label> <input
+				type="text" name="colorcode" id="field_colorcode"
+				ng-model="vm.scancaf.colorcode"
+				ng-style="{'background-color':vm.scancaf.colorcode}" cols="70"
+				readonly="readonly"> </input>
+		</div>
+		<!--  <div >
             <label class="control-label" for="field_caftype">Caftype</label>
             <input type="text" name="caftype" id="field_caftype"
                     ng-model="vm.scancaf.caftype"
                    readonly="readonly" />
         </div> -->
-        <div >
-            <label class="control-label" for="field_lastcompletedbox">Completed Box</label>
-            <input type="text" name="caftype" id="field_lastcompletedbox"
-                    ng-model="lastcompletedbox" readonly="readonly"
-                    />
-                     <label class="control-label" for="field_lastsourcebox">Last Source Box</label>
-            <input type="text" name="caftype" id="field_lastsourcebox"
-                    ng-model="lastsourcebox" readonly="readonly"
-                    />
+		<div>
+			<label class="control-label" for="field_lastcompletedbox">Completed
+				Box</label> <input type="text" name="caftype" id="field_lastcompletedbox"
+				ng-model="lastcompletedbox" readonly="readonly" /> <label
+				class="control-label" for="field_lastsourcebox">Last Source
+				Box</label> <input type="text" name="caftype" id="field_lastsourcebox"
+				ng-model="lastsourcebox" readonly="readonly" />
 
-        </div>
+		</div>
 
 
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="sourceBoxComplete()">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Source Box Complete</span>
-        </button>
-    </div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal"
+			ng-click="vm.clear()">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+		</button>
+		<button type="button" class="btn btn-primary"
+			ng-click="sourceBoxComplete()">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Source
+				Box Complete</span>
+		</button>
+	</div>
 </form>
