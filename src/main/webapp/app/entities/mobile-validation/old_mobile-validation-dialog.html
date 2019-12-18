@@ -1,0 +1,360 @@
+
+<form name="editForm" role="form" novalidate>
+
+	<script>
+		$(document)
+				.ready(
+						function() {
+
+							$('#field_mobilenumber').keyup(function() {
+								if ($(this).val().trim().length >= 10) {
+									$('#field_remobilenumber').focus();
+								}
+							});
+
+							$('#field_remobilenumber')
+									.keyup(
+											function() {
+												if ($(this).val().trim().length >= 10) {
+													if ($(
+															'#field_remobilenumber')
+															.val() != $(
+															'#field_mobilenumber')
+															.val()) {
+														alert('mobile numbers should be equal');
+
+														$('#search').prop(
+																'disabled',
+																true);
+													} else {
+														$('#search').prop(
+																'disabled',
+																false);
+													}
+												}
+											});
+
+						});
+		$(window).bind('keydown', function(event) {
+			if (event.ctrlKey || event.metaKey) {
+				switch (String.fromCharCode(event.which).toLowerCase()) {
+				case 'a':
+					event.preventDefault();
+					//if($('#field_remobilenumber').val().length ==10 && ($('#field_mobilenumber').val().length==10){
+					$("#save").click();
+					//} else{
+					//alert('please check mobile number');
+					//}
+				//	$("#field_mobilenumber").val('');
+					$("#field_mobilenumber").focus();
+					break;
+				case 'b':
+					$("#field_mobilenumber").val('');
+					$("#field_remobilenumber").val('');
+					break;
+				}
+			}
+		});
+	</script>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="vm.clear()">&times;</button>
+		<h4 class="modal-title" id="myMobileValidationLabel">Create or
+			edit a Mobile Validation</h4>
+			
+			
+	</div>
+	<div class="modal-body">
+		<jhi-alert-error></jhi-alert-error>
+
+
+		<div class="eis_row">
+
+  <div class="eis_column">
+
+
+   	<div>
+			<label class="control-label" for="field_sourcebox">Sourcebox</label>
+			<input type="text" name="sourcebox" id="field_sourcebox"
+				ng-model="vm.mobileValidation.sourcebox" maxlength="12" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_mobilenumber">Mobilenumber</label>
+			<input style="width:500px;" type="password" class="form-control" name="mobilenumber"
+				id="field_mobilenumber" ng-model="vm.mobileValidation.mobilenumber" ng-minlength="10" maxlength="10" minlength="10"/>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_remobilenumber">Re
+				Mobilenumber</label> 
+				<input  style="width:500px;" type="text" class="form-control"
+				name="remobilenumber" id="field_remobilenumber"
+				ng-model="vm.mobileValidation.remobilenumber"
+				ng-keyup="$event.keyCode == 13 && vm.search()" ng-minlength="10" maxlength="10" minlength="10"/>
+		</div>
+		<div class="form-group">
+			<!-- <button type="button" class="btn btn-default" id="search"
+				ng-click="vm.search()">
+				<span class="glyphicon"></span>&nbsp;<span>Search</span>
+			</button> -->
+			<!-- <button type="button" class="btn btn-default" id="savebutton" ng-click="vm.saveSelectedMobile()">
+				<span class="glyphicon"></span>&nbsp;<span>save</span>
+			</button> -->
+			<label class="control-label" for="field_category">Count</label> <input
+				type="text" name="category" id="field_category"
+				ng-model="vm.mobileValidation.userCount" readonly="readonly" />
+			<button type="button" class="btn btn-primary" id="save"
+				ng-click="vm.saveSelectedMobile()">
+				<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+			</button>
+		</div>
+		<div class="form-group" >
+
+			<textarea class="box_color_size"  type="text" name="colorcode" id="field_colorcode"
+				ng-model="vm.mobileValidation.colorCode"
+				ng-style="{'background-color':vm.mobileValidation.colorCode}"
+				cols="70" rows="10">
+        </textarea>
+			<div>
+				<label class="control-label" for="filter">Filter customer
+					name</label> <input class="filterBox" type="text" ng-model="inputFilter">
+
+			</div>
+
+			<table class="jh-table table table-striped">
+				<thead>
+					<tr jh-sort="vm.predicate" ascending="vm.reverse"
+						callback="vm.transition()">
+						<th><span>Activation Date</span></th>
+						<th><span>Customer Name</span></th>
+						<th><span>father name</span></th>
+						<th><span>Isselected</span></th>
+						<th></th>
+					</tr>
+				</thead>
+				</thead>
+				<tbody>
+					<tr
+						ng-repeat="mobileValidation in vm.mobileValidations | filter:inputFilter">
+						<td>{{mobileValidation.activationDate}}</td>
+						<td>{{mobileValidation.customerName}}</td>
+						<td>{{mobileValidation.fathername}}</td>
+						<td><input type="checkbox" name="isselected" id="field_photo"
+							ng-model="mobileValidation.isselected"
+							ng-change="updateSelection($index, vm.mobileValidations)" /></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+
+
+  </div>
+
+  <div class="eis_column">
+
+
+
+   <div class="form-group">
+				<input type="button" ng-click="toggleCustom()" value="In progress" />
+			</div>
+			<span ng-hide="custom">
+				<div>
+				
+				<div class="eis_row">
+			
+				  <div class="eis_div_column">
+				   <label class="control-label" for="field_category1">Active</label>
+				  </div>
+				  <div class="eis_div_column1">
+				   <input style="background-color:green; color:white;"
+						type="text" name="category1" id="field_category1"
+						ng-model="vm.mobileValidation.category1" maxlength="8"
+						ng-change="validate1()" readonly="readonly" /> 
+						<input style="background-color:green; color:white;" class="eis_div_column_text" type="number"
+						name="countCategory1" id="field_countCategory1"
+						ng-model="vm.mobileValidation.countCategory1" /> 
+						<input style="background-color:green; color:white;"
+						type="text" name="barcode" id="barcode"
+						ng-model="vm.mobileValidation.barcode" />
+				  </div>
+				  
+				</div>  
+					 
+					
+				</div>
+				<div>
+				<div class="eis_row">
+			
+				  <div class="eis_div_column">
+				   <label class="control-label" for="field_category2">L1 year</label>
+				  </div>
+				  <div class="eis_div_column1">
+				   <input style="background-color:blue; color:white;" class="eis_div_column_text" type="text" name="category2" id="field_category2"
+						ng-model="vm.mobileValidation.category2" maxlength="8"
+						ng-change="validate1()" readonly="readonly" /> 
+						<input style="background-color:blue; color:white;" type="number"
+						name="countCategory2" id="field_countCategory2"
+						ng-model="vm.mobileValidation.countCategory2" />
+				  </div>
+				  
+				</div>  			  
+				
+					
+					
+				</div>
+				<div>
+				<!-- <div class="eis_row">
+			
+				  <div class="eis_div_column">
+				   <label class="control-label" for="field_category3">1-2
+						years</label>
+				  </div>
+				  <div class="eis_div_column1">
+				   <input type="text" name="category3" id="field_category3"
+						ng-model="vm.mobileValidation.category3" maxlength="8"
+						ng-change="validate1()" readonly="readonly"/> <input type="number"
+						name="countCategory3" id="field_countCategory3"
+						ng-model="vm.mobileValidation.countCategory3" />
+				  </div>
+				  
+				</div> --> 			  
+				
+					
+				</div>
+
+				<div>
+				
+				<div class="eis_row">
+			
+				  <div class="eis_div_column">
+				   <label class="control-label" for="field_category4">2-3
+						years</label> 
+				  </div>
+				  <div class="eis_div_column1">
+				   <input  style="background-color:white; color:black;"type="text" name="category4" id="field_category4"
+						ng-model="vm.mobileValidation.catergory4" maxlength="8"
+						ng-change="validate1()" readonly="readonly"/> 
+						<input style="background-color:white; color:black;" type="number"
+						name="countCategory4" id="field_countCategory4"
+						ng-model="vm.mobileValidation.countCategory4" />
+				  </div>
+				  
+				</div>  			  
+					
+						
+				</div>
+				<div>
+				
+				<div class="eis_row">
+			
+				  <div class="eis_div_column">
+				   <label class="control-label" for="field_category5">> 3
+						years</label>
+				  </div>
+				  <div class="eis_div_column1">
+				    <input style="background-color:red; color:black;" type="text" name="category5" id="field_category5"
+						ng-model="vm.mobileValidation.catergory5" maxlength="8"
+						ng-change="validate1()"readonly="readonly" /> 
+						<input style="background-color:red; color:black;" type="number"
+						name="countCategory5" id="field_countCategory5"
+						ng-model="vm.mobileValidation.countCategory5" />
+				  </div>
+				  
+				</div>  		
+				
+					
+				</div>
+				<div>
+				
+				<div class="eis_row">
+			
+				  <div class="eis_div_column">
+				   <label class="control-label" for="field_categoryRv">Rv</label>
+				  </div>
+				  <div class="eis_div_column1">
+				    <input style="background-color:#ffa500; color:black;"
+						type="text" name="categoryRv" id="field_categoryRv"
+						ng-model="vm.mobileValidation.categoryRv" maxlength="8"
+						ng-change="validate1()" readonly="readonly" /> 
+						<input  style="background-color:#ffa500; color:black;"type="number"
+						name="countCategoryRv" id="field_countCategoryRv"
+						ng-model="vm.mobileValidation.countCategoryRv" />
+				  </div>
+				  
+				</div>  		
+				
+					
+				</div>
+				<div>
+				
+				<div class="eis_row">
+			
+				  <div class="eis_div_column">
+				  <label class="control-label" for="field_categoryNA">NA</label> 
+				  </div>
+				  <div class="eis_div_column1">
+				  <input style="background-color:pink; color:black;"
+						type="text" name="categoryNA" id="field_categoryNA"
+						ng-model="vm.mobileValidation.categoryNA" maxlength="8" readonly="readonly" /> 
+						<input style="background-color:pink; color:black;"
+						type="number" name="countCategoryNA" id="field_countCategoryNA"
+						ng-model="vm.mobileValidation.countCategoryNA" />
+				  </div>
+				  
+				</div>  		
+				
+					
+				</div>
+			</span> <br />
+
+			<div></div>
+
+
+		</div>
+
+		<div>
+		
+			  
+		
+		
+		
+			<label class="control-label">Completed Box</label> <input type="text"
+				name="caftype" id="field_lastcompletedbox"
+				ng-model="lastcompletedbox" readonly="readonly" />
+		</div>
+		<div>
+		
+
+			<label class="control-label" for="field_mobilenumber">Last
+				entered Details </label> <br /> <label class="control-label"
+				for="field_mobilenumber">Mobile Number</label> <input type="number"
+				name="mobilenumber" id="field_mobilenumber"
+				ng-model="vm.mobileValidation.lastmobilenumber" readonly="readonly" />
+			<label class="control-label" for="field_colorcode">Colorcode</label>
+			<input type="text" name="colorcode" id="field_colorcode_1"
+				ng-model="vm.mobileValidation.lastcolorCode"
+				ng-style="{'background-color':vm.mobileValidation.colorCode}"
+				cols="70" readonly="readonly" />
+				<label
+				class="control-label" for="field_lastsourcebox">Last Source
+				Box</label> <input type="text" name="caftype" id="field_lastsourcebox"
+				ng-model="lastsourcebox" readonly="readonly" />
+		</div>
+
+		<button type="button" class="btn btn-primary"
+			ng-click="sourceBoxComplete()">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Source
+				Box Complete</span>
+		</button>
+   </div>
+
+   </div>
+
+
+
+
+
+
+			<div></div>
+
+	</div>
+</form>

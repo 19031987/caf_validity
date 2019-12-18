@@ -1,0 +1,39 @@
+
+<form name="editForm" role="form" novalidate >
+<script src="https://github.com/eligrey/FileSaver.js/blob/master/src/FileSaver.js" type="text/javascript"></script>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myScancafLabel">Mobile Validation</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+          <label class="control-label" for="field_category1">Box Name</label>
+            <input type="text"  name="category1" id="field_category_1"
+                    ng-model="vm.mobileValidation.sourcebox"
+            maxlength="8" />
+
+         <button type="button" class="btn btn-primary" ng-click="vm.getOutBoxButton()" >
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>OutBox Completed</span>
+        </button>
+
+         <td>{{item.boxstatus}}</td>
+        <div hidden="true">
+         <div id="exportable">
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>{{item.boxstatus}}</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    </div>
+</div>
+      </div>
+        </div>
+        </div>
+        </form>
+

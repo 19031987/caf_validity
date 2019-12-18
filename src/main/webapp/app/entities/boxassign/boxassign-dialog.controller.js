@@ -42,8 +42,8 @@
         }
         $scope.users = Boxassign.users();
         $scope.system = Boxassign.system();
-        
-        
+
+
         $scope.catChangeGetLatest = function(){
 
         	Boxassign.getCatLatestRes(vm.boxassign,onSave);
@@ -51,8 +51,8 @@
         	 function onSave(result){
                	 var array = result.boxassign.split(',');
 
-                	if(array[0].indexOf('E1A') > -1){
-                		vm.boxassign.boxassign = 'E1A'+increment_alphanumeric_str(array[0].substring(3, 8));
+                	if(array[0].indexOf('EKA') > -1){
+                		vm.boxassign.boxassign = 'EKA'+increment_alphanumeric_str(array[0].substring(3, 8));
                 	}
                 	if(array[1].indexOf('EC1') > -1){
                 		vm.boxassign.boxassign = vm.boxassign.boxassign+","+ 'EC1'+increment_alphanumeric_str(array[1].substring(3, 8));
@@ -72,11 +72,9 @@
                 	if(array[6].indexOf('ENA')  > -1){
                 		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'ENA'+increment_alphanumeric_str(array[6].substring(3, 8));
                 	}
-
-
                 	}
         	 }
-        
+
 
         $scope.catChange = function(){
 
@@ -86,7 +84,7 @@
            		 var boxassign = result;
 
            	if(vm.boxassign.churntype==='category_1'){
-           		vm.boxassign.boxassign = 'E1A'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
+           		vm.boxassign.boxassign = 'EKA'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
            	}
            	if(vm.boxassign.churntype==='category_2'){
            		vm.boxassign.boxassign = 'EC1'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
@@ -111,8 +109,8 @@
            	if(vm.boxassign.churntype===null){
            	 var array = result.boxassign.split(',');
 
-           	if(array[0].indexOf('E1A') > -1){
-           		vm.boxassign.boxassign = 'E1A'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
+           	if(array[0].indexOf('EKA') > -1){
+           		vm.boxassign.boxassign = 'EKA'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
            	}
            	if(array[1].indexOf('EC1') > -1){
            		vm.boxassign.boxassign = vm.boxassign.boxassign+","+ 'EC1'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
@@ -132,9 +130,7 @@
            	if(array[6].indexOf('ENA')  > -1){
            		vm.boxassign.boxassign = vm.boxassign.boxassign+","+'ENA'+increment_alphanumeric_str(boxassign.boxassign.substring(3, 8));
            	}
-
-
-           	}
+}
 
          }
 

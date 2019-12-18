@@ -1,0 +1,425 @@
+
+<form name="editForm" role="form"  novalidate  show-validation>
+<script>
+
+$(window).bind('keydown', function(event) {
+    if (event.ctrlKey || event.metaKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+        case 's':
+            event.preventDefault();
+            $("#save").click();
+            $("#field_mobilenumber").focus();
+            break;
+        case 'f':
+            event.preventDefault();
+            alert('ctrl-f');
+            break;
+        case 'g':
+            event.preventDefault();
+            alert('ctrl-g');
+            break;
+        }
+    }
+});
+</script>
+
+
+
+    <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h2 align="center" class="modal-title" id="myTermAuditLabel">Term 1st Level Audit</h2>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div  ng-show="vm.termAudit.id">
+            <label for="id">ID</label>
+            <input type="text"  id="id" name="id"
+                    ng-model="vm.termAudit.id" readonly />
+        </div>
+		
+		 <div >
+            <label class ="term_lable1"  for="field_state"><span class="left_parameter">1. </span>Type Of Doc</label>
+            <select class ="term_lable2" type="text"  name="state" id="field_state"
+                    ng-model="vm.termAudit.typeofdoc"
+                    required>
+					<option value="original">Original</option>
+					<option value="filenet">Filenet</option>
+					<option value="xerox">Xerox</option>
+					<option value="filenetororiginal">Filenetororiginal</option>
+					<option value="EKYC">EKYC</option>
+					</select>
+           
+        </div>
+        
+         <div >
+            <label class ="term_lable1"  for="field_state"><span class="left_parameter">State</label>
+            <select class ="term_lable2" type="text"  name="state" id="field_state"
+                    ng-model="vm.termAudit.state"
+                    required>
+					<option value="vijayawada">vijayawada</option>
+					<option value="hyderabad">hyderabad</option>
+					
+					</select>
+           
+        </div>
+		
+        <div >
+            <label class ="term_lable1"  for="field_mobilenumber"><span class="left_parameter">2. </span>Mobile Number</label>
+            <input class ="term_lable2"  type="text"  name="mobilenumber" id="field_mobilenumber"
+                    ng-model="vm.termAudit.mobilenumber"
+                  maxlength="10"  required ng-keyup="$event.keyCode == 13 && getData()"  autofocus="autofocus"/> 
+					
+					<!-- <button type="button" class="btn-primary"  data-dismiss="modal" ng-click="getData()" > 
+                    <button type="button" class="btn-primary"  data-dismiss="modal" ng-submit="getData()">
+					<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Search</span>
+				</button> -->
+        </div>
+        <div >
+            <label class ="term_lable1"  for="field_termno"><span class="left_parameter">3. </span>Term No</label>
+            <input class ="term_lable22" type="text"  name="termno" id="field_termno"
+                    ng-model="vm.termAudit.termno"
+                    required readonly="readonly"/>
+        </div>
+		 <div >
+            <label class ="term_lable1"  for="field_nameofcustomer"><span class="left_parameter">4. </span>Name</label>
+            <input class ="term_lable2" type="text"  name="nameofcustomer" id="field_nameofcustomer"
+                    ng-model="vm.termAudit.nameofcustomer"
+                    required readonly="readonly"/>
+                     <label class ="term_lable3" for="field_customernamestatus">Yes</label>
+                <input class ="term_lable4"type="checkbox" name="customernamestatus" id="field_customernamestatus"
+                          ng-model="vm.termAudit.customernamestatus" ng-change="nameClick()"/>
+						  <label class ="term_lable6"  for="">No</label>
+                         
+					<label>	 
+                           <div class ="term_lable5" ng-show="vm.termAudit.customernamestatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason1" multiple="multiple" >
+					<option ng-repeat="option in nameReasonOptions"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+					</option> 
+					</select>
+				</div>
+                          </label>
+           
+        </div>
+		<div >
+             <label class ="term_lable1"  for="field_fathername"><span class="left_parameter">5. </span>Father Name</label>
+            <input class ="term_lable2"  type="text"  name="fathername" id="field_fathername"
+                    ng-model="vm.termAudit.fathername"
+                    readonly="readonly"/> 
+                     <label class ="term_lable3" for="field_fathernamestatus">Yes</label>
+                <input class ="term_lable4" type="checkbox" name="fathernamestatus" id="field_fathernamestatus"
+                          ng-model="vm.termAudit.fathernamestatus"  ng-change="fathernameClick()"/>
+				<label class ="term_lable6" for="">No</label>		  
+				<label>	  
+                          <div class ="term_lable5" ng-show="vm.termAudit.fathernamestatus=== false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason2" multiple="multiple">
+      <option ng-repeat="option in availableOptions"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>
+	   </div>
+	   
+	    <div >
+            <label class ="term_lable1" for="field_photo"><span class="left_parameter">6. </span>Photo</label>
+               
+				<label class ="term_lable2">
+				  <input   type="text"  name="test" id="test"
+                    ng-model="test" readonly="readonly"
+                    /> 
+					</label>
+					<label class ="term_lable3" for="field_fathernamestatus">Yes</label>
+					 <input  class ="term_lable4"type="checkbox" name="photo" id="field_photo"
+                          ng-model="vm.termAudit.photo" ng-change="photoClick()"/>
+						  <label class ="term_lable6" for="">No</label>
+						  
+					<label>	  
+                          <div class ="term_lable5" ng-show="vm.termAudit.photo === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason8" multiple="multiple">
+      <option ng-repeat="option in photoOptions"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>
+	
+        </div>
+		
+		<div >
+           
+       
+            <label class ="term_lable1"  for="field_address"><span class="left_parameter">7. </span>Address</label>
+            <textarea class ="term_lable2" type="text"  name="address" id="field_address"
+                    ng-model="vm.termAudit.address"
+                   rows="3" cols="60" readonly="readonly"/>
+                   
+                    <label class ="term_lable3" for="field_addressproofstatus">Yes</label>
+                <input class ="term_lable4"type="checkbox" name="addressproofstatus" id="field_addressproofstatus"
+                          ng-model="vm.termAudit.addressproofstatus" ng-change="addressClick()" />
+						  
+				<label class ="term_lable6" for="">No</label>
+                          
+				<label>		  
+						  
+                          <div class ="term_lable5" ng-show="vm.termAudit.addressproofstatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason6" multiple="multiple">
+      <option ng-repeat="option in addressProof"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>
+    
+        </div>
+        <div >
+           
+       
+            <label class ="term_lable1"  for="field_address"><span class="left_parameter">8. </span>Permanent Address</label>
+            <textarea class ="term_lable2" type="text"  name="addressproof" id="field_addressproof"
+                    ng-model="vm.termAudit.addressproof"
+                   rows="3" cols="60" readonly="readonly"/>
+                   
+                    <!-- <label class ="term_lable3" for="field_addressproofstatus">Addressproofstatus</label>
+                <input class ="term_lable4"type="checkbox" name="addressproofstatus" id="field_addressproofstatus"
+                          ng-model="vm.termAudit.addressproofstatus"/>
+                          
+				<label>		  
+						  
+                          <div class ="term_lable5" ng-show="vm.termAudit.addressproofstatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason6" multiple="multiple">
+      <option ng-repeat="option in addressProof"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>  -->
+    
+        </div>
+        
+		 <div >
+            <label class ="term_lable1"  for="field_checkavailabiltyofcaf"><span class="left_parameter">9. </span>Check Availabilty Of Caf</label>
+			<label class ="term_lable2">
+				  <input   type="text"  name="test" id="test"
+                    ng-model="test" readonly="readonly"
+                    /> 
+					</label>
+					<label class ="term_lable3" for="field_fathernamestatus">Yes</label>
+            <input class ="term_lable4" type="checkbox"  name="checkavailabiltyofcaf" id="field_checkavailabiltyofcaf"
+                    ng-model="vm.termAudit.checkcafstatus"
+                    readonly="readonly"   ng-change="checkcafstatus()"/>
+					<label class ="term_lable6" for="">No</label>
+				<label>	
+                    <div class ="term_lable5" ng-show="vm.termAudit.checkcafstatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason7" multiple="multiple">
+      <option ng-repeat="option in cafOptions"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>
+        </div>
+		
+        <div >
+            <label class ="term_lable1" for="field_doa"><span class="left_parameter">10. </span>Doa</label>
+            <input class ="term_lable22" type="text"  name="doa" id="field_doa"
+                    ng-model="vm.termAudit.doa |  date:'dd/MM/yy'"
+                  readonly="readonly"  />
+                     <label class ="term_lable3"  for="field_doastatus">Yes</label>
+                <input class ="term_lable4" type="checkbox" name="doastatus" id="field_doastatus"
+                          ng-model="vm.termAudit.doastatus" ng-change="doastatus()"/>
+                 <label class ="term_lable6" for="">No</label>
+					<label>
+                           <div class ="term_lable5" ng-show="vm.termAudit.doastatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason3" multiple="multiple">
+      <option ng-repeat="option in doaOptions"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>
+        </div>
+		<div>
+		<label  class="term_lable1"  for="field_activationsource"><span class="left_parameter">11. </span>Retail&Distributor</label>
+            <input type="text"  class ="term_lable2" name="activationsource" id="field_activationsource"
+                    ng-model="vm.termAudit.caf"
+                   readonly="readonly" />
+                    <label class ="term_lable3" for="field_aonamestatus">Yes</label>
+                <input  class ="term_lable4" type="checkbox" name="aonamestatus" id="field_aonamestatus"
+                          ng-model="vm.termAudit.pointsaleaddressstatus" ng-change="pointsaleaddressstatus()"/>
+                <label class ="term_lable6" for="">No</label>
+					<label>
+				<div class ="term_lable5" ng-show="vm.termAudit.pointsaleaddressstatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason9" multiple="multiple">
+      <option ng-repeat="option in retdesOptions"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>
+					</div>
+		 <div >
+            <label class ="term_lable1" for="field_aoname"><span class="left_parameter">12. </span>Aoname</label>
+            <input class ="term_lable2" type="text"  name="aoname" id="field_aoname"
+                    ng-model="vm.termAudit.aoname"
+                 readonly="readonly"   />
+                      <label class ="term_lable3" for="field_aonamestatus">Yes</label>
+                <input  class ="term_lable4" type="checkbox" name="aonamestatus" id="field_aonamestatus"
+                          ng-model="vm.termAudit.aonamestatus" ng-change="aonamestatus()"/>
+                           <label class ="term_lable6" for="">No</label>
+					<label>
+				<div class ="term_lable5" ng-show="vm.termAudit.aonamestatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason4" multiple="multiple">
+      <option ng-repeat="option in aoOptions"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>
+	</div>
+		
+		 <div >
+			  
+            <label  class ="term_lable1" for="field_identityproof"><span class="left_parameter">13. </span>Identityproof</label>
+            <input class ="term_lable2" type="text"  name="identityproof" id="field_identityproof"
+                    ng-model="vm.termAudit.identityproof"
+               readonly="readonly"     />
+					
+			 <label class ="term_lable3" for="">Yes</label>
+                    <input class ="term_lable4" type="checkbox"  name="identityproofstatus" id="field_identityproofstatus"
+                    ng-model="vm.termAudit.identityproofstatus" ng-change="identityproofstatus()" />
+                   <label class ="term_lable6" for="">No</label>
+				   <label>
+				   
+                    <div class ="term_lable5" ng-show="vm.termAudit.identityproofstatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason5" multiple="multiple">
+      <option ng-repeat="option in idProof"  value="{{option.rejectReasons}}">{{option.rejectReasons}}</option> 
+    </select>
+    </div>
+	
+	</label>
+        </div>   
+	   
+       <!--v >
+            <label class ="term_lable1"  for="field_state">State</label>
+            <input class ="term_lable2" type="text"  name="state" id="field_state"
+                    ng-model="vm.termAudit.state"
+                    />
+           
+        </div>
+		<div >
+            <label class ="term_lable1"  for="field_connectiontype">Connectiontype</label>
+            <input class ="term_lable2" type="text"  name="connectiontype" id="field_connectiontype"
+                    ng-model="vm.termAudit.connectiontype"
+                    />
+            
+        </div>
+		-->
+        <div >
+            <label  class ="term_lable1" for="field_connection"><span class="left_parameter">14. </span>Point of Sale Code</label>
+            <input class ="term_lable2" type="text"  name="connection" id="field_connection"
+                    ng-model="vm.termAudit.connection"
+                  readonly="readonly"  />
+				  <label class ="term_lable3" for="field_aonamestatus">Yes</label>
+                <input  class ="term_lable4" type="checkbox" name="aonamestatus" id="field_aonamestatus"
+                          ng-model="vm.termAudit.pointsalecode" ng-change="pointsalecode()"/>
+                <label class ="term_lable6" for="">No</label>           
+					<label>
+				<div class ="term_lable5" ng-show="vm.termAudit.pointsalecode === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason10" multiple="multiple">
+      <option ng-repeat="option in pointsalecodeOptions"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>
+                    </div>
+        
+        <div >
+            <label  class ="term_lable1"  for="field_barcode"><span class="left_parameter">15. </span>Point of Sale Name</label>
+            <input class ="term_lable2" type="text"  name="barcode" id="field_barcode"
+                    ng-model="vm.termAudit.barcode"
+                  readonly="readonly"  />
+                    <label class ="term_lable3" for="field_aonamestatus">Yes</label>
+                <input  class ="term_lable4" type="checkbox" name="aonamestatus" id="field_aonamestatus"
+                          ng-model="vm.termAudit.pointsalenamestatus" ng-change="pointsalenamestatus()"/>
+                <label class ="term_lable6" for="">No</label>           
+					<label>
+				<div class ="term_lable5" ng-show="vm.termAudit.pointsalenamestatus=== false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason11" multiple="multiple">
+      <option ng-repeat="option in pointsalenameOptions"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>
+        </div>
+       <!--  <div >
+            <label style="width:20%"  for="field_auditdate">Auditdate</label>
+                <div class="input-group">
+                    <input id="field_auditdate" type="text"  name="auditdate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.termAudit.auditdate" is-open="vm.datePickerOpenStatus.auditdate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('auditdate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div> -->
+       <!--  <div >
+            <label style="width:20%"  for="field_auditby">Auditby</label>
+            <input style="width:50%" type="text"  name="auditby" id="field_auditby"
+                    ng-model="vm.termAudit.auditby"
+                    />
+        </div>
+        <div >
+            <label class ="term_lable1"   for="field_caf">Caf</label>
+            <input class ="term_lable2" type="text"  name="caf" id="field_caf"
+                    ng-model="vm.termAudit.caf"
+                    />
+        </div> -->
+      <!--   <div >
+            <label  class ="term_lable1"  for="field_activationdate">point of sale address</label>
+            <input class ="term_lable2" type="text"  name="activationdate" id="field_activationdate"
+                    ng-model="vm.termAudit.activationdate"
+                    />
+        </div> -->
+      
+       <!--  <div >
+            <label  for="field_vendor">Vendor</label>
+            <input type="text"  name="vendor" id="field_vendor"
+                    ng-model="vm.termAudit.vendor"
+                    />
+        </div>
+        <div >
+            <label  for="field_dob">Dob</label>
+            <input type="text"  name="dob" id="field_dob"
+                    ng-model="vm.termAudit.dob"
+                    />
+        </div> -->
+        
+  
+        
+        
+        
+       
+       
+       
+                        
+        </div>
+        
+        
+       
+      
+        
+        
+        
+        </div>
+      
+            <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="button" ng-disabled="editForm.$invalid" class="btn btn-primary" id="save" ng-click="vm.save()">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+      </div>
+</form>

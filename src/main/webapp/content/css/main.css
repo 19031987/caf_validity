@@ -1,5 +1,5 @@
 body {
-    background: #fafafa;
+    background: #2e425a;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
 }
@@ -15,7 +15,7 @@ Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
 Development Ribbon
 ========================================================================== */
 .ribbon {
-    background-color: #a00;
+    background-color: #2e425a;
     box-shadow: 0 0 10px #888;
     left: -3.5em;
     moz-box-shadow: 0 0 10px #888;
@@ -76,7 +76,7 @@ Browser Upgrade Prompt
 Logo styles
 ========================================================================== */
 .navbar-brand.logo {
-    padding: 5px 15px;
+    padding: 5px 50px;
 }
 
 .logo .logo-img {
@@ -106,10 +106,11 @@ Main page styles
 
 .hipster {
     display: inline-block;
-    width: 347px;
-    height: 497px;
-    background: url("../images/hipster.png") no-repeat center top;
-    background-size: contain;
+    width: 276px;
+    height: 317px;
+    background: url("../images/EIS_LOGO4.png") no-repeat  ;
+    
+
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
@@ -336,6 +337,60 @@ ui bootstrap tweaks
     outline: none;
 }
 
+/*  ramesh div*/
+.eis_column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after image containers */
+.eis_row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.eis_div_column {
+  float: left;
+  width: 15%;
+  padding: 5px;
+  
+}
+.eis_div_column1 {
+  float: left;
+  width: 85%;
+  padding: 5px;
+  
+}
+.eis_div_column_text{
+	
+			width:20%;
+	
+				}
+
+
+/* Clear floats after image containers */
+.eis_row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+logo_centre{
+	
+	padding-top:20px;	
+}
+
+.box_color_size{
+
+	text-align: center;
+	vertical-align:middle;
+	font-size:100px;
+	color:000;
+	width:500px;
+	height:200px;
+	padding-top:20px;
+	}
 
 
 

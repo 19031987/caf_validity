@@ -73,6 +73,22 @@
         {
             "fieldName": "sourcebox",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "categoryRv",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "countCategoryRv",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "categoryNA",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "countCategoryNA",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20180211175727",

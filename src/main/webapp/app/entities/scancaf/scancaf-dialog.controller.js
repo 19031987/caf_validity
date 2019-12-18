@@ -83,7 +83,7 @@
 						vm.scancaf.categoryNA = array[6];
 					}
 				}
-				Scancaf.getDetailsByName(vm.scancaf, onSuccessName);
+				Scancaf.getDetailsByName(vm.scancaf, onSuccessName,error);
 				function onSuccessName(result) {
 					if (result != null) {
 						vm.scancaf.sourcebox = result.sourcebox;
@@ -108,7 +108,11 @@
 							vm.scancaf.category =result.category;
 						}
 					}
+					
 				}
+				function error(){
+						vm.scancaf.category =0;
+					}
 			}
 			function onError() {
 				alert("You are not allowed to work on the system, Please check with your Team leader");
@@ -118,20 +122,26 @@
 		init();
 
 		// watchCollection
+		$scope.sourceTrue
 		$scope
 				.$watch(
 						'vm.scancaf.sourcebox',
 						function() {
-							if (vm.scancaf.sourcebox != null && vm.scancaf.sourcebox.length >= 6) {
+							if (vm.scancaf.sourcebox != null && vm.scancaf.sourcebox.length >= 9) {
 								Scancaf.getSource(vm.scancaf.sourcebox,
-										onSaveSuccess);
+										onSaveSuccess,onError);
 							}
 							function onSaveSuccess() {
 
 								Scancaf.getBoxCount(vm.scancaf, onSaveSuccess1);
-
+									$scope.sourceTrue = true;
 								function onSaveSuccess1(result) {}
 
+							}
+							
+							function onError(){
+								$scope.sourceTrue = false;
+							alert("Please Enter correct SourceBoxName");
 							}
 						});
 
@@ -150,7 +160,12 @@
 								vm.scancaf.centralbarcode = vm.scancaf.cafbarcode;
 								vm.scancaf.category = parseInt(vm.scancaf.category, 10) + 1
 								vm.scancaf.caftype = result.caftype;
-								if (vm.scancaf.caftype === 'G3y') {
+								
+								if(vm.scancaf.caftype === null){
+								vm.scancaf.caftype = "";
+								}
+
+								if (vm.scancaf.caftype.trim() === 'G3y' || vm.scancaf.caftype.trim() === "G3y") {
 									vm.scancaf.colorcode = 'red';
 									vm.scancaf.countCategory5 = vm.scancaf.countCategory5 + 1;
 									if (vm.scancaf.countCategory5 === 50
@@ -175,7 +190,7 @@
 										
 									}
 								}
-								if (vm.scancaf.caftype === 'Active') {
+								if (vm.scancaf.caftype.trim() === 'Active' || vm.scancaf.caftype.trim() === "Active") {
 									vm.scancaf.colorcode = 'green';
 									vm.scancaf.countCategory1 = vm.scancaf.countCategory1 + 1;
 									if (vm.scancaf.countCategory1 === 50
@@ -199,7 +214,7 @@
 									//	Scancaf.findCategory1(onSuccessCategory);
 									}
 								}
-								if (vm.scancaf.caftype === 'L1') {
+								if (vm.scancaf.caftype.trim() === 'L1' || vm.scancaf.caftype.trim() === "L1") {
 									vm.scancaf.colorcode = 'blue';
 									vm.scancaf.countCategory2 = vm.scancaf.countCategory2 + 1;
 									if (vm.scancaf.countCategory2 === 50
@@ -222,7 +237,7 @@
 										alert('Please press ENTER');
 									}
 								}
-								if (vm.scancaf.caftype === '1-2y') {
+								if (vm.scancaf.caftype.trim() === '1-2y'||vm.scancaf.caftype.trim() === "1-2y") {
 									vm.scancaf.colorcode = 'yellow';
 									vm.scancaf.countCategory3 = vm.scancaf.countCategory3 + 1;
 									if (vm.scancaf.countCategory3 === 50
@@ -245,7 +260,7 @@
 										alert('Please press ENTER');
 									}
 								}
-								if (vm.scancaf.caftype === '2-3y') {
+								if (vm.scancaf.caftype.trim() === '2-3y' || vm.scancaf.caftype.trim() === "2-3y") {
 									vm.scancaf.colorcode = 'white';
 									vm.scancaf.countCategory4 = vm.scancaf.countCategory4 + 1;
 									if (vm.scancaf.countCategory4 === 50
@@ -268,7 +283,7 @@
 										alert('Please press ENTER');
 									}
 								}
-								if (vm.scancaf.caftype === 'RV') {
+								if (vm.scancaf.caftype.trim() === 'RV' || vm.scancaf.caftype.trim() === "RV") {
 									vm.scancaf.colorcode = 'orange';
 									vm.scancaf.countCategoryRv = vm.scancaf.countCategoryRv + 1;
 									if (vm.scancaf.countCategoryRv === 50
@@ -291,7 +306,7 @@
 										alert('Please press ENTER');
 									}
 								}
-								if (vm.scancaf.caftype === 'NA') {
+								if (vm.scancaf.caftype.trim() === 'NA' || vm.scancaf.caftype.trim() === "NA") {
 									vm.scancaf.colorcode = 'pink';
 									vm.scancaf.countCategoryNA = vm.scancaf.countCategoryNA + 1;
 									vm.scancaf.centralbarcode = vm.scancaf.cafbarcode+"_NA"
@@ -412,6 +427,7 @@
 
 								// noinspection JSAnnotator
 								function onSuccessCategoryRv(result) {
+									vm.scancaf.categoryRv = result.categoryRv;
 										vm.scancaf.categoryRv = 'ERV'
 												+ increment_alphanumeric_str(vm.scancaf.categoryRv
 														.substring(3, 8));
@@ -431,6 +447,7 @@
 
 								// noinspection JSAnnotator
 								function onSuccessCategoryNA(result) {
+									vm.scancaf.categoryNA = result.categoryNA;
 										vm.scancaf.categoryNA = 'ENA'
 												+ increment_alphanumeric_str(vm.scancaf.categoryNA
 														.substring(3, 8));
@@ -442,6 +459,141 @@
 								}
 								function onScancafError(result){
 								vm.scancaf.cafbarcode='';
+								if (vm.scancaf.countCategory5 === 800) {
+										alert("Box Name is complete "+ vm.scancaf.category5);
+										$cookieStore.put('completed',
+												vm.scancaf.category1);
+										vm.scancaf.countCategory5 = 0;
+										Scancaf.findCategory5(onSuccessCategory5);
+
+										// noinspection JSAnnotator
+										function onSuccessCategory5(result) {
+											vm.scancaf.category5 = result.category5;
+											vm.scancaf.category5 = 'EDA'
+													+ increment_alphanumeric_str(vm.scancaf.category5
+															.substring(3, 8));
+											Scancaf.save(vm.scancaf, onSaveSuccessFinal);
+										$scope.lastcompletedbox = $cookieStore
+												.get('completed')
+										}
+									}
+									if (vm.scancaf.countCategory1 === 800) {
+										alert("Box Name is complete "+ vm.scancaf.category1);
+										$cookieStore.put('completed',
+												vm.scancaf.category1);
+										vm.scancaf.countCategory1 = 0;
+										Scancaf
+												.findCategory1(onSuccessCategory1);
+
+										// noinspection JSAnnotator
+										function onSuccessCategory1(result) {
+											vm.scancaf.category1 = result.category1;
+											vm.scancaf.category1 = 'E1A'
+													+ increment_alphanumeric_str(vm.scancaf.category1
+															.substring(3, 8));
+											Scancaf.save(vm.scancaf, onSaveSuccessFinal);
+											$scope.lastcompletedbox = $cookieStore
+																				.get('completed');
+										}
+									}
+
+									if (vm.scancaf.countCategory2 === 800) {
+										alert("Box Name is complete "+ vm.scancaf.category2);
+										$cookieStore.put('completed',
+												vm.scancaf.category2);
+										vm.scancaf.countCategory2 = 0;
+										Scancaf
+												.findCategory2(onSuccessCategory2);
+
+										// noinspection JSAnnotator
+										function onSuccessCategory2(result) {
+											vm.scancaf.category2 = result.category2;
+											vm.scancaf.category2 = 'EC1'
+													+ increment_alphanumeric_str(vm.scancaf.category2
+															.substring(3, 8));
+											Scancaf.save(vm.scancaf, onSaveSuccessFinal);
+											$scope.lastcompletedbox = $cookieStore
+											.get('completed')
+										}
+									}
+									if (vm.scancaf.countCategory3 === 800) {
+										alert("Box Name is complete "+ vm.scancaf.category3);
+										$cookieStore.put('completed',
+												vm.scancaf.category3);
+										vm.scancaf.countCategory3 = 0;
+										Scancaf
+												.findCategory3(onSuccessCategory3);
+
+										// noinspection JSAnnotator
+										function onSuccessCategory3(result) {
+											vm.scancaf.category3 = result.category3;
+											vm.scancaf.category3 = 'EC2'
+													+ increment_alphanumeric_str(vm.scancaf.category3
+															.substring(3, 8));
+											Scancaf.save(vm.scancaf, onSaveSuccessFinal);
+											$scope.lastcompletedbox = $cookieStore
+											.get('completed')
+										}
+									}
+									if (vm.scancaf.countCategory4 === 800) {
+										alert("Box Name is complete "+ vm.scancaf.category4);
+										$cookieStore.put('completed',
+												vm.scancaf.category4);
+										vm.scancaf.countCategory4 = 0;
+										Scancaf
+												.findCategory4(onSuccessCategory4);
+
+										// noinspection JSAnnotator
+										function onSuccessCategory4(result) {
+											vm.scancaf.category4 = result.category4;
+											vm.scancaf.category4 = 'EC3'
+													+ increment_alphanumeric_str(vm.scancaf.category4
+															.substring(3, 8));
+											Scancaf.save(vm.scancaf, onSaveSuccessFinal);
+											$scope.lastcompletedbox = $cookieStore
+											.get('completed')
+										}
+									}
+									
+									if (vm.scancaf.countCategoryRv === 800) {
+										alert("Box Name is complete "+ vm.scancaf.categoryRv);
+										$cookieStore.put('completed',
+												vm.scancaf.categoryRv);
+										vm.scancaf.countCategoryRv = 0;
+										Scancaf
+										.findCategoryRv(onSuccessCategoryRv);
+
+								// noinspection JSAnnotator
+								function onSuccessCategoryRv(result) {
+									vm.scancaf.categoryRv = result.categoryRv;
+										vm.scancaf.categoryRv = 'ERV'
+												+ increment_alphanumeric_str(vm.scancaf.categoryRv
+														.substring(3, 8));
+										Scancaf.save(vm.scancaf, onSaveSuccessFinal);
+										$scope.lastcompletedbox = $cookieStore
+										.get('completed')
+									  }
+									}
+
+									if (vm.scancaf.countCategoryNA === 800) {
+										alert("Box Name is complete "+ vm.scancaf.categoryNA);
+										$cookieStore.put('completed',
+												vm.scancaf.categoryNA);
+										vm.scancaf.countCategoryNA = 0;
+										Scancaf
+										.findCategoryNA(onSuccessCategoryNA);
+
+								// noinspection JSAnnotator
+								function onSuccessCategoryNA(result) {
+									vm.scancaf.categoryNA = result.categoryNA;
+										vm.scancaf.categoryNA = 'ENA'
+												+ increment_alphanumeric_str(vm.scancaf.categoryNA
+														.substring(3, 8));
+										Scancaf.save(vm.scancaf, onSaveSuccessFinal);
+										$scope.lastcompletedbox = $cookieStore
+												.get('completed')
+									  }
+									}
 								}
 							}
 						});

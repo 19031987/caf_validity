@@ -1,0 +1,134 @@
+<div>
+    <h2>Term Audits</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+             <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="term-audit-my-suffix.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                      First Level Audit
+                    </span>
+                </button>
+            </div>
+             <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="term-audit-my-suffix.second" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                      Second Level Audit
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mobilenumber"><span>Mobilenumber</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="termno"><span>Termno</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="state"><span>State</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="connection"><span>Connection</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="connectiontype"><span>Connectiontype</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="barcode"><span>Barcode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="nameofcustomer"><span>Nameofcustomer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fathername"><span>Fathername</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doa"><span>Doa</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="aoname"><span>Aoname</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="checkavailabiltyofcaf"><span>Checkavailabiltyofcaf</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="photo"><span>Photo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="identityproof"><span>Identityproof</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="addressproof"><span>Addressproof</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="address"><span>Address</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="auditdate"><span>Auditdate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="auditby"><span>Auditby</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="caf"><span>Caf</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="activationdate"><span>Activationdate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="activationsource"><span>Activationsource</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="vendor"><span>Vendor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dob"><span>Dob</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customernamestatus"><span>Customernamestatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fathernamestatus"><span>Fathernamestatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="doastatus"><span>Doastatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="aonamestatus"><span>Aonamestatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="identityproofstatus"><span>Identityproofstatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="addressproofstatus"><span>Addressproofstatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="rejectedreason"><span>Rejectedreason</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="typeofdoc"><span>Typeofdoc</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pointsalecode"><span>Pointsalecode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pointsalenamestatus"><span>Pointsalenamestatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pointsaleaddressstatus"><span>Pointsaleaddressstatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="checkcafstatus"><span>Checkcafstatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="termAudit in vm.termAudits track by termAudit.id">
+                    <td><a ui-sref="term-audit-my-suffix-detail({id:termAudit.id})">{{termAudit.id}}</a></td>
+                    <td>{{termAudit.mobilenumber}}</td>
+                    <td>{{termAudit.termno}}</td>
+                    <td>{{termAudit.state}}</td>
+                    <td>{{termAudit.connection}}</td>
+                    <td>{{termAudit.connectiontype}}</td>
+                    <td>{{termAudit.barcode}}</td>
+                    <td>{{termAudit.nameofcustomer}}</td>
+                    <td>{{termAudit.fathername}}</td>
+                    <td>{{termAudit.doa}}</td>
+                    <td>{{termAudit.aoname}}</td>
+                    <td>{{termAudit.checkavailabiltyofcaf}}</td>
+                    <td>{{termAudit.photo}}</td>
+                    <td>{{termAudit.identityproof}}</td>
+                    <td>{{termAudit.addressproof}}</td>
+                    <td>{{termAudit.address}}</td>
+                        <td>{{termAudit.auditdate | date:'mediumDate'}}</td>
+                    <td>{{termAudit.auditby}}</td>
+                    <td>{{termAudit.caf}}</td>
+                    <td>{{termAudit.activationdate}}</td>
+                    <td>{{termAudit.activationsource}}</td>
+                    <td>{{termAudit.vendor}}</td>
+                    <td>{{termAudit.dob}}</td>
+                    <td>{{termAudit.customernamestatus}}</td>
+                    <td>{{termAudit.fathernamestatus}}</td>
+                    <td>{{termAudit.doastatus}}</td>
+                    <td>{{termAudit.aonamestatus}}</td>
+                    <td>{{termAudit.identityproofstatus}}</td>
+                    <td>{{termAudit.addressproofstatus}}</td>
+                    <td>{{termAudit.rejectedreason}}</td>
+                    <td>{{termAudit.typeofdoc}}</td>
+                    <td>{{termAudit.pointsalecode}}</td>
+                    <td>{{termAudit.pointsalenamestatus}}</td>
+                    <td>{{termAudit.pointsaleaddressstatus}}</td>
+                    <td>{{termAudit.checkcafstatus}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="term-audit-my-suffix-detail({id:termAudit.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="term-audit-my-suffix.edit({id:termAudit.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="term-audit-my-suffix.delete({id:termAudit.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

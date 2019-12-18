@@ -124,6 +124,9 @@
                                  countCategory3: 0,
                                  countCategory4: 0,
                                  countCategory5: 0,
+                                 countCategoryRv: 0,
+                                 countCategoryNA: 0,
+                                 userCount:0,
                                 user: null,
                                 userDate: null,
                                 id: null
@@ -212,6 +215,7 @@
                                 countCategory3: 0,
                                 countCategory4: 0,
                                 countCategory5: 0,
+                                countCategoryRv: 0,
                                 colorcode: null,
                                 user: null,
                                 userdate: null,

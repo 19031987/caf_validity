@@ -1,0 +1,99 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySecondsegregationLabel">Create or edit a Secondsegregation</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.secondsegregation.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.secondsegregation.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_boxname">Boxname</label>
+            <input type="text" class="form-control" name="boxname" id="field_boxname"
+                    ng-model="vm.secondsegregation.boxname"
+                    />
+                     <label class="control-label" for="field_boxname">Count</label>
+            <input type="number" class="form-control" name="count" id="field_count"
+                    ng-model="vm.secondsegregation.count"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_cafcode">Cafcode</label>
+            <input type="text" class="form-control" name="cafcode" id="field_cafcode"
+                    ng-model="vm.secondsegregation.cafcode"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_firstleveluser">Firstleveluser</label>
+            <input type="text" class="form-control" name="firstleveluser" id="field_firstleveluser"
+                    ng-model="vm.secondsegregation.firstleveluser"
+                    />
+        </div>
+
+          <div >
+            <label class="control-label" for="field_colorcode">Color Code</label>
+            <textarea type="text"  name="colorcode" id="field_colorcode"
+                    ng-model="vm.secondsegregation.colorcode"
+                    ng-style="{'background-color':vm.secondsegregation.colorcode}" cols="70" rows="10"
+                    >
+            </textarea>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label" for="field_segregatedcount">Segregatedcount</label>
+            <input type="number" class="form-control" name="segregatedcount" id="field_segregatedcount"
+                    ng-model="vm.secondsegregation.segregatedcount"
+                    />
+        </div>
+
+         <div class="form-group">
+            <label class="control-label" for="field_segregatedcount">Last segregated count</label>
+            <input type="number" class="form-control" name="segregatedcount" id="field_lastcafentered"
+                    ng-model="vm.secondsegregation.lastcafentered"
+                    />
+        </div>
+       <!--  <div class="form-group">
+            <label class="control-label" for="field_wrongsegregatedcount">Wrongsegregatedcount</label>
+            <input type="number" class="form-control" name="wrongsegregatedcount" id="field_wrongsegregatedcount"
+                    ng-model="vm.secondsegregation.wrongsegregatedcount"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_notsegregatedcount">Notsegregatedcount</label>
+            <input type="number" class="form-control" name="notsegregatedcount" id="field_notsegregatedcount"
+                    ng-model="vm.secondsegregation.notsegregatedcount"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_user">User</label>
+            <input type="text" class="form-control" name="user" id="field_user"
+                    ng-model="vm.secondsegregation.user"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_userdate">Userdate</label>
+                <div class="input-group">
+                    <input id="field_userdate" type="text" class="form-control" name="userdate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.secondsegregation.userdate" is-open="vm.datePickerOpenStatus.userdate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('userdate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>-->
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Rejected Reasons</span> {{vm.rejectedReasons.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Fkreason Type</span></dt>
+        <dd>
+            <span>{{vm.rejectedReasons.fkreasonType}}</span>
+        </dd>
+        <dt><span>Reject Reasons</span></dt>
+        <dd>
+            <span>{{vm.rejectedReasons.rejectReasons}}</span>
+        </dd>
+        <dt><span>Rejected Reason Type</span></dt>
+        <dd>
+            <a ui-sref="rejected-reason-type-my-suffix-detail({id:vm.rejectedReasons.rejectedReasonTypeId})">{{vm.rejectedReasons.rejectedReasonTypeId}}</a>
+        </dd>
+        <dt><span>Reason Types</span></dt>
+        <dd>
+            <a ui-sref="rejected-reason-type-my-suffix-detail({id:vm.rejectedReasons.reasonTypesId})">{{vm.rejectedReasons.reasonTypesId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="rejected-reasons-my-suffix-detail.edit({id:vm.rejectedReasons.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

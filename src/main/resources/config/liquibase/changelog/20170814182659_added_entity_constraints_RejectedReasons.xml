@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity RejectedReasons.
+    -->
+    <changeSet id="20170814182659-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="rejected_reason_type_id"
+                                 baseTableName="rejected_reasons"
+                                 constraintName="fk_rejected_reasons_rejected_reason_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rejected_reason_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="reason_types_id"
+                                 baseTableName="rejected_reasons"
+                                 constraintName="fk_rejected_reasons_reason_types_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rejected_reason_type"/>
+
+    </changeSet>
+</databaseChangeLog>

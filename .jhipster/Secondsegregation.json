@@ -1,0 +1,60 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "boxname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cafcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "firstleveluser",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "segregatedcount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "wrongsegregatedcount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "notsegregatedcount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "user",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userdate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "colorcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastcafentered",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "count",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180324092824",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "secondsegregation",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

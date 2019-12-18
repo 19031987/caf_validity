@@ -1,0 +1,177 @@
+
+<form name="editForm" role="form" novalidate >
+<script>
+
+$(window).bind('keydown', function(event) {
+    if (event.ctrlKey || event.metaKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+        case 's':
+            event.preventDefault();
+            $("#save").click();
+            $("#field_mobilenumber").focus();
+            break;
+        case 'f':
+            event.preventDefault();
+            alert('ctrl-f');
+            break;
+        case 'g':
+            event.preventDefault();
+            alert('ctrl-g');
+            break;
+        }
+    }
+});
+</script>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h2 align="center" class="modal-title" id="myTermAuditLabel">Term 2nd Level Audit</h4>
+    </div>
+    <div class="modal-body">
+	
+	<div>
+	
+        <jhi-alert-error></jhi-alert-error>
+        <input type="number" class="second_level_top"  ng-model="vm.termAudit.mobilenumber"
+					ng-pattern="/^[1-9]{1}[0-9]{9}$/"	placeholder="Mobile Number" ng-keyup="$event.keyCode == 13 && findByMobNo()"/> 
+							
+						
+				<!--<button type="button" class="btn-primary"  data-dismiss="modal" ng-click="findByMobNo()">
+					<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Search</span>
+				</button> -->
+				
+	</div>
+	
+        
+     <br/><br/><br/>
+        
+                   
+                          
+      <br/>
+      <!--   <label class="term_lable1" >Mobile Number</label>
+        <input class="term_lable2" type="text"  ng-model="vm.termAudit.mobilenumber"
+						readonly="readonly" required="required" size="10" /> -->
+						
+						<br/>
+        <div >
+            <label class="term_lable1"  for="field_termno">Term NO</label>
+            <input class="term_lable2"  type="text"  name="termno" id="field_termno"
+                    ng-model="vm.termAudit.termno"
+                    required/>
+        </div>
+              
+   <div >
+            <label class ="term_lable1"  for="field_nameofcustomer">Name</label>
+            <input class ="term_lable2" type="text"  name="nameofcustomer" id="field_nameofcustomer"
+                    ng-model="vm.termAudit.nameofcustomer"
+                    required readonly="readonly"/>
+                     <label class ="term_lable3" for="field_customernamestatus">Yes</label>
+                <input class ="term_lable4"type="checkbox" name="customernamestatus" id="field_customernamestatus"
+                          ng-model="vm.termAudit.customernamestatus"  ng-change="nameClick()"/>
+						  <label class ="term_lable6"  for="">No</label>
+                         
+					<label>	 
+                           <div class ="term_lable5" ng-show="vm.termAudit.customernamestatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason1" multiple="multiple" >
+					<option ng-repeat="option in nameReasonOptions"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+					</option> 
+					</select>
+				</div>
+                          </label>
+           
+        </div>
+     <div >
+           
+       
+            <label class ="term_lable1"  for="field_address">Address</label>
+            <textarea class ="term_lable2" type="text"  name="address" id="field_address"
+                    ng-model="vm.termAudit.address"
+                   rows="3" cols="60" readonly="readonly"/>
+                   
+                    <label class ="term_lable3" for="field_addressproofstatus">Yes</label>
+                <input class ="term_lable4"type="checkbox" name="addressproofstatus" id="field_addressproofstatus"
+                          ng-model="vm.termAudit.addressproofstatus" ng-change="addressClick()"/>
+                <label class ="term_lable6"  for="">No</label>          
+				<label>		  
+						  
+                          <div class ="term_lable5" ng-show="vm.termAudit.addressproofstatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason6" multiple="multiple">
+      <option ng-repeat="option in addressProof"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>
+    
+        </div>
+          <div >
+			  
+            <label  class ="term_lable1" for="field_identityproof">Identityproof</label>
+            <input class ="term_lable2" type="text"  name="identityproof" id="field_identityproof"
+                    ng-model="vm.termAudit.identityproof"
+               readonly="readonly"     />
+					
+			 <label class ="term_lable3" for="">Yes</label>
+                    <input class ="term_lable4" type="checkbox"  name="identityproofstatus" id="field_identityproofstatus"
+                    ng-model="vm.termAudit.identityproofstatus"  ng-change="identityproofstatus()"  />
+					
+			<label class ="term_lable6"  for="">No</label>		
+                   
+				   <label>
+				   
+                    <div class ="term_lable5" ng-show="vm.termAudit.identityproofstatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason5" multiple="multiple">
+      <option ng-repeat="option in idProof"  value="{{option.rejectReasons}}">{{option.rejectReasons}}</option> 
+    </select>
+    </div>
+	
+	</label>
+        </div>   
+        
+        <div >
+            <label class ="term_lable1" for="field_doa">Doa</label>
+            <input class ="term_lable2" type="text"  name="doa" id="field_doa"
+                    ng-model="vm.termAudit.doa |  date:'dd/MM/yy'"
+                  readonly="readonly"  />
+                     <label class ="term_lable3"  for="field_doastatus">Yes</label>
+                <input class ="term_lable4" type="checkbox" name="doastatus" id="field_doastatus"
+                          ng-model="vm.termAudit.doastatus" ng-change="doastatus()"/>
+						  
+				<label class ="term_lable6"  for="">No</label>		  
+                 
+					<label>
+                           <div class ="term_lable5" ng-show="vm.termAudit.doastatus === false">
+                          <select name="rejectreason" id="rejectreason" ng-model="reason3" multiple="multiple">
+      <option ng-repeat="option in doaOptions"  value="{{option.rejectReasons}}">{{option.rejectReasons}}
+
+</option> 
+    </select>
+    </div>
+	</label>
+        </div>
+        
+         <!--<div >
+            <label class="term_lable1"   for="field_caf">Caf</label>
+            <input class="term_lable2" type="text"  name="caf" id="field_caf"
+                    ng-model="vm.termAudit.caf"
+                    />
+        </div> -->
+   </div>
+
+   
+      
+        
+     
+    
+       	
+
+    <div class="modal-footer" style=" margin:auto; display:block;">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="button" ng-disabled="editForm.$invalid" class="btn btn-primary" id="save" ng-click="vm.save()">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

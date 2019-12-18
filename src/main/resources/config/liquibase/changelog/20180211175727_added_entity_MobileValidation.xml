@@ -15,7 +15,7 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity MobileValidation.
+        Added the entity Mobilevalidation.
     -->
     <changeSet id="20180211175727-1" author="jhipster">
         <createTable tableName="mobile_validation">
@@ -91,6 +91,50 @@
             </column>
 
             <column name="sourcebox" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="category_rv" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="count_category_rv" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="category_na" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="count_category_na" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="barcode" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="user_count" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="barcode_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lot" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="barcode_name_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lot_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fathername" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

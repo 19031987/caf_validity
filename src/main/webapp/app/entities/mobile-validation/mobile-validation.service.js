@@ -40,7 +40,7 @@
             'getByMobileNum': {
                 method: 'POST',
                 url:'/api/getmobilenumber',
-                isArray:true,
+                isArray: true,
                 transformRequest: function (data) {
                     var copy = angular.copy(data);
                     copy.userDate = DateUtils.convertLocalDateToServer(copy.userDate);
@@ -102,15 +102,32 @@
                    // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
                     return angular.toJson(copy);
                 }
-            },'getBox': {
+            },'getOutBox': {
                               method: 'POST',
-                              url: 'api/mobile-validaiton/getBox',
+                              url: 'api/mobile-validaiton/getOutBox',
                               transformRequest: function (data) {
                                   var copy = angular.copy(data);
                                  // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
                                   return angular.toJson(copy);
                               }
-                          }
+            },'findCategoryRv': {
+                              method: 'POST',
+                              url: 'api/mobile-validation/categoryRv',
+                              transformRequest: function (data) {
+                                  var copy = angular.copy(data);
+                                 // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                                  return angular.toJson(copy);
+                              }
+                          },
+                          'findCategoryNa': {
+                              method: 'POST',
+                              url: 'api/mobile-validation/categoryNa',
+                              transformRequest: function (data) {
+                                  var copy = angular.copy(data);
+                                 // copy.userdate = DateUtils.convertLocalDateToServer(copy.userdate);
+                                  return angular.toJson(copy);
+                              }
+                          },
         });
     }
 })();

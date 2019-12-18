@@ -1,7 +1,7 @@
 package com.caf.valididty.service.dto;
 
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -22,7 +22,7 @@ public class MobileValidationDTO implements Serializable {
 
     private String user;
 
-    private LocalDate userDate;
+    private LocalDateTime userDate;
 
     public Long getId() {
         return id;
@@ -72,11 +72,11 @@ public class MobileValidationDTO implements Serializable {
         this.user = user;
     }
 
-    public LocalDate getUserDate() {
+    public LocalDateTime getUserDate() {
         return userDate;
     }
 
-    public void setUserDate(LocalDate userDate) {
+    public void setUserDate(LocalDateTime userDate) {
         this.userDate = userDate;
     }
 

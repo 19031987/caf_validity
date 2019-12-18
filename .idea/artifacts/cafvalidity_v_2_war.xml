@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="cafvalidity-v-2:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>cafvalidity-v-2</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="cafvalidity-v-2-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="cafvalidity-v-2:war exploded" />
+    </root>
+  </artifact>
+</component>

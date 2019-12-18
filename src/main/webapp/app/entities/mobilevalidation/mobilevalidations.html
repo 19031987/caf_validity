@@ -1,0 +1,133 @@
+<div>
+    <h2>Mobilevalidations</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="mobilevalidation.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs-down" >
+                        Create new Mobilevalidation
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mobilenumber"><span>Mobilenumber</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="activationDate"><span>Activation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customerName"><span>Customer Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="colorCode"><span>Color Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userDate"><span>User Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isselected"><span>Isselected</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category1"><span>Category 1</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category2"><span>Category 2</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category3"><span>Category 3</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="catergory4"><span>Catergory 4</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="catergory5"><span>Catergory 5</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategory1"><span>Count Category 1</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategory2"><span>Count Category 2</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategory3"><span>Count Category 3</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategory4"><span>Count Category 4</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategory5"><span>Count Category 5</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sourcebox"><span>Sourcebox</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="categoryRv"><span>Category Rv</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategoryRv"><span>Count Category Rv</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="categoryNA"><span>Category NA</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="countCategoryNA"><span>Count Category NA</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="barcode"><span>Barcode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userCount"><span>User Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="barcodeName"><span>Barcode Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lot"><span>Lot</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="barcodeName1"><span>Barcode Name 1</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lot1"><span>Lot 1</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fathername"><span>Fathername</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="mobilevalidation in vm.mobilevalidations track by mobilevalidation.id">
+                    <td><a ui-sref="mobilevalidation-detail({id:mobilevalidation.id})">{{mobilevalidation.id}}</a></td>
+                    <td>{{mobilevalidation.mobilenumber}}</td>
+                    <td>{{mobilevalidation.activationDate}}</td>
+                    <td>{{mobilevalidation.customerName}}</td>
+                    <td>{{mobilevalidation.colorCode}}</td>
+                    <td>{{mobilevalidation.user}}</td>
+                        <td>{{mobilevalidation.userDate | date:'mediumDate'}}</td>
+                    <td>{{mobilevalidation.isselected}}</td>
+                    <td>{{mobilevalidation.category1}}</td>
+                    <td>{{mobilevalidation.category2}}</td>
+                    <td>{{mobilevalidation.category3}}</td>
+                    <td>{{mobilevalidation.catergory4}}</td>
+                    <td>{{mobilevalidation.catergory5}}</td>
+                    <td>{{mobilevalidation.countCategory1}}</td>
+                    <td>{{mobilevalidation.countCategory2}}</td>
+                    <td>{{mobilevalidation.countCategory3}}</td>
+                    <td>{{mobilevalidation.countCategory4}}</td>
+                    <td>{{mobilevalidation.countCategory5}}</td>
+                    <td>{{mobilevalidation.sourcebox}}</td>
+                    <td>{{mobilevalidation.categoryRv}}</td>
+                    <td>{{mobilevalidation.countCategoryRv}}</td>
+                    <td>{{mobilevalidation.categoryNA}}</td>
+                    <td>{{mobilevalidation.countCategoryNA}}</td>
+                    <td>{{mobilevalidation.barcode}}</td>
+                    <td>{{mobilevalidation.userCount}}</td>
+                    <td>{{mobilevalidation.barcodeName}}</td>
+                    <td>{{mobilevalidation.lot}}</td>
+                    <td>{{mobilevalidation.barcodeName1}}</td>
+                    <td>{{mobilevalidation.lot1}}</td>
+                    <td>{{mobilevalidation.fathername}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="mobilevalidation-detail({id:mobilevalidation.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="mobilevalidation.edit({id:mobilevalidation.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="mobilevalidation.delete({id:mobilevalidation.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

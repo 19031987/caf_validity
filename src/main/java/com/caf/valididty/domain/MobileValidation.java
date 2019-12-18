@@ -7,6 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "mobile_validation")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "mobilevalidation")
+@Document(indexName = "MobileValidation")
 public class MobileValidation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,7 +41,7 @@ public class MobileValidation implements Serializable {
     private String user;
 
     @Column(name = "user_date")
-    private LocalDate userDate;
+    private LocalDateTime userDate;
 
     @Column(name = "isselected")
     private Boolean isselected;
@@ -77,6 +78,33 @@ public class MobileValidation implements Serializable {
 
     @Column(name = "sourcebox")
     private String sourcebox;
+
+    @Column(name = "category_rv")
+    private String categoryRv;
+
+    @Column(name = "count_category_rv")
+    private Integer countCategoryRv;
+
+    @Column(name = "category_na")
+    private String categoryNA;
+
+    @Column(name = "count_category_na")
+    private Integer countCategoryNA;
+
+    @Column(name = "barcode")
+    private Integer barcode;
+
+    @Column(name = "user_count")
+    private String userCount;
+
+    @Column(name = "barcode_name")
+    private String barcodeName;
+
+    @Column(name = "lot")
+    private String lot;
+
+    @Column(name = "fathername")
+    private String fathername;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -152,16 +180,16 @@ public class MobileValidation implements Serializable {
         this.user = user;
     }
 
-    public LocalDate getUserDate() {
+    public LocalDateTime getUserDate() {
         return userDate;
     }
 
-    public MobileValidation userDate(LocalDate userDate) {
+    public MobileValidation userDate(LocalDateTime userDate) {
         this.userDate = userDate;
         return this;
     }
 
-    public void setUserDate(LocalDate userDate) {
+    public void setUserDate(LocalDateTime userDate) {
         this.userDate = userDate;
     }
 
@@ -320,6 +348,122 @@ public class MobileValidation implements Serializable {
     public void setSourcebox(String sourcebox) {
         this.sourcebox = sourcebox;
     }
+
+    public String getCategoryRv() {
+        return categoryRv;
+    }
+
+    public MobileValidation categoryRv(String categoryRv) {
+        this.categoryRv = categoryRv;
+        return this;
+    }
+
+    public void setCategoryRv(String categoryRv) {
+        this.categoryRv = categoryRv;
+    }
+
+    public Integer getCountCategoryRv() {
+        return countCategoryRv;
+    }
+
+    public MobileValidation countCategoryRv(Integer countCategoryRv) {
+        this.countCategoryRv = countCategoryRv;
+        return this;
+    }
+
+    public void setCountCategoryRv(Integer countCategoryRv) {
+        this.countCategoryRv = countCategoryRv;
+    }
+
+    public String getCategoryNA() {
+        return categoryNA;
+    }
+
+    public MobileValidation categoryNA(String categoryNA) {
+        this.categoryNA = categoryNA;
+        return this;
+    }
+
+    public void setCategoryNA(String categoryNA) {
+        this.categoryNA = categoryNA;
+    }
+
+    public Integer getCountCategoryNA() {
+        return countCategoryNA;
+    }
+
+    public MobileValidation countCategoryNA(Integer countCategoryNA) {
+        this.countCategoryNA = countCategoryNA;
+        return this;
+    }
+
+    public void setCountCategoryNA(Integer countCategoryNA) {
+        this.countCategoryNA = countCategoryNA;
+    }
+
+    public Integer getBarcode() {
+        return barcode;
+    }
+
+    public MobileValidation barcode(Integer barcode) {
+        this.barcode = barcode;
+        return this;
+    }
+
+    public void setBarcode(Integer barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getUserCount() {
+        return userCount;
+    }
+
+    public MobileValidation userCount(String userCount) {
+        this.userCount = userCount;
+        return this;
+    }
+
+    public void setUserCount(String userCount) {
+        this.userCount = userCount;
+    }
+
+    public String getBarcodeName() {
+        return barcodeName;
+    }
+
+    public MobileValidation barcodeName(String barcodeName) {
+        this.barcodeName = barcodeName;
+        return this;
+    }
+
+    public void setBarcodeName(String barcodeName) {
+        this.barcodeName = barcodeName;
+    }
+
+    public String getLot() {
+        return lot;
+    }
+
+    public MobileValidation lot(String lot) {
+        this.lot = lot;
+        return this;
+    }
+
+    public void setLot(String lot) {
+        this.lot = lot;
+    }
+    public String getFathername() {
+        return fathername;
+    }
+
+    public MobileValidation fathername(String fathername) {
+        this.fathername = fathername;
+        return this;
+    }
+
+    public void setFathername(String fathername) {
+        this.fathername = fathername;
+    }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
     @Override
@@ -330,11 +474,11 @@ public class MobileValidation implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        MobileValidation mobileValidation = (MobileValidation) o;
-        if (mobileValidation.getId() == null || getId() == null) {
+        MobileValidation MobileValidation = (MobileValidation) o;
+        if (MobileValidation.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), mobileValidation.getId());
+        return Objects.equals(getId(), MobileValidation.getId());
     }
 
     @Override
@@ -364,6 +508,15 @@ public class MobileValidation implements Serializable {
             ", countCategory4='" + getCountCategory4() + "'" +
             ", countCategory5='" + getCountCategory5() + "'" +
             ", sourcebox='" + getSourcebox() + "'" +
+            ", categoryRv='" + getCategoryRv() + "'" +
+            ", countCategoryRv='" + getCountCategoryRv() + "'" +
+            ", categoryNA='" + getCategoryNA() + "'" +
+            ", countCategoryNA='" + getCountCategoryNA() + "'" +
+            ", barcode='" + getBarcode() + "'" +
+            ", userCount='" + getUserCount() + "'" +
+            ", barcodeName='" + getBarcodeName() + "'" +
+            ", lot='" + getLot() + "'" +
+            ", fathername='" + getFathername() + "'" +
             "}";
     }
 }

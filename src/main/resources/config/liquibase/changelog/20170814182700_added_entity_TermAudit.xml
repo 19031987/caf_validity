@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity TermAudit.
+    -->
+    <changeSet id="20170814182700-1" author="jhipster">
+        <createTable tableName="term_audit">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="mobilenumber" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="termno" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="state" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="pointsalecode" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="connectiontype" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="pointsalename" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="nameofcustomer" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="fathername" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="doa" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="aoname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <!--<column name="checkavailabiltyofcaf" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>-->
+
+            <column name="photo" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="identityproof" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="permanentaddress" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="address" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="auditdate" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="auditby" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="retailanddistribution" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+           <!-- <column name="activationdate" type="varchar(255)">
+                <constraints nullable="true" />
+            </column> -->
+
+            <column name="activationsource" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="vendor" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="secaudituser" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="customernamestatus" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fathernamestatus" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="doastatus" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="aonamestatus" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="identityproofstatus" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="addressproofstatus" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="rejectedreason" type="varchar(2550)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="typeofdoc" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="pointsalecodestatus" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="pointsalenamestatus" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="retaildistributionstatus" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="checkcafstatus" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="secauditdate" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+    </changeSet>
+</databaseChangeLog>

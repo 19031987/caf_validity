@@ -23,7 +23,7 @@
             'update': { method:'PUT' }
             , 'users': {
                 method: 'GET',
-                url: 'api/users',
+                url: 'api/usersList',
                 isArray: true,
                 transformResponse: function (data) {
                     if (data) {
@@ -40,7 +40,7 @@
                     }
                     return data;
                 }
-            	
+
             },
             'system': {
                 method: 'GET',
@@ -54,14 +54,14 @@
                 }
             },'getCatLatestRes' :{
                 method: 'POST',
-                url: 'api/scancafs/getCatLatest',
+                url: 'api/mobile-validation/getCatLatest',
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
                     }
                     return data;
                 }
-            	
+
             }
         });
     }

@@ -1,0 +1,203 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myMobilevalidationLabel">Create or edit a Mobilevalidation</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.mobilevalidation.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.mobilevalidation.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_mobilenumber">Mobilenumber</label>
+            <input type="number" class="form-control" name="mobilenumber" id="field_mobilenumber"
+                    ng-model="vm.mobilevalidation.mobilenumber"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_activationDate">Activation Date</label>
+            <input type="text" class="form-control" name="activationDate" id="field_activationDate"
+                    ng-model="vm.mobilevalidation.activationDate"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_customerName">Customer Name</label>
+            <input type="text" class="form-control" name="customerName" id="field_customerName"
+                    ng-model="vm.mobilevalidation.customerName"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_colorCode">Color Code</label>
+            <input type="text" class="form-control" name="colorCode" id="field_colorCode"
+                    ng-model="vm.mobilevalidation.colorCode"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_user">User</label>
+            <input type="text" class="form-control" name="user" id="field_user"
+                    ng-model="vm.mobilevalidation.user"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_userDate">User Date</label>
+                <div class="input-group">
+                    <input id="field_userDate" type="text" class="form-control" name="userDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.mobilevalidation.userDate" is-open="vm.datePickerOpenStatus.userDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('userDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_isselected">Isselected</label>
+                <input type="checkbox" name="isselected" id="field_isselected"
+                          ng-model="vm.mobilevalidation.isselected"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_category1">Category 1</label>
+            <input type="text" class="form-control" name="category1" id="field_category1"
+                    ng-model="vm.mobilevalidation.category1"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_category2">Category 2</label>
+            <input type="text" class="form-control" name="category2" id="field_category2"
+                    ng-model="vm.mobilevalidation.category2"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_category3">Category 3</label>
+            <input type="text" class="form-control" name="category3" id="field_category3"
+                    ng-model="vm.mobilevalidation.category3"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_catergory4">Catergory 4</label>
+            <input type="text" class="form-control" name="catergory4" id="field_catergory4"
+                    ng-model="vm.mobilevalidation.catergory4"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_catergory5">Catergory 5</label>
+            <input type="text" class="form-control" name="catergory5" id="field_catergory5"
+                    ng-model="vm.mobilevalidation.catergory5"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_countCategory1">Count Category 1</label>
+            <input type="number" class="form-control" name="countCategory1" id="field_countCategory1"
+                    ng-model="vm.mobilevalidation.countCategory1"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_countCategory2">Count Category 2</label>
+            <input type="number" class="form-control" name="countCategory2" id="field_countCategory2"
+                    ng-model="vm.mobilevalidation.countCategory2"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_countCategory3">Count Category 3</label>
+            <input type="number" class="form-control" name="countCategory3" id="field_countCategory3"
+                    ng-model="vm.mobilevalidation.countCategory3"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_countCategory4">Count Category 4</label>
+            <input type="number" class="form-control" name="countCategory4" id="field_countCategory4"
+                    ng-model="vm.mobilevalidation.countCategory4"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_countCategory5">Count Category 5</label>
+            <input type="number" class="form-control" name="countCategory5" id="field_countCategory5"
+                    ng-model="vm.mobilevalidation.countCategory5"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_sourcebox">Sourcebox</label>
+            <input type="text" class="form-control" name="sourcebox" id="field_sourcebox"
+                    ng-model="vm.mobilevalidation.sourcebox"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_categoryRv">Category Rv</label>
+            <input type="text" class="form-control" name="categoryRv" id="field_categoryRv"
+                    ng-model="vm.mobilevalidation.categoryRv"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_countCategoryRv">Count Category Rv</label>
+            <input type="number" class="form-control" name="countCategoryRv" id="field_countCategoryRv"
+                    ng-model="vm.mobilevalidation.countCategoryRv"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_categoryNA">Category NA</label>
+            <input type="text" class="form-control" name="categoryNA" id="field_categoryNA"
+                    ng-model="vm.mobilevalidation.categoryNA"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_countCategoryNA">Count Category NA</label>
+            <input type="number" class="form-control" name="countCategoryNA" id="field_countCategoryNA"
+                    ng-model="vm.mobilevalidation.countCategoryNA"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_barcode">Barcode</label>
+            <input type="number" class="form-control" name="barcode" id="field_barcode"
+                    ng-model="vm.mobilevalidation.barcode"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_userCount">User Count</label>
+            <input type="text" class="form-control" name="userCount" id="field_userCount"
+                    ng-model="vm.mobilevalidation.userCount"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_barcodeName">Barcode Name</label>
+            <input type="text" class="form-control" name="barcodeName" id="field_barcodeName"
+                    ng-model="vm.mobilevalidation.barcodeName"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lot">Lot</label>
+            <input type="text" class="form-control" name="lot" id="field_lot"
+                    ng-model="vm.mobilevalidation.lot"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_barcodeName1">Barcode Name 1</label>
+            <input type="text" class="form-control" name="barcodeName1" id="field_barcodeName1"
+                    ng-model="vm.mobilevalidation.barcodeName1"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lot1">Lot 1</label>
+            <input type="text" class="form-control" name="lot1" id="field_lot1"
+                    ng-model="vm.mobilevalidation.lot1"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_fathername">Fathername</label>
+            <input type="text" class="form-control" name="fathername" id="field_fathername"
+                    ng-model="vm.mobilevalidation.fathername"
+                    />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -20,11 +20,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
+import com.caf.valididty.domain.Boxassign;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +45,9 @@ public class MobileValidationResource {
     private final MobileValidationRepository mobileValidationRepository;
 
     private final MobileValidationSearchRepository mobileValidationSearchRepository;
-    public MobileValidationResource(MobileValidationRepository mobileValidationRepository, MobileValidationSearchRepository mobileValidationSearchRepository) {
+    private Scancaf scancaf;
+
+    MobileValidationResource(MobileValidationRepository mobileValidationRepository, MobileValidationSearchRepository mobileValidationSearchRepository) {
         this.mobileValidationRepository = mobileValidationRepository;
         this.mobileValidationSearchRepository = mobileValidationSearchRepository;
     }
@@ -52,7 +55,8 @@ public class MobileValidationResource {
     /**
      * POST  /mobile-validations : Create a new mobileValidation.
      *
-     * @param mobileValidation the mobileValidation to create
+     * @param mobion.getId() != null) {
+            return RespoileValidation the mobileValidation to create
      * @return the ResponseEntity with status 201 (Created) and with body the new mobileValidation, or with status 400 (Bad Request) if the mobileValidation has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
@@ -61,18 +65,74 @@ public class MobileValidationResource {
     public ResponseEntity<MobileValidation> createMobileValidation(@RequestBody MobileValidation mobileValidation) throws URISyntaxException {
         log.debug("REST request to save MobileValidation : {}", mobileValidation);
         mobileValidation.setId(null);
-        if (mobileValidation.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new mobileValidation cannot already have an ID")).body(null);
+        if (mobileValidatnseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new mobileValidation cannot already have an ID")).body(null);
+        }
+        MobileValidation latestByUser = mobileValidationRepository.findByuserOrderByDsc(getCurrentUserLogin());
+        if (latestByUser != null && latestByUser.getMobilenumber() != null && latestByUser.getMobilenumber().equals(mobileValidation.getMobilenumber())) {
+            return ResponseEntity.badRequest().headers(
+                HeaderUtil.createFailureAlert(ENTITY_NAME, "mobilenumberrepeat", "mobile number is entered"))
+                .body(null);
         }
         mobileValidation.setUser(getCurrentUserLogin());
+        MobileValidation latestCat1 = getLatestCategory1();
+        int userCount = getUserCount();
+        mobileValidation.setUserCount(Integer.toString(userCount + 1));
         LocalDateTime localDateTime = LocalDateTime.now();
-        LocalDate localDate = localDateTime.toLocalDate();
-        mobileValidation.setUserDate(localDate);
-        MobileValidation result = mobileValidationRepository.save(mobileValidation);
-        mobileValidationSearchRepository.save(result);
-        return ResponseEntity.created(new URI("/api/mobile-validations/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+      //  LocalDate localDate = localDateTime.toLocalDate();
+        mobileValidation.setUserDate(localDateTime);
+        if (mobileValidation.getColorCode() != null
+            && mobileValidation.getColorCode().trim().equalsIgnoreCase("pink")) {
+            mobileValidation.setFathername("");
+            mobileValidation.setActivationDate("");
+            mobileValidation.setCustomerName("");
+        }
+
+        if (mobileValidation.getColorCode() != null && mobileValidation.getColorCode().trim().equalsIgnoreCase("green")) {
+
+            if (latestCat1 != null && latestCat1.getBarcodeName() != null && !latestCat1.getBarcodeName().isEmpty()
+                && latestCat1.getCategory1().equals(mobileValidation.getCategory1())) {
+					//EKA000430001
+                String previousBarCode = latestCat1.getBarcodeName().substring(6, 11);
+                //String presentBarCode = mobileValidation.getCategory1().substring(7, 8)+mobileValidation.getBarcode();
+                if (Integer.parseInt(previousBarCode) + 1 == mobileValidation.getBarcode()) {
+                    mobileValidation.setBarcodeName(mobileValidation.getCategory1().substring(0, 6) + String.format("%05d", mobileValidation.getBarcode()));
+                } else {
+                    return ResponseEntity.badRequest().headers(
+                        HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "Bar code is is not in sequence"))
+                        .body(null);
+                }
+            } else {
+                if (mobileValidation.getBarcode() % 10 == 1) {
+                    mobileValidation.setBarcodeName(mobileValidation.getCategory1().substring(0, 6) + String.format("%05d", mobileValidation.getBarcode()));
+                } else {
+                    return ResponseEntity.badRequest().headers(
+                        HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "Bar code should start with 001"))
+                        .body(null);
+                }
+            }
+        }
+
+
+        try {
+            MobileValidation result = mobileValidationRepository.save(mobileValidation);
+            // mobileValidationSearchRepository.save(result);
+            return ResponseEntity.created(new URI("/api/mobile-validations/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+                .body(result);
+        } catch (Exception dive) {
+            System.out.println(dive);
+            return ResponseEntity.badRequest().headers(
+                HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "Bar code is already entered"))
+                .body(null);
+        }
+    }
+
+    private MobileValidation getLatestCategory1() {
+        return mobileValidationRepository.getCategory1ByUser(getCurrentUserLogin());
+    }
+
+    private int getUserCount() {
+        return mobileValidationRepository.getCountOfUser(getCurrentUserLogin());
     }
 
     /**
@@ -81,11 +141,11 @@ public class MobileValidationResource {
      * @param mobileValidation the mobileValidation to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated mobileValidation,
      * or with status 400 (Bad Request) if the mobileValidation is not valid,
-     * or with status 500 (Internal Server Error) if the mobileValidation couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * or with status 500 (Internal Server Error) if the mobileValidation couldn't be u
      */
     @PutMapping("/mobile-validations")
-    @Timed
+    @Timedpdated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
     public ResponseEntity<MobileValidation> updateMobileValidation(@RequestBody MobileValidation mobileValidation) throws URISyntaxException {
         log.debug("REST request to update MobileValidation : {}", mobileValidation);
         if (mobileValidation.getId() == null) {
@@ -146,7 +206,7 @@ public class MobileValidationResource {
      * SEARCH  /_search/mobile-validations?query=:query : search for the mobileValidation corresponding
      * to the query.
      *
-     * @param query the query of the mobileValidation search
+     * @param query    the query of the mobileValidation search
      * @param pageable the pagination information
      * @return the result of the search
      */
@@ -162,92 +222,141 @@ public class MobileValidationResource {
     @PostMapping("/getmobilenumber")
     @Timed
     public ResponseEntity<List<MobileValidation>> getMobileValidation(@RequestBody MobileValidation mobileValidation) {
-               List<MobileValidation> result = mobileValidationRepository.getMobileNumber(mobileValidation.getMobilenumber());
-       return new ResponseEntity<List<MobileValidation>>(result, HttpStatus.ACCEPTED);
+        List<MobileValidation> result = mobileValidationRepository.getMobileNumber(mobileValidation.getMobilenumber());
+        if (result.isEmpty()) {
+            mobileValidation.setColorCode("NA");
+            result = new ArrayList<MobileValidation>();
+            result.add(mobileValidation);
+        }
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
     public String getCurrentUserLogin() {
+        return getUserName();
+    }
+
+    static String getUserName() {
         org.springframework.security.core.context.SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         String login = null;
         if (authentication != null)
             if (authentication.getPrincipal() instanceof UserDetails)
-            	login = ((UserDetails) authentication.getPrincipal()).getUsername();
+                login = ((UserDetails) authentication.getPrincipal()).getUsername();
             else if (authentication.getPrincipal() instanceof String)
-            	login = (String) authentication.getPrincipal();
+                login = (String) authentication.getPrincipal();
 
         return login;
+    }
 
-
-}
     @PostMapping("/mobile-validation/getDetailsByName")
     @Timed
     public ResponseEntity<MobileValidation> getDetailsByName(@RequestBody MobileValidation scancaf) {
+        MobileValidation scancafLocal = mobileValidationRepository.findByuserOrderByDsc(scancaf.getUser());
+        if (scancafLocal != null) {
+            return ResponseEntity.ok().body(scancafLocal);
+        } else {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
 
-    	 MobileValidation scancafLocal  = mobileValidationRepository.findByuserOrderByDsc(scancaf.getUser());
-    	if(scancafLocal!= null) {
-		return ResponseEntity.ok().body(scancafLocal);
-    	}else {
-    		return ResponseEntity.badRequest().body(null);
-    	}
-
-
+    @PostMapping("/mobile-validation/getCatLatest")
+    @Timed
+    public Boxassign getCatLatest(@RequestBody Boxassign id) {
+        log.debug("REST request to get Mobile validation : {}", id);
+        Boxassign assign = new Boxassign();
+        MobileValidation scancaf = getScanCafReset();
+        assign.setBoxassign((scancaf.getCategory1() + "," + scancaf.getCategory2()
+            + "," + scancaf.getCategory3() + "," + scancaf.getCatergory4() + "," + scancaf.getCatergory5()+ "," + scancaf.getCategoryRv()
+            + "," + scancaf.getCategoryNA()));
+        return assign;
 
     }
 
+    private MobileValidation getScanCafReset() {
+        MobileValidation scanCaf = new MobileValidation();
+        scanCaf.setCategory1(getByCategory1().getCategory1());
+        scanCaf.setCategory2(getByCategory2().getCategory2());
+        scanCaf.setCategory3(getByCategory3().getCategory3());
+        scanCaf.setCatergory4(getByCategory4().getCatergory4());
+        scanCaf.setCatergory5(getByCategory5().getCatergory5());
+        scanCaf.setCategoryRv(getByCategoryRv().getCategoryRv());
+        scanCaf.setCategoryNA(getByCategoryNa().getCategoryNA());
+        return scanCaf;
+    }
+
+
     @PostMapping("/mobile-validation/category1")
-	@Timed
-	public Scancaf getByCategory1() {
-		String scancafLocal = mobileValidationRepository.getCategory1();
-		Scancaf scancaf = new Scancaf();
-            scancaf.setCategory1(scancafLocal);
-		return  (scancaf);
-	}
+    @Timed
+    public MobileValidation getByCategory1() {
+        String mobileValidationLocal = mobileValidationRepository.getCategory1();
+        MobileValidation mobileValidation = new MobileValidation();
+        mobileValidation.setCategory1(mobileValidationLocal);
+        return (mobileValidation);
+    }
 
-	@PostMapping("/mobile-validation/category2")
-	@Timed
-	public Scancaf getByCategory2() {
-		String scancafLocal = mobileValidationRepository.getCategory2();
-        Scancaf scancaf = new Scancaf();
-        scancaf.setCategory2(scancafLocal);
-		return  (scancaf);
-	}
+    @PostMapping("/mobile-validation/category2")
+    @Timed
+    public MobileValidation getByCategory2() {
+        String MobileValidationLocal = mobileValidationRepository.getCategory2();
+        MobileValidation mobileValidation = new MobileValidation();
+        mobileValidation.setCategory2(MobileValidationLocal);
+        return (mobileValidation);
+    }
 
-	@PostMapping("/mobile-validation/category3")
-	@Timed
-	public Scancaf getByCategory3() {
-		String scancafLocal = mobileValidationRepository.getCategory3();
-        Scancaf scancaf = new Scancaf();
-        scancaf.setCategory3(scancafLocal);
-		return  (scancaf);
-	}
+    @PostMapping("/mobile-validation/category3")
+    @Timed
+    public MobileValidation getByCategory3() {
+        String mobileValidationLocal = mobileValidationRepository.getCategory3();
+        MobileValidation mobileValidation = new MobileValidation();
+        mobileValidation.setCategory3(mobileValidationLocal);
+        return (mobileValidation);
+    }
 
-	@PostMapping("/mobile-validation/category4")
-	@Timed
-	public Scancaf getByCategory4() {
-		String scancafLocal = mobileValidationRepository.getCategory4();
-        Scancaf scancaf = new Scancaf();
-        scancaf.setCategory4(scancafLocal);
-        return  (scancaf);
-	}
+    @PostMapping("/mobile-validation/category4")
+    @Timed
+    public MobileValidation getByCategory4() {
+        String mobileValidationLocal = mobileValidationRepository.getCategory4();
+        MobileValidation mobileValidation = new MobileValidation();
+        mobileValidation.setCatergory4(mobileValidationLocal);
+        return (mobileValidation);
+    }
 
-	@PostMapping("/mobile-validation/category5")
-	@Timed
-	public Scancaf getByCategory5() {
-		String scancafLocal = mobileValidationRepository.getCategory5();
-        Scancaf scancaf = new Scancaf();
-        scancaf.setCategory5(scancafLocal);
-        return  (scancaf);
-	}
+    @PostMapping("/mobile-validation/category5")
+    @Timed
+    public MobileValidation getByCategory5() {
+        String mobileValidationLocal = mobileValidationRepository.getCategory5();
+        MobileValidation mobileValidation = new MobileValidation();
+        mobileValidation.setCatergory5(mobileValidationLocal);
+        return (mobileValidation);
+    }
 
-    @PostMapping("/mobile-validation/getBox")
+    @PostMapping("/mobile-validation/categoryRv")
+    @Timed
+    public MobileValidation getByCategoryRv() {
+        String mobileValidationLocal = mobileValidationRepository.getCategoryRv();
+        MobileValidation mobileValidation = new MobileValidation();
+        mobileValidation.setCategoryRv(mobileValidationLocal);
+        return (mobileValidation);
+    }
+
+    @PostMapping("/mobile-validation/categoryNa")
+    @Timed
+    public MobileValidation getByCategoryNa() {
+        String mobileValidationLocal = mobileValidationRepository.getCategoryNA();
+        MobileValidation mobileValidation = new MobileValidation();
+        mobileValidation.setCategoryNA(mobileValidationLocal);
+        return (mobileValidation);
+    }
+
+
+    @PostMapping("/mobile-validation/getOutBox")
     @Timed
     private ResponseEntity<MobileValidation> getBox(@RequestBody MobileValidation id) {
         log.debug("REST request to get Mobile validation : {}", id);
         MobileValidation mobileValidation = mobileValidationRepository.findByMobileNumber(id.getMobilenumber());
         if (mobileValidation != null) {
             return ResponseEntity.ok().body(mobileValidation);
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

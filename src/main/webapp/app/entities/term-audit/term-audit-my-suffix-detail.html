@@ -1,0 +1,155 @@
+
+<div>
+    <h2><span>Term Audit</span> {{vm.termAudit.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Mobilenumber</span></dt>
+        <dd>
+            <span>{{vm.termAudit.mobilenumber}}</span>
+        </dd>
+        <dt><span>Termno</span></dt>
+        <dd>
+            <span>{{vm.termAudit.termno}}</span>
+        </dd>
+        <dt><span>State</span></dt>
+        <dd>
+            <span>{{vm.termAudit.state}}</span>
+        </dd>
+        <dt><span>Connection</span></dt>
+        <dd>
+            <span>{{vm.termAudit.connection}}</span>
+        </dd>
+        <dt><span>Connectiontype</span></dt>
+        <dd>
+            <span>{{vm.termAudit.connectiontype}}</span>
+        </dd>
+        <dt><span>Barcode</span></dt>
+        <dd>
+            <span>{{vm.termAudit.barcode}}</span>
+        </dd>
+        <dt><span>Nameofcustomer</span></dt>
+        <dd>
+            <span>{{vm.termAudit.nameofcustomer}}</span>
+        </dd>
+        <dt><span>Fathername</span></dt>
+        <dd>
+            <span>{{vm.termAudit.fathername}}</span>
+        </dd>
+        <dt><span>Doa</span></dt>
+        <dd>
+            <span>{{vm.termAudit.doa}}</span>
+        </dd>
+        <dt><span>Aoname</span></dt>
+        <dd>
+            <span>{{vm.termAudit.aoname}}</span>
+        </dd>
+        <!-- <dt><span>Checkavailabiltyofcaf</span></dt>
+        <dd>
+            <span>{{vm.termAudit.checkavailabiltyofcaf}}</span>
+        </dd> -->
+        <dt><span>Photo</span></dt>
+        <dd>
+            <span>{{vm.termAudit.photo}}</span>
+        </dd>
+        <dt><span>Identityproof</span></dt>
+        <dd>
+            <span>{{vm.termAudit.identityproof}}</span>
+        </dd>
+        <dt><span>Addressproof</span></dt>
+        <dd>
+            <span>{{vm.termAudit.addressproof}}</span>
+        </dd>
+        <dt><span>Address</span></dt>
+        <dd>
+            <span>{{vm.termAudit.address}}</span>
+        </dd>
+        <dt><span>Auditdate</span></dt>
+        <dd>
+            <span>{{vm.termAudit.auditdate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Auditby</span></dt>
+        <dd>
+            <span>{{vm.termAudit.auditby}}</span>
+        </dd>
+        <dt><span>Caf</span></dt>
+        <dd>
+            <span>{{vm.termAudit.caf}}</span>
+        </dd>
+        <dt><span>Activationdate</span></dt>
+        <dd>
+            <span>{{vm.termAudit.activationdate}}</span>
+        </dd>
+        <dt><span>Activationsource</span></dt>
+        <dd>
+            <span>{{vm.termAudit.activationsource}}</span>
+        </dd>
+        <dt><span>Vendor</span></dt>
+        <dd>
+            <span>{{vm.termAudit.vendor}}</span>
+        </dd>
+        <dt><span>Dob</span></dt>
+        <dd>
+            <span>{{vm.termAudit.dob}}</span>
+        </dd>
+        <dt><span>Customernamestatus</span></dt>
+        <dd>
+            <span>{{vm.termAudit.customernamestatus}}</span>
+        </dd>
+        <dt><span>Fathernamestatus</span></dt>
+        <dd>
+            <span>{{vm.termAudit.fathernamestatus}}</span>
+        </dd>
+        <dt><span>Doastatus</span></dt>
+        <dd>
+            <span>{{vm.termAudit.doastatus}}</span>
+        </dd>
+        <dt><span>Aonamestatus</span></dt>
+        <dd>
+            <span>{{vm.termAudit.aonamestatus}}</span>
+        </dd>
+        <dt><span>Identityproofstatus</span></dt>
+        <dd>
+            <span>{{vm.termAudit.identityproofstatus}}</span>
+        </dd>
+        <dt><span>Addressproofstatus</span></dt>
+        <dd>
+            <span>{{vm.termAudit.addressproofstatus}}</span>
+        </dd>
+        <dt><span>Rejectedreason</span></dt>
+        <dd>
+            <span>{{vm.termAudit.rejectedreason}}</span>
+        </dd>
+        <dt><span>Typeofdoc</span></dt>
+        <dd>
+            <span>{{vm.termAudit.typeofdoc}}</span>
+        </dd>
+        <dt><span>Pointsalecode</span></dt>
+        <dd>
+            <span>{{vm.termAudit.pointsalecode}}</span>
+        </dd>
+        <dt><span>Pointsalenamestatus</span></dt>
+        <dd>
+            <span>{{vm.termAudit.pointsalenamestatus}}</span>
+        </dd>
+        <dt><span>Pointsaleaddressstatus</span></dt>
+        <dd>
+            <span>{{vm.termAudit.pointsaleaddressstatus}}</span>
+        </dd>
+        <dt><span>Checkcafstatus</span></dt>
+        <dd>
+            <span>{{vm.termAudit.checkcafstatus}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="term-audit-my-suffix-detail.edit({id:vm.termAudit.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

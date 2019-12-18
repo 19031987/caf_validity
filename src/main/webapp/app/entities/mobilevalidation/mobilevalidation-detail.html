@@ -1,0 +1,135 @@
+
+<div>
+    <h2><span>Mobilevalidation</span> {{vm.mobilevalidation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Mobilenumber</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.mobilenumber}}</span>
+        </dd>
+        <dt><span>Activation Date</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.activationDate}}</span>
+        </dd>
+        <dt><span>Customer Name</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.customerName}}</span>
+        </dd>
+        <dt><span>Color Code</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.colorCode}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.user}}</span>
+        </dd>
+        <dt><span>User Date</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.userDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Isselected</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.isselected}}</span>
+        </dd>
+        <dt><span>Category 1</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.category1}}</span>
+        </dd>
+        <dt><span>Category 2</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.category2}}</span>
+        </dd>
+        <dt><span>Category 3</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.category3}}</span>
+        </dd>
+        <dt><span>Catergory 4</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.catergory4}}</span>
+        </dd>
+        <dt><span>Catergory 5</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.catergory5}}</span>
+        </dd>
+        <dt><span>Count Category 1</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.countCategory1}}</span>
+        </dd>
+        <dt><span>Count Category 2</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.countCategory2}}</span>
+        </dd>
+        <dt><span>Count Category 3</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.countCategory3}}</span>
+        </dd>
+        <dt><span>Count Category 4</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.countCategory4}}</span>
+        </dd>
+        <dt><span>Count Category 5</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.countCategory5}}</span>
+        </dd>
+        <dt><span>Sourcebox</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.sourcebox}}</span>
+        </dd>
+        <dt><span>Category Rv</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.categoryRv}}</span>
+        </dd>
+        <dt><span>Count Category Rv</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.countCategoryRv}}</span>
+        </dd>
+        <dt><span>Category NA</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.categoryNA}}</span>
+        </dd>
+        <dt><span>Count Category NA</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.countCategoryNA}}</span>
+        </dd>
+        <dt><span>Barcode</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.barcode}}</span>
+        </dd>
+        <dt><span>User Count</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.userCount}}</span>
+        </dd>
+        <dt><span>Barcode Name</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.barcodeName}}</span>
+        </dd>
+        <dt><span>Lot</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.lot}}</span>
+        </dd>
+        <dt><span>Barcode Name 1</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.barcodeName1}}</span>
+        </dd>
+        <dt><span>Lot 1</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.lot1}}</span>
+        </dd>
+        <dt><span>Fathername</span></dt>
+        <dd>
+            <span>{{vm.mobilevalidation.fathername}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="mobilevalidation-detail.edit({id:vm.mobilevalidation.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>
