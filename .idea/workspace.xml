@@ -4,24 +4,15 @@
     <option name="ANALYZE_TEST_SOURCES" value="false" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5fc9fbd-d4d9-4565-b3ac-dd6ff151a75a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.wst.common.component" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.eclipse.wst.common.component" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/caf/valididty/repository/MobileValidationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/caf/valididty/repository/MobileValidationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/caf/valididty/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/caf/valididty/service/UserService.java" afterDir="false" />
+    <list default="true" id="b5fc9fbd-d4d9-4565-b3ac-dd6ff151a75a" name="Default" comment="user change and final changes included">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cafvalidity-v-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cafvalidity-v-2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/caf/valididty/web/rest/MobileValidationResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/caf/valididty/web/rest/MobileValidationResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/caf/valididty/web/rest/UserResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/caf/valididty/web/rest/UserResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/boxassign/boxassign.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/boxassign/boxassign.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/mobile-validation/mobile-validation-dialog.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/mobile-validation/mobile-validation-dialog.controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/mobile-validation/mobile-validation-dialog.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/mobile-validation/mobile-validation-dialog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/mobile-validation/mobile-validation.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/mobile-validation/mobile-validation.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/scancaf/scancaf-dialog.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/scancaf/scancaf-dialog.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/scancaf/scancafs.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/scancaf/scancafs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/layouts/navbar/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/layouts/navbar/navbar.html" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,42 +27,6 @@
   </component>
   <component name="FindBugs-IDEA-Workspace">
     <toolWindowGroupBy>BugRank</toolWindowGroupBy>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>getAllScan</find>
-      <find>onError</find>
-      <find>scancafdialogcontroller</find>
-      <find>ScancafDialogController</find>
-      <find>find</find>
-      <find>countCategory1</find>
-      <find>textarea</find>
-      <find>td</find>
-      <find>background-color'</find>
-      <find>getbox</find>
-      <find>findbyba</find>
-      <find>cafcheck</find>
-      <find>selecte</find>
-      <find>category4</find>
-      <find>13</find>
-      <find>emit</find>
-      <find>str</find>
-      <find>mobile</find>
-      <find>vm.scancaf</find>
-      <find>scancaf</find>
-      <find>field_mobilenumber</find>
-      <find>button</find>
-      <find>mobilevalidationresource</find>
-      <find>Scancaf</find>
-      <find>setCate</find>
-      <find>setCater</find>
-      <find>scancafLocal</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>countCategory5</replace>
-      <replace>vm.mobileValidation</replace>
-      <replace>mobileValidation</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -104,6 +59,9 @@
       </list>
     </option>
   </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
   <component name="ProjectId" id="1V9fR0urCtnVExVRQDV5qXpOevJ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -114,14 +72,28 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="TF_FMT" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548584475453" />
     <property name="editor.config.ad.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="yarn" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Application.CafvalidityV2App">
     <configuration default="true" type="Applet">
@@ -188,18 +160,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -215,7 +175,9 @@
       <workItem from="1521063314486" duration="1858000" />
       <workItem from="1521156212946" duration="181000" />
       <workItem from="1576670252665" duration="1320000" />
-      <workItem from="1576671712965" duration="974000" />
+      <workItem from="1576671712965" duration="2973000" />
+      <workItem from="1576774651012" duration="2756000" />
+      <workItem from="1576836925348" duration="6282000" />
     </task>
     <task id="LOCAL-00001" summary="Mobile validation changes">
       <created>1520457758898</created>
@@ -301,30 +263,33 @@
     <option name="LAST_COMMIT_MESSAGE" value="user change and final changes included" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="274" y="24" key="#Notifications" timestamp="1576672498366">
-      <screen x="0" y="0" width="1364" height="728" />
-    </state>
-    <state x="274" y="24" key="#Notifications/0.0.1364.728@0.0.1364.728" timestamp="1576672498366" />
-    <state x="462" y="120" key="FileChooserDialogImpl" timestamp="1576672124595">
-      <screen x="0" y="0" width="1364" height="728" />
-    </state>
-    <state x="462" y="120" key="FileChooserDialogImpl/0.0.1364.728@0.0.1364.728" timestamp="1576672124595" />
-    <state width="336" height="298" key="Git.Branch.Popup" timestamp="1576672917167">
-      <screen x="0" y="0" width="1364" height="728" />
-    </state>
-    <state width="336" height="298" key="Git.Branch.Popup/0.0.1364.728@0.0.1364.728" timestamp="1576672917167" />
-    <state x="185" y="8" key="SettingsEditor" timestamp="1576672677765">
-      <screen x="0" y="0" width="1364" height="728" />
-    </state>
-    <state x="185" y="8" key="SettingsEditor/0.0.1364.728@0.0.1364.728" timestamp="1576672677765" />
-    <state x="274" y="99" key="Vcs.Push.Dialog.v2" timestamp="1576672945511">
-      <screen x="0" y="0" width="1364" height="728" />
-    </state>
-    <state x="274" y="99" key="Vcs.Push.Dialog.v2/0.0.1364.728@0.0.1364.728" timestamp="1576672945511" />
-    <state x="389" y="190" key="com.intellij.ide.util.TipDialog" timestamp="1576671706815">
-      <screen x="0" y="0" width="1364" height="728" />
-    </state>
-    <state x="389" y="190" key="com.intellij.ide.util.TipDialog/0.0.1364.728@0.0.1364.728" timestamp="1576671706815" />
+    <state x="274" y="24" key="#Notifications" />
+    <state x="274" y="24" key="#Notifications/0.0.1364.728@0.0.1364.728" />
+    <state x="334" y="0" key="CommitChangelistDialog2" />
+    <state x="334" y="0" key="CommitChangelistDialog2/0.0.1364.728@0.0.1364.728" />
+    <state x="462" y="120" key="FileChooserDialogImpl" />
+    <state x="462" y="120" key="FileChooserDialogImpl/0.0.1364.728@0.0.1364.728" />
+    <state width="340" height="302" key="Git.Branch.Popup" />
+    <state width="338" height="300" key="Git.Branch.Popup/0.0.1364.728@0.0.1364.728" />
+    <state width="340" height="302" key="Git.Branch.Popup/1366.768" />
+    <state width="340" height="302" key="Git.Branch.Popup@1366.768" />
+    <state x="185" y="8" key="SettingsEditor" />
+    <state x="185" y="8" key="SettingsEditor/0.0.1364.728@0.0.1364.728" />
+    <state x="274" y="99" key="Vcs.Push.Dialog.v2" />
+    <state x="274" y="99" key="Vcs.Push.Dialog.v2/0.0.1364.728@0.0.1364.728" />
+    <state x="389" y="190" key="com.intellij.ide.util.TipDialog" />
+    <state x="389" y="190" key="com.intellij.ide.util.TipDialog/0.0.1364.728@0.0.1364.728" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/caf/valididty/web/rest/MobileValidationResource.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

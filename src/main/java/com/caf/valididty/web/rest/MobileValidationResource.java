@@ -55,8 +55,7 @@ public class MobileValidationResource {
     /**
      * POST  /mobile-validations : Create a new mobileValidation.
      *
-     * @param mobion.getId() != null) {
-            return RespoileValidation the mobileValidation to create
+     * @param mobileValidation the mobileValidation to create
      * @return the ResponseEntity with status 201 (Created) and with body the new mobileValidation, or with status 400 (Bad Request) if the mobileValidation has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
@@ -65,7 +64,8 @@ public class MobileValidationResource {
     public ResponseEntity<MobileValidation> createMobileValidation(@RequestBody MobileValidation mobileValidation) throws URISyntaxException {
         log.debug("REST request to save MobileValidation : {}", mobileValidation);
         mobileValidation.setId(null);
-        if (mobileValidatnseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new mobileValidation cannot already have an ID")).body(null);
+        if (mobileValidation.getId() != null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new mobileValidation cannot already have an ID")).body(null);
         }
         MobileValidation latestByUser = mobileValidationRepository.findByuserOrderByDsc(getCurrentUserLogin());
         if (latestByUser != null && latestByUser.getMobilenumber() != null && latestByUser.getMobilenumber().equals(mobileValidation.getMobilenumber())) {
@@ -92,10 +92,10 @@ public class MobileValidationResource {
             if (latestCat1 != null && latestCat1.getBarcodeName() != null && !latestCat1.getBarcodeName().isEmpty()
                 && latestCat1.getCategory1().equals(mobileValidation.getCategory1())) {
 					//EKA000430001
-                String previousBarCode = latestCat1.getBarcodeName().substring(6, 11);
+                String previousBarCode = latestCat1.getBarcodeName().substring(8, 11);
                 //String presentBarCode = mobileValidation.getCategory1().substring(7, 8)+mobileValidation.getBarcode();
                 if (Integer.parseInt(previousBarCode) + 1 == mobileValidation.getBarcode()) {
-                    mobileValidation.setBarcodeName(mobileValidation.getCategory1().substring(0, 6) + String.format("%05d", mobileValidation.getBarcode()));
+                    mobileValidation.setBarcodeName(mobileValidation.getCategory1() + String.format("%03d", mobileValidation.getBarcode()));
                 } else {
                     return ResponseEntity.badRequest().headers(
                         HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "Bar code is is not in sequence"))
@@ -141,11 +141,11 @@ public class MobileValidationResource {
      * @param mobileValidation the mobileValidation to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated mobileValidation,
      * or with status 400 (Bad Request) if the mobileValidation is not valid,
-     * or with status 500 (Internal Server Error) if the mobileValidation couldn't be u
+     * or with status 500 (Internal Server Error) if the mobileValidation couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/mobile-validations")
-    @Timedpdated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+    @Timed
     public ResponseEntity<MobileValidation> updateMobileValidation(@RequestBody MobileValidation mobileValidation) throws URISyntaxException {
         log.debug("REST request to update MobileValidation : {}", mobileValidation);
         if (mobileValidation.getId() == null) {

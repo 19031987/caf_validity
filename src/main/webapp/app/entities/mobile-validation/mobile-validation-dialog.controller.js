@@ -267,7 +267,8 @@
         }
 
         function search() {
-            if (vm.mobileValidation.mobilenumber.length === 10 && vm.mobileValidation.remobilenumber.length === 10) {
+            if (vm.mobileValidation.mobilenumber === vm.mobileValidation.remobilenumber
+                && vm.mobileValidation.mobilenumber.length === 10 && vm.mobileValidation.remobilenumber.length === 10) {
                 MobileValidation.getByMobileNum(vm.mobileValidation, onSaveSuccessmob);
 
                 function onSaveSuccessmob(result) {
@@ -276,11 +277,12 @@
                     } else {
                         result = result[0];
                         if (result === undefined) {
-                            vm.mobileValidation.colorCode = 'pink';
-                            vm.mobileValidation.countCategoryNA = vm.mobileValidation.countCategoryNA + 1;
+                            vm.mobileValidation.colorCode = 'red';
+                            vm.mobileValidation.countCategory5 = vm.mobileValidation.countCategory5 + 1;
                             vm.mobileValidation.customerName = '';
                             vm.mobileValidation.activationDate = '';
                             vm.mobileValidation.fathername = '';
+                            vm.mobileValidation.mobilenumber = vm.mobileValidation.mobilenumber+"_NA" ;
                             identifyColor(vm.mobileValidation);
 
                         } else {
@@ -310,7 +312,8 @@
                                 }
                                 if (angular.equals(cafType.trim(), 'NA')
                                     || vm.mobileValidation.colorCode === "NA") {
-                                    vm.mobileValidation.colorCode = 'pink';
+                                    vm.mobileValidation.colorCode = 'red';
+                                    vm.mobileValidation.customerName = "pink";
                                 }
 
                             } else {
@@ -560,7 +563,7 @@
 
             function onMobileValidationError() {
 
-              //  vm.mobileValidation.userCount = parseInt(result.userCount) - 1;
+                //  vm.mobileValidation.userCount = parseInt(result.userCount) - 1;
 
                 if (result.colorCode.trim() === 'G3y' || result.colorCode === 'red') {
                     vm.mobileValidation.colorCode = 'red';
@@ -1049,12 +1052,13 @@
                 }
             }
             if (angular.equals(result.colorCode.trim(), "NA") || result.colorCode === "pink") {
-                vm.mobileValidation.colorCode = 'pink';
-                vm.mobileValidation.countCategoryNA = vm.mobileValidation.countCategoryNA + 1;
+                vm.mobileValidation.colorCode = 'red';
+                vm.mobileValidation.countCategory5 = vm.mobileValidation.countCategory5 + 1;
+                vm.mobileValidation.mobileValidation = vm.mobileValidation.mobilenumber+"_NA";
                 if (isLotComlpelted(vm.mobileValidation.countCategoryNA)) {
                     alert('NA : Lot is completed, Lot number is:'
-                        + vm.mobileValidation.countCategoryNA / 100
-                        + " Box Name " + vm.mobileValidation.categoryNA
+                        + vm.mobileValidation.countCategory5 / 100
+                        + " Box Name " + vm.mobileValidation.countCategory5
                         + " Color " + vm.mobileValidation.colorCode);
                     alert('Please press ENTER');
                 }
