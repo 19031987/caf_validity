@@ -61,12 +61,18 @@ public class MobileValidationResource {
      */
     @PostMapping("/mobile-validations")
     @Timed
-    public ResponseEntity<MobileValidation> createMobileValidation(@RequestBody MobileValidation mobileValidation) throws URISyntaxException {
+    public synchronized ResponseEntity<MobileValidation> createMobileValidation(@RequestBody MobileValidation mobileValidation) throws URISyntaxException {
         log.debug("REST request to save MobileValidation : {}", mobileValidation);
         mobileValidation.setId(null);
         if (mobileValidation.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new mobileValidation cannot already have an ID")).body(null);
         }
+
+        if (mobileValidation.getMobilenumber() == null || mobileValidation.getColorCode() == null ) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "data wrong", "Data can not be saved as mobile number or color code are null, Please try to re enter")).body(null);
+        }
+
+
         MobileValidation latestByUser = mobileValidationRepository.findByuserOrderByDsc(getCurrentUserLogin());
         if (latestByUser != null && latestByUser.getMobilenumber() != null && latestByUser.getMobilenumber().equals(mobileValidation.getMobilenumber())) {
             return ResponseEntity.badRequest().headers(
@@ -308,7 +314,7 @@ public class MobileValidationResource {
     public MobileValidation getByCategory3() {
         String mobileValidationLocal = mobileValidationRepository.getCategory3();
         MobileValidation mobileValidation = new MobileValidation();
-        mobileValidation.setCategory3(mobileValidationLocal);
+        mobileValidation.setCategory3("EC290002");
         return (mobileValidation);
     }
 
@@ -344,7 +350,7 @@ public class MobileValidationResource {
     public MobileValidation getByCategoryNa() {
         String mobileValidationLocal = mobileValidationRepository.getCategoryNA();
         MobileValidation mobileValidation = new MobileValidation();
-        mobileValidation.setCategoryNA(mobileValidationLocal);
+        mobileValidation.setCategoryNA("ENA90003");
         return (mobileValidation);
     }
 

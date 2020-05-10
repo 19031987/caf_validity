@@ -1,5 +1,6 @@
 package com.caf.valididty.web.rest;
 
+import com.caf.valididty.domain.MobileValidation;
 import com.codahale.metrics.annotation.Timed;
 import com.caf.valididty.domain.Scancaf;
 import com.caf.valididty.domain.Secondsegregation;
@@ -192,12 +193,13 @@ public class SecondsegregationResource {
     @Timed
     public ResponseEntity<Secondsegregation> getbox(@RequestBody Secondsegregation secondsegregation) {
         log.debug("Request to search application {}", secondsegregation);
-        Scancaf scancaf = secondsegregationRepository.findByBoxName(secondsegregation.getBoxname(), secondsegregation.getCafcode());
+        secondsegregation.setStatus(null);
+        MobileValidation scancaf = secondsegregationRepository.findByBoxName(secondsegregation.getBoxname().trim(),secondsegregation.getCafcode().trim());
         if(scancaf!= null) {
             log.debug("Scan caf **************** {}", scancaf);
             Secondsegregation secondSegregation = secondsegregationRepository.findBycafcode(secondsegregation.getCafcode());
             if(secondSegregation == null) {
-                if(scancaf.getCategory1().equalsIgnoreCase(secondsegregation.getBoxname())&& secondsegregation.getBoxname().contains("E1A")) {
+                if(scancaf.getCategory1().equalsIgnoreCase(secondsegregation.getBoxname())&& secondsegregation.getBoxname().contains("EKA")) {
                     secondsegregation.setSegregatedcount(secondsegregation.getSegregatedcount()+1);
                 }else if(scancaf.getCategory2().equalsIgnoreCase(secondsegregation.getBoxname())&& secondsegregation.getBoxname().contains("EC1")) {
                     secondsegregation.setSegregatedcount(secondsegregation.getSegregatedcount()+1);
@@ -205,10 +207,10 @@ public class SecondsegregationResource {
                 else if(scancaf.getCategory3().equalsIgnoreCase(secondsegregation.getBoxname())&& secondsegregation.getBoxname().contains("EC2")) {
                     secondsegregation.setSegregatedcount(secondsegregation.getSegregatedcount()+1);
                 }
-                else if(scancaf.getCategory4().equalsIgnoreCase(secondsegregation.getBoxname())&& secondsegregation.getBoxname().contains("EC3")) {
+                else if(scancaf.getCatergory4().equalsIgnoreCase(secondsegregation.getBoxname())&& secondsegregation.getBoxname().contains("EC3")) {
                     secondsegregation.setSegregatedcount(secondsegregation.getSegregatedcount()+1);
                 }
-                else if(scancaf.getCategory5().equalsIgnoreCase(secondsegregation.getBoxname())&& secondsegregation.getBoxname().contains("EDA")) {
+                else if(scancaf.getCatergory5().equalsIgnoreCase(secondsegregation.getBoxname())&& secondsegregation.getBoxname().contains("EDA")) {
 
                     secondsegregation.setSegregatedcount(secondsegregation.getSegregatedcount()+1);
                 }
@@ -223,13 +225,12 @@ public class SecondsegregationResource {
 
                 }
                 secondsegregation.setFirstleveluser(scancaf.getUser());
-                secondsegregation.setColorcode(scancaf.getColorcode());
+                secondsegregation.setColorcode(scancaf.getColorCode());
                 secondsegregation.setLastcafentered(secondsegregation.getCafcode());
             }
             else {
-                secondsegregation.setNotsegregatedcount(secondsegregation.getNotsegregatedcount()+1);
-                secondsegregation.setStatus("NA");
-                return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME,"CafBarCodeNotFound",String.format("Data not found for the caf bar code", secondsegregation.getCafcode()))).body(secondsegregation);
+                int reduceCount = secondSegregation.getCount() - 1;
+                secondsegregation.setCount(reduceCount);
             }
         }else {
             secondsegregation.setNotsegregatedcount(secondsegregation.getNotsegregatedcount()+1);

@@ -18,7 +18,6 @@
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
-        vm.save = save;
         vm.search = search;
         vm.mobileValidations;
         vm.isRowSelected;
@@ -31,172 +30,6 @@
 
         function clear() {
             $uibModalInstance.dismiss('cancel');
-        }
-
-        function save() {
-            vm.isSaving = true;
-            if (vm.mobileValidation.id !== null) {
-                MobileValidation.update(vm.mobileValidation[i], onSaveSuccess,
-                    onSaveError);
-            } else {
-                for (var i = 0; i < vm.mobileValidations.length; i++) {
-                    if (vm.mobileValidations[i].isselected === true) {
-                        if (vm.mobileValidation.countCategory5 >= 1500) {
-                            alert('Category1 Box is completed please ask for another one');
-                            vm.mobileValidation.boxstatus = 'catergory5-completed';
-                            vm.mobileValidation.countCategory5 = 0;
-                            vm.mobileValidation.catergory5 = MobileValidation.findCategory5(onSucess);
-
-                            function onSuccess(result) {
-                                vm.mobileValidation.catergory5 = result;
-                            }
-
-                            vm.mobileValidation.catergory5 = 'EDA'
-                                + increment_alphanumeric_str(vm.mobileValidation.catergory5
-                                    .substring(3, 8));
-                        }
-
-                        if (vm.mobileValidation.countCategory1 >= 300) {
-                            alert('Category1 Box is completed please ask for another one');
-                            vm.mobileValidation.countCatergory1 = 0;
-                            vm.mobileValidation.category1 = mobileValidation
-                                .findCategory1(onSucess);
-
-                            function onSuccess(result) {
-                                vm.mobileValidation.category1 = result;
-                            }
-
-                            vm.mobileValidation.category1 = 'EKA'
-                                + increment_alphanumeric_str(vm.mobileValidation.category1
-                                    .substring(3, 8));
-                            if (vm.mobileValidation.boxstatus != null) {
-                                vm.mobileValidation.boxstatus = ' ,category1-completed'
-                            } else {
-                                vm.mobileValidation.boxstatus = 'category1-completed'
-                            }
-                        }
-                        if (vm.mobileValidation.countCategory2 >= 1500) {
-                            alert('Category2 Box is completed please ask for another one');
-                            vm.mobileValidation.countCatergory2 = 0;
-                            vm.mobileValidation.category2 = mobileValidation
-                                .findCategory2(onSucess);
-
-                            function onSuccess(result) {
-                                vm.mobileValidation.category2 = result;
-                            }
-
-                            vm.mobileValidation.category2 = 'EC1'
-                                + increment_alphanumeric_str(vm.mobileValidation.category1
-                                    .substring(3, 8));
-                            if (vm.mobileValidation.boxstatus != null) {
-                                vm.mobileValidation.boxstatus = ' ,category2-completed'
-                            } else {
-                                vm.mobileValidation.boxstatus = 'category2-completed'
-                            }
-                        }
-
-                        if (vm.mobileValidation.countCategory3 >= 1500) {
-                            alert('Category3 Box is completed please ask for another one');
-                            vm.mobileValidation.countCatergory3 = 0;
-                            vm.mobileValidation.category3 = mobileValidation
-                                .findCategory3(onSucess);
-
-                            function onSuccess(result) {
-                                vm.mobileValidation.category3 = result;
-                            }
-
-                            vm.mobileValidation.category3 = 'EC2'
-                                + increment_alphanumeric_str(vm.mobileValidation.category3
-                                    .substring(3, 8));
-                            if (vm.mobileValidation.boxstatus != null) {
-                                vm.mobileValidation.boxstatus = ' ,category3-completed'
-                            } else {
-                                vm.mobileValidation.boxstatus = 'category3-completed'
-                            }
-                        }
-                        if (vm.mobileValidation.countCategory4 >= 1500) {
-                            alert('Category4 Box is completed please ask for another one');
-                            vm.mobileValidation.countCatergory4 = 0;
-                            vm.mobileValidation.catergory4 = mobileValidation
-                                .findCategory4(onSucess);
-
-                            function onSuccess(result) {
-                                vm.mobileValidation.catergory4 = result;
-                            }
-
-                            vm.mobileValidation.catergory4 = 'EC3'
-                                + increment_alphanumeric_str(vm.mobileValidation.catergory4
-                                    .substring(3, 8));
-                            if (vm.mobileValidation.boxstatus != null) {
-                                vm.mobileValidation.boxstatus = ' ,category4-completed'
-                            } else {
-                                vm.mobileValidation.boxstatus = 'category4-completed'
-                            }
-                        }
-                        if (isLotComlpelted(vm.mobileValidation.countCategoryRv)) {
-                            alert('For Category1 : Lot is completed');
-                            vm.mobileValidation.categoryRv = mobileValidation
-                                .findCategoryRv(onSucess);
-
-                            function onSuccess(result) {
-                                vm.mobileValidation.categoryRv = result;
-                            }
-
-                            vm.mobileValidation.categoryRv = 'ERV'
-                                + increment_alphanumeric_str(vm.mobileValidation.categoryRv
-                                    .substring(3, 8));
-                        }
-
-                        if (isLotComlpelted(vm.mobileValidation.countCategory5)
-                            || vm.mobileValidation.countCategory5 === 800
-                            || vm.mobileValidation.countCategory5 === 900
-                            || vm.mobileValidation.countCategory5 === 1000
-                            || vm.mobileValidation.countCategory5 === 1100
-                            || vm.mobileValidation.countCategory5 === 1200
-                            || vm.mobileValidation.countCategory5 === 1300
-                            || vm.mobileValidation.countCategory5 === 1400
-                            || vm.mobileValidation.countCategory5 === 1500
-                            ) {
-                            alert('For catergory5 : Lot is completed');
-                            vm.mobileValidation.catergory5 = mobileValidation
-                                .findcatergory5(onSucess);
-
-                            function onSuccess(result) {
-                                vm.mobileValidation.catergory5 = result;
-                            }
-
-                            vm.mobileValidation.catergory5 = 'EDA'
-                                + increment_alphanumeric_str(vm.mobileValidation.catergory5
-                                    .substring(3, 8));
-                        }
-                        if (vm.mobileValidation.countCategory3 === 50
-                            || vm.mobileValidation.countCategory3 === 100
-                            || vm.mobileValidation.countCategory3 === 150
-                            || vm.mobileValidation.countCategory3 === 200
-                            || vm.mobileValidation.countCategory3 === 250) {
-                            alert('For Category3 : Lot is completed');
-                        }
-                        if (vm.mobileValidation.countCategory4 === 50
-                            || vm.mobileValidation.countCategory4 === 100
-                            || vm.mobileValidation.countCategory4 === 150
-                            || vm.mobileValidation.countCategory4 === 200
-                            || vm.mobileValidation.countCategory4 === 250) {
-                            alert('For Category4 : Lot is completed');
-                        }
-                        if (vm.mobileValidation.countCategory5 === 50
-                            || vm.mobileValidation.countCategory5 === 100
-                            || vm.mobileValidation.countCategory5 === 150
-                            || vm.mobileValidation.countCategory5 === 200
-                            || vm.mobileValidation.countCategory5 === 250) {
-                            alert('For catergory5 : Lot is completed');
-                        }
-
-                        MobileValidation.save(vm.mobileValidation,
-                            onSaveSuccess, onSaveError);
-                    }
-                }
-
-            }
         }
 
         init();
@@ -282,7 +115,6 @@
                             vm.mobileValidation.customerName = '';
                             vm.mobileValidation.activationDate = '';
                             vm.mobileValidation.fathername = '';
-                            vm.mobileValidation.mobilenumber = vm.mobileValidation.mobilenumber+"_NA" ;
                             identifyColor(vm.mobileValidation);
 
                         } else {
@@ -297,6 +129,7 @@
                                 }
                                 if (angular.equals(cafType.trim(), 'Active')) {
                                     vm.mobileValidation.colorCode = 'green';
+                                    $("#barcode").focus();
                                 }
                                 if (angular.equals(cafType.trim(), 'L1')) {
                                     vm.mobileValidation.colorCode = 'blue';
@@ -305,10 +138,10 @@
                                     vm.mobileValidation.colorCode = 'yellow';
                                 }
                                 if (angular.equals(cafType.trim(), '2-3y')) {
-                                    vm.mobileValidation.colorCode = 'white';
+                                    vm.mobileValidation.colorCode = 'red';
                                 }
                                 if (angular.equals(cafType.trim(), 'RV')) {
-                                    vm.mobileValidation.colorCode = 'orange';
+                                    vm.mobileValidation.colorCode = 'red';
                                 }
                                 if (angular.equals(cafType.trim(), 'NA')
                                     || vm.mobileValidation.colorCode === "NA") {
@@ -339,6 +172,7 @@
                                         }
                                         if (angular.equals(cafType.trim(), 'Active')) {
                                             vm.mobileValidation.colorCode = 'green';
+                                            $("#barcode").focus();
                                         }
                                         if (angular.equals(cafType.trim(), 'L1')) {
                                             vm.mobileValidation.colorCode = 'blue';
@@ -410,9 +244,15 @@
             vm.mobileValidation.fathername = result.fathername;
 
 
+            if ( vm.mobileValidation.mobilenumber != null ||  vm.mobileValidation.colorCode != null) {
+                MobileValidation.save(vm.mobileValidation, onSaveSuccessFinal,
+                    onMobileValidationError);
+            } else {
+                alert("please press a again !!!")
+            }
+
             // save functionality is being called
-            MobileValidation.save(vm.mobileValidation, onSaveSuccessFinal,
-                onMobileValidationError);
+
 
             function onSaveSuccessFinal(result) {
                 vm.mobileValidation.id = null;
@@ -565,295 +405,73 @@
 
                 //  vm.mobileValidation.userCount = parseInt(result.userCount) - 1;
 
-                if (result.colorCode.trim() === 'G3y' || result.colorCode === 'red') {
-                    vm.mobileValidation.colorCode = 'red';
-                    vm.mobileValidation.countCategory5 = vm.mobileValidation.countCategory5 - 1;
+                if(result.colorCode === null){
+                    if ( result.lastcolorCode === 'red' ) {
+                        vm.mobileValidation.colorCode = 'red';
+                        vm.mobileValidation.countCategory5 = vm.mobileValidation.countCategory5 - 1;
 
-                }
-                if (angular.equals(result.colorCode.trim(), "Active")
-                    || result.colorCode === "green") {
-                    vm.mobileValidation.colorCode = 'green';
-                    vm.mobileValidation.countCategory1 = vm.mobileValidation.countCategory1 - 1;
-
-                }
-                if (angular.equals(result.colorCode.trim(), "L1") || result.colorCode === "blue") {
-                    vm.mobileValidation.colorCode = 'blue';
-                    vm.mobileValidation.countCategory2 = vm.mobileValidation.countCategory2 - 1;
-
-                }
-                if (angular.equals(result.colorCode.trim(), "1-2y")
-                    || result.colorCode === "yellow") {
-                    vm.mobileValidation.colorCode = 'yellow';
-                    vm.mobileValidation.countCategory3 = vm.mobileValidation.countCategory3 - 1;
-
-                }
-                if (angular.equals(result.colorCode.trim(), "2-3y") || result.colorCode === "white") {
-                    vm.mobileValidation.colorCode = 'white';
-                    vm.mobileValidation.countCategory4 = vm.mobileValidation.countCategory4 - 1;
-
-                }
-                if (angular.equals(result.colorCode.trim(), "RV") || result.colorCode === "orange") {
-                    vm.mobileValidation.colorCode = 'orange';
-                    vm.mobileValidation.countCategoryRv = vm.mobileValidation.countCategoryRv - 1;
-
-                }
-
-
-                if (vm.mobileValidation.countCategory5 === 1500) {
-                    alert("Box Name is complete "
-                        + vm.mobileValidation.catergory5);
-                    $cookieStore
-                        .put('completed', vm.mobileValidation.category1);
-                    vm.mobileValidation.countCategory5 = 0;
-                    MobileValidation.findcategory5(onSuccesscatergory5);
-
-                    // noinspection JSAnnotator
-                    function onSuccesscatergory5(result) {
-                        vm.mobileValidation.catergory5 = result.catergory5;
-                        vm.mobileValidation.catergory5 = 'EDA'
-                            + increment_alphanumeric_str(vm.mobileValidation.catergory5
-                                .substring(3, 8));
-                        MobileValidation.save(vm.mobileValidation,
-                            onSaveSuccessFinal);
-                        $scope.lastcompletedbox = $cookieStore.get('completed')
                     }
-                }
-                if (vm.mobileValidation.countCategory1 === 300) {
-                    alert("Box Name is complete "
-                        + vm.mobileValidation.category1);
-                    $cookieStore
-                        .put('completed', vm.mobileValidation.category1);
-                    vm.mobileValidation.countCategory1 = 0;
-                    MobileValidation.findCategory1(onSuccessCategory1);
+                    if ( result.lastcolorCode === "green") {
+                        vm.mobileValidation.colorCode = 'green';
+                        vm.mobileValidation.countCategory1 = vm.mobileValidation.countCategory1 - 1;
 
-                    // noinspection JSAnnotator
-                    function onSuccessCategory1(result) {
-                        vm.mobileValidation.category1 = result.category1;
-                        vm.mobileValidation.category1 = 'EKA'
-                            + increment_alphanumeric_str(vm.mobileValidation.category1
-                                .substring(3, 8));
-                        MobileValidation.save(vm.mobileValidation,
-                            onSaveSuccessFinal);
-                        $scope.lastcompletedbox = $cookieStore.get('completed');
                     }
-                }
+                    if ( result.lastcolorCode === "blue") {
+                        vm.mobileValidation.colorCode = 'blue';
+                        vm.mobileValidation.countCategory2 = vm.mobileValidation.countCategory2 - 1;
 
-                if (vm.mobileValidation.countCategory2 === 1500) {
-                    alert("Box Name is complete "
-                        + vm.mobileValidation.category2);
-                    $cookieStore
-                        .put('completed', vm.mobileValidation.category2);
-                    vm.mobileValidation.countCategory2 = 0;
-                    MobileValidation.findCategory2(onSuccessCategory2);
-
-                    // noinspection JSAnnotator
-                    function onSuccessCategory2(result) {
-
-                        vm.mobileValidation.category2 = result.category2;
-                        vm.mobileValidation.category2 = 'EC1'
-                            + increment_alphanumeric_str(vm.mobileValidation.category2
-                                .substring(3, 8));
-                        MobileValidation.save(vm.mobileValidation,
-                            onSaveSuccessFinal);
-                        $scope.lastcompletedbox = $cookieStore.get('completed')
                     }
-                }
-                if (vm.mobileValidation.countCategory3 === 1500) {
-                    alert("Box Name is complete "
-                        + vm.mobileValidation.category3);
-                    $cookieStore
-                        .put('completed', vm.mobileValidation.category3);
-                    vm.mobileValidation.countCategory3 = 0;
-                    MobileValidation.findCategory3(onSuccessCategory3);
+                    if ( result.lastcolorCode === "yellow") {
+                        vm.mobileValidation.colorCode = 'yellow';
+                        vm.mobileValidation.countCategory3 = vm.mobileValidation.countCategory3 - 1;
 
-                    // noinspection JSAnnotator
-                    function onSuccessCategory3(result) {
-                        vm.mobileValidation.category3 = result.category3;
-                        vm.mobileValidation.category3 = 'EC2'
-                            + increment_alphanumeric_str(vm.mobileValidation.category3
-                                .substring(3, 8));
-                        MobileValidation.save(vm.mobileValidation,
-                            onSaveSuccessFinal);
-                        $scope.lastcompletedbox = $cookieStore.get('completed')
                     }
-                }
-                if (vm.mobileValidation.countCategory4 === 1500) {
-                    alert("Box Name is complete "
-                        + vm.mobileValidation.category4);
-                    $cookieStore
-                        .put('completed', vm.mobileValidation.category4);
-                    vm.mobileValidation.countCategory4 = 0;
-                    MobileValidation.findCategory4(onSuccessCategory4);
+                    if ( result.lastcolorCode === "white") {
+                        vm.mobileValidation.colorCode = 'white';
+                        vm.mobileValidation.countCategory4 = vm.mobileValidation.countCategory4 - 1;
 
-                    // noinspection JSAnnotator
-                    function onSuccessCategory4(result) {
-                        vm.mobileValidation.category4 = result.category4;
-                        vm.mobileValidation.category4 = 'EC3'
-                            + increment_alphanumeric_str(vm.mobileValidation.category4
-                                .substring(3, 8));
-                        MobileValidation.save(vm.mobileValidation,
-                            onSaveSuccessFinal);
-                        $scope.lastcompletedbox = $cookieStore.get('completed')
                     }
-                }
+                    if (result.lastcolorCode === "orange") {
+                        vm.mobileValidation.colorCode = 'orange';
+                        vm.mobileValidation.countCategoryRv = vm.mobileValidation.countCategoryRv - 1;
 
-                if (vm.mobileValidation.countCategoryRv === 1500) {
-                    alert("Box Name is complete "
-                        + vm.mobileValidation.categoryRv);
-                    $cookieStore.put('completed',
-                        vm.mobileValidation.categoryRv);
-                    vm.mobileValidation.countCategoryRv = 0;
-                    MobileValidation.findCategoryRv(onSuccessCategoryRv);
-
-                    // noinspection JSAnnotator
-                    function onSuccessCategoryRv(result) {
-                        vm.mobileValidation.categoryRv = result.categoryRv;
-                        vm.mobileValidation.categoryRv = 'ERV'
-                            + increment_alphanumeric_str(vm.mobileValidation.categoryRv
-                                .substring(3, 8));
-                        MobileValidation.save(vm.mobileValidation,
-                            onSaveSuccessFinal);
-                        $scope.lastcompletedbox = $cookieStore.get('completed')
                     }
-                }
+                } else {
+                    if (result.colorCode.trim() === 'G3y' || result.colorCode === 'red' ) {
+                        vm.mobileValidation.colorCode = 'red';
+                        vm.mobileValidation.countCategory5 = vm.mobileValidation.countCategory5 - 1;
 
-                if (vm.mobileValidation.countCategoryNA === 1500) {
-                    alert("Box Name is complete "
-                        + vm.mobileValidation.categoryNA);
-                    $cookieStore.put('completed',
-                        vm.mobileValidation.categoryNA);
-                    vm.mobileValidation.countCategoryNA = 0;
-                    MobileValidation.findCategoryNa(onSuccessCategoryNA);
+                    }
+                    if (angular.equals(result.colorCode.trim(), "Active")
+                        || result.colorCode === "green") {
+                        vm.mobileValidation.colorCode = 'green';
+                        vm.mobileValidation.countCategory1 = vm.mobileValidation.countCategory1 - 1;
 
-                    // noinspection JSAnnotator
-                    function onSuccessCategoryNA(result) {
-                        vm.mobileValidation.categoryNA = result.categoryNA;
-                        vm.mobileValidation.categoryNA = 'ENA'
-                            + increment_alphanumeric_str(vm.mobileValidation.categoryNA
-                                .substring(3, 8));
-                        MobileValidation.save(vm.mobileValidation,
-                            onSaveSuccessFinal);
-                        $scope.lastcompletedbox = $cookieStore.get('completed')
+                    }
+                    if (angular.equals(result.colorCode.trim(), "L1") || result.colorCode === "blue") {
+                        vm.mobileValidation.colorCode = 'blue';
+                        vm.mobileValidation.countCategory2 = vm.mobileValidation.countCategory2 - 1;
+
+                    }
+                    if (angular.equals(result.colorCode.trim(), "1-2y")
+                        || result.colorCode === "yellow") {
+                        vm.mobileValidation.colorCode = 'yellow';
+                        vm.mobileValidation.countCategory3 = vm.mobileValidation.countCategory3 - 1;
+
+                    }
+                    if (angular.equals(result.colorCode.trim(), "2-3y") || result.colorCode === "white") {
+                        vm.mobileValidation.colorCode = 'white';
+                        vm.mobileValidation.countCategory4 = vm.mobileValidation.countCategory4 - 1;
+
+                    }
+                    if (angular.equals(result.colorCode.trim(), "RV") || result.colorCode === "orange") {
+                        vm.mobileValidation.colorCode = 'orange';
+                        vm.mobileValidation.countCategoryRv = vm.mobileValidation.countCategoryRv - 1;
+
                     }
                 }
             }
         }
-
-        function onSaveSuccess() {
-
-            if (vm.mobileValidation.countCategory5 === 1500) {
-
-                $cookieStore.put('completed', vm.mobileValidation.category1);
-                vm.mobileValidation.countCategory5 = 0;
-                vm.mobileValidation.catergory5 = 'EDA'
-                    + increment_alphanumeric_str(vm.mobileValidation.catergory5
-                        .substring(3, 8));
-                $scope.lastcompletedbox = $cookieStore.get('completed')
-            }
-
-            if (vm.mobileValidation.countCategory1 === 300) {
-                $cookieStore.put('completed', vm.mobileValidation.category2);
-                vm.mobileValidation.countCategory1 = 0;
-                mobileValidation.findCategory1(onSuccessCategory1);
-
-                function onSuccessCategory1(result) {
-                    vm.mobileValidation.category1 = result.category1;
-                    vm.mobileValidation.category1 = 'EKA'
-                        + increment_alphanumeric_str(vm.mobileValidation.category1
-                            .substring(3, 8));
-                }
-
-                $scope.lastcompletedbox = $cookieStore.get('completed')
-            }
-            if (vm.mobileValidation.countCategory2 === 1500) {
-                $cookieStore.put('completed', vm.mobileValidation.category2);
-                vm.mobileValidation.countCategory2 = 0;
-                mobileValidation.findCategory2(onSuccessCategory2);
-
-                function onSuccessCategory2(result) {
-                    vm.mobileValidation.category2 = result.category2;
-                    vm.mobileValidation.category2 = 'EC2'
-                        + increment_alphanumeric_str(vm.mobileValidation.category2
-                            .substring(3, 8));
-                }
-
-                $scope.lastcompletedbox = $cookieStore.get('completed')
-            }
-            if (vm.mobileValidation.countCategory3 === 1500) {
-                $cookieStore.put('completed', vm.mobileValidation.category3);
-                vm.mobileValidation.countCategory3 = 0;
-                mobileValidation.findCategory4(onSuccessCategory3);
-
-                function onSuccessCategory3(result) {
-                    vm.mobileValidation.category3 = result.category3;
-                    vm.mobileValidation.category3 = 'EC2'
-                        + increment_alphanumeric_str(vm.mobileValidation.category3
-                            .substring(3, 8));
-                }
-            }
-
-            if (vm.mobileValidation.countCategory4 === 1500) {
-                $cookieStore.put('completed', vm.mobileValidation.catergory4);
-                vm.mobileValidation.countCategory4 = 0;
-                vm.mobileValidation.catergory4 = 'EC3'
-                    + increment_alphanumeric_str(vm.mobileValidation.catergory4
-                        .substring(4, 8));
-                $scope.lastcompletedbox = $cookieStore.get('completed')
-            }
-
-            if (vm.mobileValidation.countCategory5 === 1500) {
-                $cookieStore.put('completed', vm.mobileValidation.catergory5);
-                vm.mobileValidation.countCategory5 = 0;
-                mobileValidation.findcatergory5(onSuccessCategory1);
-
-                function onSuccesscatergory5(result) {
-                    vm.mobileValidation.catergory5 = result.catergory5;
-                    vm.mobileValidation.catergory5 = 'EKA'
-                        + increment_alphanumeric_str(vm.mobileValidation.catergory5
-                            .substring(3, 8));
-                }
-
-                $scope.lastcompletedbox = $cookieStore.get('completed')
-            }
-            if (vm.mobileValidation.countCategoryRv === 1500) {
-                alert("Box Name is complete " + vm.mobileValidation.categoryRv);
-                $cookieStore.put('completed', vm.mobileValidation.categoryRv);
-                vm.mobileValidation.countCategoryRv = 0;
-                MobileValidation.findCategoryRv(onSuccessCategoryRv);
-
-                // noinspection JSAnnotator
-                function onSuccessCategoryRv(result) {
-                    vm.mobileValidation.categoryRv = result.categoryRv;
-                    vm.mobileValidation.categoryRv = 'ERV'
-                        + increment_alphanumeric_str(vm.mobileValidation.categoryRv
-                            .substring(3, 8));
-                    MobileValidation.save(vm.mobileValidation,
-                        onSaveSuccessFinal);
-                    $scope.lastcompletedbox = $cookieStore.get('completed')
-                }
-            }
-
-            if (vm.mobileValidation.countCategoryNA === 1500) {
-                alert("Box Name is complete " + vm.mobileValidation.categoryNA);
-                $cookieStore.put('completed', vm.mobileValidation.categoryNA);
-                vm.mobileValidation.countCategoryNA = 0;
-                MobileValidation.findCategoryNa(onSuccessCategoryNA);
-
-                // noinspection JSAnnotator
-                function onSuccessCategoryNA(result) {
-                    vm.mobileValidation.categoryNA = result.categoryNA;
-                    vm.mobileValidation.categoryNA = 'ENA'
-                        + increment_alphanumeric_str(vm.mobileValidation.categoryNA
-                            .substring(3, 8));
-                    MobileValidation.save(vm.mobileValidation,
-                        onSaveSuccessFinal);
-                    $scope.lastcompletedbox = $cookieStore.get('completed')
-                }
-            }
-            vm.mobileValidation.mobilenumber = '';
-            vm.mobileValidation.remobilenumber = '';
-        }
-
         $scope.validate1 = function () {
 
             if (vm.mobileValidation.category1.length === 8) {
@@ -882,10 +500,6 @@
                 }
             }
         };
-
-        function onSaveError() {
-            vm.isSaving = false;
-        }
 
         $scope.isSelected = function (mobileValidation) {
             vm.mobileValidation.colorCode = mobileValidation.colorCode;
@@ -933,6 +547,13 @@
                 || category === 300 || category === 800 || category === 1300
                 || category === 400 || category === 900 || category === 1400
                 || category === 500 || category === 1000 || category === 1500)
+        }
+
+
+        function activeLot(category) {
+            return (category === 50 || category === 100 || category === 150
+                || category === 200 || category === 250 || category === 300
+            )
         }
 
         $scope.BoxComplete = function () {
@@ -993,9 +614,9 @@
                 || result.colorCode === "green") {
                 vm.mobileValidation.colorCode = 'green';
                 vm.mobileValidation.countCategory1 = vm.mobileValidation.countCategory1 + 1;
-                if (isLotComlpelted(vm.mobileValidation.countCategory1)) {
+                if (activeLot(vm.mobileValidation.countCategory1)) {
                     alert('For Active : Lot is completed, Lot number is:'
-                        + vm.mobileValidation.countCategory1 / 100
+                        + vm.mobileValidation.countCategory1 / 50
                         + " Box Name " + vm.mobileValidation.category1
                         + " Color " + vm.mobileValidation.colorCode);
                     alert('Please press ENTER');

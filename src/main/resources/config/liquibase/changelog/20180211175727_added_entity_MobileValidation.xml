@@ -23,7 +23,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="mobilenumber" type="bigint">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="activation_date" type="varchar(255)">
@@ -35,14 +35,14 @@
             </column>
 
             <column name="color_code" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="jhi_user" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="user_date" type="date">
+            <column name="user_date" type="timestamp">
                 <constraints nullable="true" />
             </column>
 
