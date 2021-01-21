@@ -66,6 +66,6 @@
     "test": "gulp test"
   },
   "dependencies": {
-    "socket.io": "^2.1.0"
+    "socket.io": "^2.4.0"
   }
 }
